@@ -1,0 +1,29 @@
+# Local licensed game, private runtime records, preferences and binaries
+/game/
+/work/
+/dist/
+**/bin/
+**/obj/
+.vs/
+*.user
+*.suo
+*.tmp
+*.log
+# Full original CIL / resource dumps stay local; regenerate with ThothTAS.Inspect.
+/docs/*
+!/docs/baseline/
+!/docs/public/
+!/docs/game-fingerprint.json
+!/docs/game-fingerprint.tsv
+!/docs/levels.txt
+!/docs/create-tas-copy.md
+!/docs/editing-guide-zh.md
+!/docs/editing-guide-en.md
+!/docs/chapter-format.md
+/docs/baseline/*
+!/docs/baseline/THOTH.sav
+# Credentials and control session tokens never belong in Git.
+.env
+.env.*
+session.cfg
+editor-settings.json

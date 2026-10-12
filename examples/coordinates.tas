@@ -1,0 +1,9 @@
+Version,1
+Start,Basic-1
+Seed,2
+
+# Direction shorthand accepts UR and U,R. Diagonals use unit length.
+30, U,R, A=90
+30, M=-30, A=(-12.5, 3.25)
+30, N, A=0:0
+30, M=0.25:-0.5, A=-90

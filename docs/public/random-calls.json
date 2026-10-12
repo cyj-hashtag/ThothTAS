@@ -1,0 +1,4048 @@
+{
+  "schemaVersion": 1,
+  "evidenceKind": "static-cil-scan",
+  "scanner": "ThothTAS.Inspect / Mono.Cecil 0.11.6",
+  "observedRuntimeExecutions": 0,
+  "coverage": {
+    "assemblies": [
+      "Assembly-CSharp.dll",
+      "Assembly-CSharp-firstpass.dll",
+      "Assembly-UnityScript-firstpass.dll"
+    ],
+    "methodBodyErrors": [],
+    "directCallOnly": true
+  },
+  "limitations": [
+    "静态调用点不证明该路径已经执行。runtimeParameters / runtimeResult 为 null，不代填推测值。",
+    "siteId 用程序集名 + MethodDef token + IL offset，需结合 assemblySha256 / mvid；更换 build 后必须重新扫描。",
+    "nearbyFieldWrites 只是后续 16 条指令中的写字段候选，未经数据流分析，不能作为受随机值影响的证明。",
+    "不覆盖引擎原生随机源、反射/动态加载的未知代码、Unity 内部行为或非游戏三个程序集。",
+    "ldftn / ldvirtftn 的随机引用单独记入 audit；不计为直接随机调用点。"
+  ],
+  "assemblies": [
+    {
+      "name": "Assembly-CSharp.dll",
+      "sha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "runtimeVersion": "v2.0.50727",
+      "architecture": "I386",
+      "reaIdentityEvidenceId": "ev_32d819f034c1c5f31cbac0c8471ab95c617396375edc5ee4623818bd66d05121"
+    },
+    {
+      "name": "Assembly-CSharp-firstpass.dll",
+      "sha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "runtimeVersion": "v2.0.50727",
+      "architecture": "I386",
+      "reaIdentityEvidenceId": "ev_c25b569800e0f182ca9afa4f5224af1c9954f706740a38723856b83c728bad8c"
+    },
+    {
+      "name": "Assembly-UnityScript-firstpass.dll",
+      "sha256": "f93acb5a43f6a7f5e7e3bbfd104d44b872e106409d64842120c746e66596a484",
+      "mvid": "375034b8-3cda-4677-a9bb-fd10c498d870",
+      "runtimeVersion": "v2.0.50727",
+      "architecture": "I386",
+      "reaIdentityEvidenceId": "ev_a0d7623f5ed2d51ee0f630767c88774b2dfc4aa496f2ced4358278d1da4748db"
+    }
+  ],
+  "randomCallCounts": {
+    "Assembly-CSharp.dll": 147,
+    "Assembly-CSharp-firstpass.dll": 9,
+    "Assembly-UnityScript-firstpass.dll": 2
+  },
+  "totalRandomDirectCalls": 158,
+  "randomCalls": [
+    {
+      "siteId": "Assembly-CSharp:0x060005f6:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossMusic",
+      "method": "System.Void BossMusic::PlayBossCymbal()",
+      "methodToken": "0x060005f6",
+      "methodRawIlSha256": "0b16d5decaf90faa866bbfeee60a86fb2e4e8f3486f4c164107069a00c53b517",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0024",
+          "field": "UnityEngine.AudioSource BossMusic::currentCymbal"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000602:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayPlayerKilledSound()",
+      "methodToken": "0x06000602",
+      "methodRawIlSha256": "7286ebe2a68ac16ced25347598f0b353004c5a7ad39c22d57e91fda8404c6f89",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000603:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayEnemyBullet(Receiver)",
+      "methodToken": "0x06000603",
+      "methodRawIlSha256": "7b9ba9c2209287dbed4f99711fdb191ae1932b955a2c70a4adaf0898e6eaf4c7",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000604:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayBossBullets()",
+      "methodToken": "0x06000604",
+      "methodRawIlSha256": "7896df0bbde9f8039585dba8b5846e2c0ab624188af917eb0a2207c9497c3b7d",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0043",
+          "field": "System.Single GeneralSoundBank::timeSincePlayBossBullets"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000605:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayTeleportJump()",
+      "methodToken": "0x06000605",
+      "methodRawIlSha256": "25580d9a58fba2e53463b887f378507406aebe36c53d471cd065b3c13c739cd4",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_002e",
+          "field": "System.Single GeneralSoundBank::timeSinceTeleported"
+        },
+        {
+          "il": "IL_0035",
+          "field": "System.Boolean GeneralSoundBank::nextTeleporterActive"
+        },
+        {
+          "il": "IL_003c",
+          "field": "System.Boolean GeneralSoundBank::firstTeleportedDone"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000609:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayToggleOn()",
+      "methodToken": "0x06000609",
+      "methodRawIlSha256": "43e994194804f3ae163af7d830124c67912685a45338f66ae114b63a881db2fd",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060a:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayToggleOff()",
+      "methodToken": "0x0600060a",
+      "methodRawIlSha256": "a5c16d4515011eeff6ebf77cf1f891689a0738637b86036a9e721bb6707e22f1",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060b:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayRotaterUp()",
+      "methodToken": "0x0600060b",
+      "methodRawIlSha256": "1e8ccb206bbebb63247389502d769e06ce31cd86acf233cae82256448aef813b",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::timeSinceRotaterSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060c:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayRotaterDown()",
+      "methodToken": "0x0600060c",
+      "methodRawIlSha256": "e7ce02ff5298497d36b3d2c7c206c9be1086e3396520b81a513a17be984ee639",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::timeSinceRotaterSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060d:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayScalerUp()",
+      "methodToken": "0x0600060d",
+      "methodRawIlSha256": "35a9941a79f97f4adadcbb7506fd3e49b1fc82743d5869d4632bfab824d8c0c4",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::timeSinceScalerSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060e:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayScalerDown()",
+      "methodToken": "0x0600060e",
+      "methodRawIlSha256": "a4e0f580a2ae555842fc08c9c4a90341fbd6894f9759f17c72410ca5b8ef44c2",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::timeSinceScalerSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600060f:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayZapperIsBack()",
+      "methodToken": "0x0600060f",
+      "methodRawIlSha256": "453305b841810382092f5fe7e04256eb6d31a2f68ef22f85e800c0630d1be124",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000615:IL_005b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayExpanderSound(System.Int32,System.Single)",
+      "methodToken": "0x06000615",
+      "methodRawIlSha256": "f040a0aff68835f61e4fc01a448c658f2fdffee136fe2c3eeb83f18c72365115",
+      "ilOffset": 91,
+      "ilLabel": "IL_005b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000616:IL_0043",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::ResetExpanderSound(System.Int32)",
+      "methodToken": "0x06000616",
+      "methodRawIlSha256": "1555c658ec1f993234a5cfcd94b55e5659885e50df80cdf576ec1dfbbe4a092c",
+      "ilOffset": 67,
+      "ilLabel": "IL_0043",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_005d",
+          "field": "UnityEngine.AudioSource GeneralSoundBank::currentExpanderSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000618:IL_0036",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayConnector()",
+      "methodToken": "0x06000618",
+      "methodRawIlSha256": "f72aa82fea7cec7854a687819a769529d0286dc4a4cb40da7ca7c26ba740de1e",
+      "ilOffset": 54,
+      "ilLabel": "IL_0036",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600061c:IL_0022",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayFlowerSound()",
+      "methodToken": "0x0600061c",
+      "methodRawIlSha256": "d1b67d5423b4309f49050686dedf62c0545018673a99bc593d3494a3d7681ed4",
+      "ilOffset": 34,
+      "ilLabel": "IL_0022",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0043",
+          "field": "System.Single GeneralSoundBank::flowerTimer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600061d:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayLavaEnableSound()",
+      "methodToken": "0x0600061d",
+      "methodRawIlSha256": "9dfb4b02bb2c07a2884077c0c87995d3c10f1c8756e9df767e79283d7cd5af20",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600061e:IL_0020",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayHardcoreDeathSound()",
+      "methodToken": "0x0600061e",
+      "methodRawIlSha256": "e3913ac78a2a5659526e755733c56a30c8fc5c95957a085cf336b4133bcd83b5",
+      "ilOffset": 32,
+      "ilLabel": "IL_0020",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600065c:IL_0039",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "PlayerAudio",
+      "method": "System.Void PlayerAudio::OnBulletsFired()",
+      "methodToken": "0x0600065c",
+      "methodRawIlSha256": "dd6418263e6d63a78572ce77bc2fccb00981f0773e87d857f56e66f9cf8e5c73",
+      "ilOffset": 57,
+      "ilLabel": "IL_0039",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_004b",
+          "field": "UnityEngine.AudioSource PlayerAudio::currentShootSound"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000662:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::Play(System.Boolean)",
+      "methodToken": "0x06000662",
+      "methodRawIlSha256": "631e54d8c855ed34b90a127dc47958e7a1ed0d698c846c174a8d9aebe1766fd9",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000662:IL_007d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::Play(System.Boolean)",
+      "methodToken": "0x06000662",
+      "methodRawIlSha256": "631e54d8c855ed34b90a127dc47958e7a1ed0d698c846c174a8d9aebe1766fd9",
+      "ilOffset": 125,
+      "ilLabel": "IL_007d",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0091",
+          "field": "System.Int32 ProceduralMusic::lastIndexChosen"
+        },
+        {
+          "il": "IL_0098",
+          "field": "System.Int32 ProceduralMusic::lastFolderUsed"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000665:IL_0052",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::UpdateMusic()",
+      "methodToken": "0x06000665",
+      "methodRawIlSha256": "9ef31b35348134ff806c5da581780c1a20b64c1af514cc11f09f2d63807f178e",
+      "ilOffset": 82,
+      "ilLabel": "IL_0052",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000665:IL_0073",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::UpdateMusic()",
+      "methodToken": "0x06000665",
+      "methodRawIlSha256": "9ef31b35348134ff806c5da581780c1a20b64c1af514cc11f09f2d63807f178e",
+      "ilOffset": 115,
+      "ilLabel": "IL_0073",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0087",
+          "field": "System.Int32 ProceduralMusic::lastFolderUsed"
+        },
+        {
+          "il": "IL_008e",
+          "field": "System.Int32 ProceduralMusic::lastIndexChosen"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_0076",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 118,
+      "ilLabel": "IL_0076",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_007b",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_009e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_0099",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 153,
+      "ilLabel": "IL_0099",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_009e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_00bc",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_00c3",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_00f1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 241,
+      "ilLabel": "IL_00f1",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00f6",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0119",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_0114",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 276,
+      "ilLabel": "IL_0114",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0119",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0137",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_013e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_0177",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 375,
+      "ilLabel": "IL_0177",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_017c",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_019f",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_019a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 410,
+      "ilLabel": "IL_019a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_019f",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_01bd",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_01c4",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_01db",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 475,
+      "ilLabel": "IL_01db",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_01e0",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0203",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_01fe",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 510,
+      "ilLabel": "IL_01fe",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0203",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0223",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_022a",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600066f:IL_0288",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600066f",
+      "methodRawIlSha256": "a9636ec2cfe336280abc89c91321654f73760e3d32da7a032274c3c0518584ba",
+      "ilOffset": 648,
+      "ilLabel": "IL_0288",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000670:IL_0024",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayPlayerDiedSound()",
+      "methodToken": "0x06000670",
+      "methodRawIlSha256": "00b9897ed78ca6f3f55623d354ba734c7a0e8730878e9b808a02da76ed0e7b00",
+      "ilOffset": 36,
+      "ilLabel": "IL_0024",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0029",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0047",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_004e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000671:IL_0061",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayNextImpact()",
+      "methodToken": "0x06000671",
+      "methodRawIlSha256": "b3f7571137689f138b9a6299fec11bc2585933e3dec5c87dae67fd9e1fc1d206",
+      "ilOffset": 97,
+      "ilLabel": "IL_0061",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000671:IL_0140",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayNextImpact()",
+      "methodToken": "0x06000671",
+      "methodRawIlSha256": "b3f7571137689f138b9a6299fec11bc2585933e3dec5c87dae67fd9e1fc1d206",
+      "ilOffset": 320,
+      "ilLabel": "IL_0140",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0145",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::impactIndex"
+        },
+        {
+          "il": "IL_015a",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::impactIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000674:IL_000f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayWallImpactSound(System.Single)",
+      "methodToken": "0x06000674",
+      "methodRawIlSha256": "314f14dea8b114b882b3bdca1e9e831cf804c136d03189ac19e8ebff1c825920",
+      "ilOffset": 15,
+      "ilLabel": "IL_000f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000697:IL_0086",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x06000697",
+      "methodRawIlSha256": "1489db3fbf47f1e2714d2fdf810673a817c1f032497bffbce69ecd124405c5e0",
+      "ilOffset": 134,
+      "ilLabel": "IL_0086",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000697:IL_0095",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x06000697",
+      "methodRawIlSha256": "1489db3fbf47f1e2714d2fdf810673a817c1f032497bffbce69ecd124405c5e0",
+      "ilOffset": 149,
+      "ilLabel": "IL_0095",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000697:IL_00a4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x06000697",
+      "methodRawIlSha256": "1489db3fbf47f1e2714d2fdf810673a817c1f032497bffbce69ecd124405c5e0",
+      "ilOffset": 164,
+      "ilLabel": "IL_00a4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000698:IL_0038",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::ShuffleColors()",
+      "methodToken": "0x06000698",
+      "methodRawIlSha256": "dbc17ae849b6b6fddba49c736711fe474a91f3b20a8ddf33028db1fe83183a1d",
+      "ilOffset": 56,
+      "ilLabel": "IL_0038",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069c:IL_0028",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x0600069c",
+      "methodRawIlSha256": "63884c089f5d935fef85b4a81ba3fefd133deab59d8ddd83f745154062b6195b",
+      "ilOffset": 40,
+      "ilLabel": "IL_0028",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069c:IL_0037",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x0600069c",
+      "methodRawIlSha256": "63884c089f5d935fef85b4a81ba3fefd133deab59d8ddd83f745154062b6195b",
+      "ilOffset": 55,
+      "ilLabel": "IL_0037",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069c:IL_0046",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x0600069c",
+      "methodRawIlSha256": "63884c089f5d935fef85b4a81ba3fefd133deab59d8ddd83f745154062b6195b",
+      "ilOffset": 70,
+      "ilLabel": "IL_0046",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069f:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x0600069f",
+      "methodRawIlSha256": "94a9be89d8d7ba7a02b6435aeff2b67220fa0779fb451f091a53add650be157d",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069f:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x0600069f",
+      "methodRawIlSha256": "94a9be89d8d7ba7a02b6435aeff2b67220fa0779fb451f091a53add650be157d",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00c3",
+          "field": "System.Single BossBouncer::speedScale"
+        },
+        {
+          "il": "IL_00d9",
+          "field": "System.Single BossBouncer::timeSinceImpact"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a5:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::StartBlink()",
+      "methodToken": "0x060006a5",
+      "methodRawIlSha256": "95738fa1b884661534702f3fa8512a06404ebc5ff22a5a2ca5e752f55befb3f2",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0017",
+          "field": "System.Single BossBouncer::blinkTimer"
+        },
+        {
+          "il": "IL_002a",
+          "field": "System.Boolean Receiver::dontToggleRenderer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a7:IL_002a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateBlinksAndEffects()",
+      "methodToken": "0x060006a7",
+      "methodRawIlSha256": "43b819a8590f13af7ab0fef29ae5a0301d86df896274618fd8590139c2183c98",
+      "ilOffset": 42,
+      "ilLabel": "IL_002a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a8:IL_00a2",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006a8",
+      "methodRawIlSha256": "755452101d4cf4202254864fbfab99a3c3d4c51e6f1e3c7f57f1bf4420504c3f",
+      "ilOffset": 162,
+      "ilLabel": "IL_00a2",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a8:IL_018e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006a8",
+      "methodRawIlSha256": "755452101d4cf4202254864fbfab99a3c3d4c51e6f1e3c7f57f1bf4420504c3f",
+      "ilOffset": 398,
+      "ilLabel": "IL_018e",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0193",
+          "field": "System.Int32 BossBouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_01a0",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_01a7",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a8:IL_019b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006a8",
+      "methodRawIlSha256": "755452101d4cf4202254864fbfab99a3c3d4c51e6f1e3c7f57f1bf4420504c3f",
+      "ilOffset": 411,
+      "ilLabel": "IL_019b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_01a0",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_01a7",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a8:IL_0253",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006a8",
+      "methodRawIlSha256": "755452101d4cf4202254864fbfab99a3c3d4c51e6f1e3c7f57f1bf4420504c3f",
+      "ilOffset": 595,
+      "ilLabel": "IL_0253",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0258",
+          "field": "System.Int32 BossBouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_0265",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_026c",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a8:IL_0260",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006a8",
+      "methodRawIlSha256": "755452101d4cf4202254864fbfab99a3c3d4c51e6f1e3c7f57f1bf4420504c3f",
+      "ilOffset": 608,
+      "ilLabel": "IL_0260",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0265",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_026c",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a9:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006a9",
+      "methodRawIlSha256": "88ac6ff2257f67565a11963da70ba9e0035db12c38ebf5e3bb1a6922c8fede3b",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_013f",
+          "field": "System.Int32 BossBouncer::frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a9:IL_0124",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006a9",
+      "methodRawIlSha256": "88ac6ff2257f67565a11963da70ba9e0035db12c38ebf5e3bb1a6922c8fede3b",
+      "ilOffset": 292,
+      "ilLabel": "IL_0124",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_013f",
+          "field": "System.Int32 BossBouncer::frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a9:IL_018f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006a9",
+      "methodRawIlSha256": "88ac6ff2257f67565a11963da70ba9e0035db12c38ebf5e3bb1a6922c8fede3b",
+      "ilOffset": 399,
+      "ilLabel": "IL_018f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a9:IL_01a3",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006a9",
+      "methodRawIlSha256": "88ac6ff2257f67565a11963da70ba9e0035db12c38ebf5e3bb1a6922c8fede3b",
+      "ilOffset": 419,
+      "ilLabel": "IL_01a3",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a9:IL_01b7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006a9",
+      "methodRawIlSha256": "88ac6ff2257f67565a11963da70ba9e0035db12c38ebf5e3bb1a6922c8fede3b",
+      "ilOffset": 439,
+      "ilLabel": "IL_01b7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b6:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006b6",
+      "methodRawIlSha256": "bcdf442b08ac491711a25f107f2e62a5aac632a8d609762860da8c4e34e1eb59",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b6:IL_0124",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006b6",
+      "methodRawIlSha256": "bcdf442b08ac491711a25f107f2e62a5aac632a8d609762860da8c4e34e1eb59",
+      "ilOffset": 292,
+      "ilLabel": "IL_0124",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b6:IL_0133",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006b6",
+      "methodRawIlSha256": "bcdf442b08ac491711a25f107f2e62a5aac632a8d609762860da8c4e34e1eb59",
+      "ilOffset": 307,
+      "ilLabel": "IL_0133",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b9:IL_008d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006b9",
+      "methodRawIlSha256": "581c848057f65752c3c71a211087678685d5f2eace51b3d6c298ac1213ab1b5f",
+      "ilOffset": 141,
+      "ilLabel": "IL_008d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0099",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b9:IL_00b4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006b9",
+      "methodRawIlSha256": "581c848057f65752c3c71a211087678685d5f2eace51b3d6c298ac1213ab1b5f",
+      "ilOffset": 180,
+      "ilLabel": "IL_00b4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00d5",
+          "field": "System.Single BossBouncerSphere::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006b9:IL_00d0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006b9",
+      "methodRawIlSha256": "581c848057f65752c3c71a211087678685d5f2eace51b3d6c298ac1213ab1b5f",
+      "ilOffset": 208,
+      "ilLabel": "IL_00d0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d5",
+          "field": "System.Single BossBouncerSphere::speedScale"
+        },
+        {
+          "il": "IL_0101",
+          "field": "UnityEngine.Vector3 BossBouncerSphere::velocity"
+        },
+        {
+          "il": "IL_010c",
+          "field": "System.Single BossBouncerSphere::timeSinceImpact"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006bc:IL_000b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006bc",
+      "methodRawIlSha256": "a3b0e6116083cae5bfbb8c2759d8d142fa4ee79e8d94ed953073cf6e279105ad",
+      "ilOffset": 11,
+      "ilLabel": "IL_000b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006bc:IL_001a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006bc",
+      "methodRawIlSha256": "a3b0e6116083cae5bfbb8c2759d8d142fa4ee79e8d94ed953073cf6e279105ad",
+      "ilOffset": 26,
+      "ilLabel": "IL_001a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.Transform Bouncer::myTransform"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006bc:IL_0029",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006bc",
+      "methodRawIlSha256": "a3b0e6116083cae5bfbb8c2759d8d142fa4ee79e8d94ed953073cf6e279105ad",
+      "ilOffset": 41,
+      "ilLabel": "IL_0029",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.Transform Bouncer::myTransform"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006bc:IL_0158",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006bc",
+      "methodRawIlSha256": "a3b0e6116083cae5bfbb8c2759d8d142fa4ee79e8d94ed953073cf6e279105ad",
+      "ilOffset": 344,
+      "ilLabel": "IL_0158",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_015d",
+          "field": "System.Int32 Bouncer::randomStartNoiseMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c1:IL_000b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::SetRandomSpeedScale()",
+      "methodToken": "0x060006c1",
+      "methodRawIlSha256": "36fc6ca7019bc32f8ddeba5d9005ff8256e75540b94120ba81373ae0d6f78dbf",
+      "ilOffset": 11,
+      "ilLabel": "IL_000b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0010",
+          "field": "System.Single Bouncer::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "静态 CIL 核对：随机 Range 结果写入 Bouncer.speedScale；调用结果仍需运行日志。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c2:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006c2",
+      "methodRawIlSha256": "fa94cd0aa6f9d9c749cde9ca97bf2c725a3f441b975ba802847e236e062f8e36",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c2:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006c2",
+      "methodRawIlSha256": "fa94cd0aa6f9d9c749cde9ca97bf2c725a3f441b975ba802847e236e062f8e36",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00cd",
+          "field": "System.Single Bouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean Bouncer::firstImpactHappened"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c2:IL_00c8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006c2",
+      "methodRawIlSha256": "fa94cd0aa6f9d9c749cde9ca97bf2c725a3f441b975ba802847e236e062f8e36",
+      "ilOffset": 200,
+      "ilLabel": "IL_00c8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "System.Single Bouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean Bouncer::firstImpactHappened"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "System.Single Bouncer::timeSinceImpact"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c6:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::StartBlink()",
+      "methodToken": "0x060006c6",
+      "methodRawIlSha256": "f2c452309d6f8703b71617b6d4281525aae029ada32f17820f9110a1bd3497b0",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0017",
+          "field": "System.Single Bouncer::blinkTimer"
+        },
+        {
+          "il": "IL_002a",
+          "field": "System.Boolean Receiver::dontToggleRenderer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c8:IL_002a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateBlinksAndEffects()",
+      "methodToken": "0x060006c8",
+      "methodRawIlSha256": "8bbcc031ef1bb8faca291790c69ba00ba89af9ff02541a2f511f5ea980e643ef",
+      "ilOffset": 42,
+      "ilLabel": "IL_002a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ca:IL_00b0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006ca",
+      "methodRawIlSha256": "101add557499982679111b5ee55335c4550b91981920af40e608ddac7222bfce",
+      "ilOffset": 176,
+      "ilLabel": "IL_00b0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ca:IL_0333",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006ca",
+      "methodRawIlSha256": "101add557499982679111b5ee55335c4550b91981920af40e608ddac7222bfce",
+      "ilOffset": 819,
+      "ilLabel": "IL_0333",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0338",
+          "field": "System.Int32 Bouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_0345",
+          "field": "System.Int32 Bouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_034c",
+          "field": "System.Int32 Bouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ca:IL_0340",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006ca",
+      "methodRawIlSha256": "101add557499982679111b5ee55335c4550b91981920af40e608ddac7222bfce",
+      "ilOffset": 832,
+      "ilLabel": "IL_0340",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0345",
+          "field": "System.Int32 Bouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_034c",
+          "field": "System.Int32 Bouncer::prevMeshIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0095",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "40ca80b244f3103be1388b0088f993c57b24511bdffd72f36d2e63999e3a7f4f",
+      "ilOffset": 149,
+      "ilLabel": "IL_0095",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bf",
+          "field": "System.Int32 Bouncer::noiseFrameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_00a4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "40ca80b244f3103be1388b0088f993c57b24511bdffd72f36d2e63999e3a7f4f",
+      "ilOffset": 164,
+      "ilLabel": "IL_00a4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bf",
+          "field": "System.Int32 Bouncer::noiseFrameCount"
+        },
+        {
+          "il": "IL_00e0",
+          "field": "System.Single Bouncer::timeHasBeenCompleted"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0130",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "40ca80b244f3103be1388b0088f993c57b24511bdffd72f36d2e63999e3a7f4f",
+      "ilOffset": 304,
+      "ilLabel": "IL_0130",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0144",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "40ca80b244f3103be1388b0088f993c57b24511bdffd72f36d2e63999e3a7f4f",
+      "ilOffset": 324,
+      "ilLabel": "IL_0144",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0158",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "40ca80b244f3103be1388b0088f993c57b24511bdffd72f36d2e63999e3a7f4f",
+      "ilOffset": 344,
+      "ilLabel": "IL_0158",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ed:IL_00e7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x060006ed",
+      "methodRawIlSha256": "950b61a9502487a6b83c37f5c2f39e0fe2c20eaa6b54496265300b540cb4ebec",
+      "ilOffset": 231,
+      "ilLabel": "IL_00e7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ed:IL_00f6",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x060006ed",
+      "methodRawIlSha256": "950b61a9502487a6b83c37f5c2f39e0fe2c20eaa6b54496265300b540cb4ebec",
+      "ilOffset": 246,
+      "ilLabel": "IL_00f6",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ed:IL_0105",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x060006ed",
+      "methodRawIlSha256": "950b61a9502487a6b83c37f5c2f39e0fe2c20eaa6b54496265300b540cb4ebec",
+      "ilOffset": 261,
+      "ilLabel": "IL_0105",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f2:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f2",
+      "methodRawIlSha256": "2df896dbb57b5a68d61f59b5d9026a24c63e2b83d2c258f9fc65b08b8b38eb6b",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00aa",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f2:IL_00c5",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f2",
+      "methodRawIlSha256": "2df896dbb57b5a68d61f59b5d9026a24c63e2b83d2c258f9fc65b08b8b38eb6b",
+      "ilOffset": 197,
+      "ilLabel": "IL_00c5",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e6",
+          "field": "System.Single BouncerSphere::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f2:IL_00e1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f2",
+      "methodRawIlSha256": "2df896dbb57b5a68d61f59b5d9026a24c63e2b83d2c258f9fc65b08b8b38eb6b",
+      "ilOffset": 225,
+      "ilLabel": "IL_00e1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e6",
+          "field": "System.Single BouncerSphere::speedScale"
+        },
+        {
+          "il": "IL_0113",
+          "field": "UnityEngine.Vector3 BouncerSphere::velocity"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fd:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006fd",
+      "methodRawIlSha256": "0492e3140d4404c3f03120f86a8e5dad31e326b97dc9f29808e9bfde4446f394",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fd:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006fd",
+      "methodRawIlSha256": "0492e3140d4404c3f03120f86a8e5dad31e326b97dc9f29808e9bfde4446f394",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00cd",
+          "field": "System.Single EvilPlayerBouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean EvilPlayerBouncer::firstImpactHappened"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fd:IL_00c8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006fd",
+      "methodRawIlSha256": "0492e3140d4404c3f03120f86a8e5dad31e326b97dc9f29808e9bfde4446f394",
+      "ilOffset": 200,
+      "ilLabel": "IL_00c8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "System.Single EvilPlayerBouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean EvilPlayerBouncer::firstImpactHappened"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "System.Single EvilPlayerBouncer::timeSinceImpact"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_009a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 154,
+      "ilLabel": "IL_009a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_00c0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 192,
+      "ilLabel": "IL_00c0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_00dc",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 220,
+      "ilLabel": "IL_00dc",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_015a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 346,
+      "ilLabel": "IL_015a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_0169",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 361,
+      "ilLabel": "IL_0169",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fe:IL_0178",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x060006fe",
+      "methodRawIlSha256": "db5124b54285ac6b7a156cfc784492747e89cda015017e83bc62ff1aa264e6e6",
+      "ilOffset": 376,
+      "ilLabel": "IL_0178",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000707:IL_001b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Start()",
+      "methodToken": "0x06000707",
+      "methodRawIlSha256": "57864060558b0b042fdb05217651b861c820958617eccd89d0913eeaa98ac363",
+      "ilOffset": 27,
+      "ilLabel": "IL_001b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0020",
+          "field": "System.Int32 Expander::randomStartNoiseMeshIndex"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.MeshFilter Expander::rotaterMeshFilter"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070e:IL_00ec",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x0600070e",
+      "methodRawIlSha256": "e1548ee552a1a25f230b256170408c78742785c22ff63742ff837c07e7968cf6",
+      "ilOffset": 236,
+      "ilLabel": "IL_00ec",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00f1",
+          "field": "System.Int32 Expander::meshUpRotIndex"
+        },
+        {
+          "il": "IL_00fe",
+          "field": "System.Int32 Expander::meshBackRotIndex"
+        },
+        {
+          "il": "IL_0105",
+          "field": "System.Int32 Expander::prevIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070e:IL_00f9",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x0600070e",
+      "methodRawIlSha256": "e1548ee552a1a25f230b256170408c78742785c22ff63742ff837c07e7968cf6",
+      "ilOffset": 249,
+      "ilLabel": "IL_00f9",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00fe",
+          "field": "System.Int32 Expander::meshBackRotIndex"
+        },
+        {
+          "il": "IL_0105",
+          "field": "System.Int32 Expander::prevIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070f:IL_0039",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x0600070f",
+      "methodRawIlSha256": "8d98907fc5547e24139447bc668beb8654be1bec0e9591e0dc6956ce59baa1d4",
+      "ilOffset": 57,
+      "ilLabel": "IL_0039",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070f:IL_004d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x0600070f",
+      "methodRawIlSha256": "8d98907fc5547e24139447bc668beb8654be1bec0e9591e0dc6956ce59baa1d4",
+      "ilOffset": 77,
+      "ilLabel": "IL_004d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070f:IL_0061",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x0600070f",
+      "methodRawIlSha256": "8d98907fc5547e24139447bc668beb8654be1bec0e9591e0dc6956ce59baa1d4",
+      "ilOffset": 97,
+      "ilLabel": "IL_0061",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070f:IL_013d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x0600070f",
+      "methodRawIlSha256": "8d98907fc5547e24139447bc668beb8654be1bec0e9591e0dc6956ce59baa1d4",
+      "ilOffset": 317,
+      "ilLabel": "IL_013d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0167",
+          "field": "System.Int32 Expander::my_frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600070f:IL_014c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x0600070f",
+      "methodRawIlSha256": "8d98907fc5547e24139447bc668beb8654be1bec0e9591e0dc6956ce59baa1d4",
+      "ilOffset": 332,
+      "ilLabel": "IL_014c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0167",
+          "field": "System.Int32 Expander::my_frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600073f:IL_0002",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::Start()",
+      "methodToken": "0x0600073f",
+      "methodRawIlSha256": "8c8f7dcc045b3ba9333bfbbc666b2ca5ec71905b999d08743d503ce9489fc474",
+      "ilOffset": 2,
+      "ilLabel": "IL_0002",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000743:IL_013b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000743",
+      "methodRawIlSha256": "bbf55910c6fb6e30d9c2728714859cfacb49071727ed0d381d60ecc8f2085a1c",
+      "ilOffset": 315,
+      "ilLabel": "IL_013b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0141",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_0162",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000743:IL_015c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000743",
+      "methodRawIlSha256": "bbf55910c6fb6e30d9c2728714859cfacb49071727ed0d381d60ecc8f2085a1c",
+      "ilOffset": 348,
+      "ilLabel": "IL_015c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0162",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_0182",
+          "field": "System.Single OLD_Bouncer::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000743:IL_017d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000743",
+      "methodRawIlSha256": "bbf55910c6fb6e30d9c2728714859cfacb49071727ed0d381d60ecc8f2085a1c",
+      "ilOffset": 381,
+      "ilLabel": "IL_017d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0182",
+          "field": "System.Single OLD_Bouncer::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000758:IL_001e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x06000758",
+      "methodRawIlSha256": "a94ce3686452d79f3da332d3f0a1fad841388b4368aa5f175ef9e78dfd5e1518",
+      "ilOffset": 30,
+      "ilLabel": "IL_001e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000758:IL_002d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x06000758",
+      "methodRawIlSha256": "a94ce3686452d79f3da332d3f0a1fad841388b4368aa5f175ef9e78dfd5e1518",
+      "ilOffset": 45,
+      "ilLabel": "IL_002d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000758:IL_003c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x06000758",
+      "methodRawIlSha256": "a94ce3686452d79f3da332d3f0a1fad841388b4368aa5f175ef9e78dfd5e1518",
+      "ilOffset": 60,
+      "ilLabel": "IL_003c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000771:IL_008d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Scaler",
+      "method": "System.Void Scaler::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000771",
+      "methodRawIlSha256": "9352b72907ce77c8cba5e955681f3063ac8a7f5e30fea456178739813685c2a1",
+      "ilOffset": 141,
+      "ilLabel": "IL_008d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0099",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000771:IL_00b4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Scaler",
+      "method": "System.Void Scaler::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000771",
+      "methodRawIlSha256": "9352b72907ce77c8cba5e955681f3063ac8a7f5e30fea456178739813685c2a1",
+      "ilOffset": 180,
+      "ilLabel": "IL_00b4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e1",
+          "field": "UnityEngine.Vector3 Scaler::velocity"
+        },
+        {
+          "il": "IL_00ec",
+          "field": "System.Single Scaler::timeSinceImpact"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a3:IL_0075",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007a3",
+      "methodRawIlSha256": "3ec1f900bfe2b051639b4349f1cf86588495b8e357fc7277906e604759afffc7",
+      "ilOffset": 117,
+      "ilLabel": "IL_0075",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0081",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00a8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a3:IL_009c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007a3",
+      "methodRawIlSha256": "3ec1f900bfe2b051639b4349f1cf86588495b8e357fc7277906e604759afffc7",
+      "ilOffset": 156,
+      "ilLabel": "IL_009c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00a8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00bd",
+          "field": "System.Single Teleporter::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a3:IL_00b8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007a3",
+      "methodRawIlSha256": "3ec1f900bfe2b051639b4349f1cf86588495b8e357fc7277906e604759afffc7",
+      "ilOffset": 184,
+      "ilLabel": "IL_00b8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Single Teleporter::speedScale"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "UnityEngine.Vector3 Teleporter::velocity"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a4:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007a4",
+      "methodRawIlSha256": "08c0d87b35c6b0cfc10e0914f8b35865071cf0c297a44e1ba3ee9c0efee480ef",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00aa",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "静态 CIL 核对：Range(-0.2,0.2) * 0.95 加到 Teleporter.velocity.x；运行结果未知。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a4:IL_00c5",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007a4",
+      "methodRawIlSha256": "08c0d87b35c6b0cfc10e0914f8b35865071cf0c297a44e1ba3ee9c0efee480ef",
+      "ilOffset": 197,
+      "ilLabel": "IL_00c5",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e6",
+          "field": "System.Single Teleporter::speedScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "静态 CIL 核对：Range(-0.2,0.2) * 0.95 加到 Teleporter.velocity.y；运行结果未知。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007a4:IL_00e1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007a4",
+      "methodRawIlSha256": "08c0d87b35c6b0cfc10e0914f8b35865071cf0c297a44e1ba3ee9c0efee480ef",
+      "ilOffset": 225,
+      "ilLabel": "IL_00e1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e6",
+          "field": "System.Single Teleporter::speedScale"
+        },
+        {
+          "il": "IL_0113",
+          "field": "UnityEngine.Vector3 Teleporter::velocity"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "静态 CIL 核对：Range(0.9,1.1) 写入 Teleporter.speedScale；运行结果未知。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007b1:IL_005b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007b1",
+      "methodRawIlSha256": "769102ef1153985cd915138a803c154d7bafaa2eaee9d0d1a9ef960b32e4116a",
+      "ilOffset": 91,
+      "ilLabel": "IL_005b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0060",
+          "field": "System.Single BouncerGfxBlock::rand"
+        },
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007b1:IL_007b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007b1",
+      "methodRawIlSha256": "769102ef1153985cd915138a803c154d7bafaa2eaee9d0d1a9ef960b32e4116a",
+      "ilOffset": 123,
+      "ilLabel": "IL_007b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007b1:IL_008b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007b1",
+      "methodRawIlSha256": "769102ef1153985cd915138a803c154d7bafaa2eaee9d0d1a9ef960b32e4116a",
+      "ilOffset": 139,
+      "ilLabel": "IL_008b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007b1:IL_00a7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007b1",
+      "methodRawIlSha256": "769102ef1153985cd915138a803c154d7bafaa2eaee9d0d1a9ef960b32e4116a",
+      "ilOffset": 167,
+      "ilLabel": "IL_00a7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "UnityEngine.Vector3 BouncerGfxBlock::targetScale"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007b1:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007b1",
+      "methodRawIlSha256": "769102ef1153985cd915138a803c154d7bafaa2eaee9d0d1a9ef960b32e4116a",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007bb:IL_0013",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "Flicker",
+      "method": "System.Void Flicker::Update()",
+      "methodToken": "0x060007bb",
+      "methodRawIlSha256": "306a803f1a1ca33eaf8bc71bf5ef0ee3353e62ab81fcb41f8b64c2a5eb42c578",
+      "ilOffset": 19,
+      "ilLabel": "IL_0013",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0018",
+          "field": "System.Single UnityEngine.Color::a"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007bf:IL_0035",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "UnityEngine.Mesh GenerateNoiseMeshes::ReturnRandomSphereMesh(Receiver)",
+      "methodToken": "0x060007bf",
+      "methodRawIlSha256": "a88236cc4758a4e39f2cebab48080c8a1c20031de8051515719f3973d70bd665",
+      "ilOffset": 53,
+      "ilLabel": "IL_0035",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007bf:IL_0056",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "UnityEngine.Mesh GenerateNoiseMeshes::ReturnRandomSphereMesh(Receiver)",
+      "methodToken": "0x060007bf",
+      "methodRawIlSha256": "a88236cc4758a4e39f2cebab48080c8a1c20031de8051515719f3973d70bd665",
+      "ilOffset": 86,
+      "ilLabel": "IL_0056",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007c4:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddMesh(System.Int32,System.Single)",
+      "methodToken": "0x060007c4",
+      "methodRawIlSha256": "240d523e7f84a3c6c1a2af578d2ebe9d4dd59ba2f13a86fd9e88b562159686aa",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007c4:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddMesh(System.Int32,System.Single)",
+      "methodToken": "0x060007c4",
+      "methodRawIlSha256": "240d523e7f84a3c6c1a2af578d2ebe9d4dd59ba2f13a86fd9e88b562159686aa",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007c5:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddSphereMesh(System.Int32,System.Single)",
+      "methodToken": "0x060007c5",
+      "methodRawIlSha256": "7756551f598fcf15bd3ec1e736c3cd5ec5c6ea5d82637bb9b377745b19cb14e4",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007c5:IL_007a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddSphereMesh(System.Int32,System.Single)",
+      "methodToken": "0x060007c5",
+      "methodRawIlSha256": "7756551f598fcf15bd3ec1e736c3cd5ec5c6ea5d82637bb9b377745b19cb14e4",
+      "ilOffset": 122,
+      "ilLabel": "IL_007a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007e6:IL_0044",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "WhiteNoiseAnim",
+      "method": "System.Void WhiteNoiseAnim::Update()",
+      "methodToken": "0x060007e6",
+      "methodRawIlSha256": "17a1d057511577c1d70da8096f17dcd4d9a12e1a750f4cefbab8d3ab78320606",
+      "ilOffset": 68,
+      "ilLabel": "IL_0044",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0064",
+          "field": "System.Int32 WhiteNoiseAnim::frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007e6:IL_0053",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "WhiteNoiseAnim",
+      "method": "System.Void WhiteNoiseAnim::Update()",
+      "methodToken": "0x060007e6",
+      "methodRawIlSha256": "17a1d057511577c1d70da8096f17dcd4d9a12e1a750f4cefbab8d3ab78320606",
+      "ilOffset": 83,
+      "ilLabel": "IL_0053",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0064",
+          "field": "System.Int32 WhiteNoiseAnim::frameCount"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008b2:IL_0017",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "HardcoreArenaChanger",
+      "method": "System.Void HardcoreArenaChanger::Awake()",
+      "methodToken": "0x060008b2",
+      "methodRawIlSha256": "d470f9f2842c98ed7bfc80a9d7fc40979dd4954521f83a5be68c6a5ec033afdf",
+      "ilOffset": 23,
+      "ilLabel": "IL_0017",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bd:IL_016b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::Awake()",
+      "methodToken": "0x060008bd",
+      "methodRawIlSha256": "feea7510eeb1e8b867d489a54089a8a1d730624c1a28e2157c7fcf78c25683ba",
+      "ilOffset": 363,
+      "ilLabel": "IL_016b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bd:IL_0283",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::Awake()",
+      "methodToken": "0x060008bd",
+      "methodRawIlSha256": "feea7510eeb1e8b867d489a54089a8a1d730624c1a28e2157c7fcf78c25683ba",
+      "ilOffset": 643,
+      "ilLabel": "IL_0283",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_006d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 109,
+      "ilLabel": "IL_006d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_007e",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_008a",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_0094",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_009b",
+          "field": "System.Boolean ProceduralRoom::prevIsHorizontal"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_00d4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 212,
+      "ilLabel": "IL_00d4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e9",
+          "field": "System.Single ProceduralRoom::mirrorSign"
+        },
+        {
+          "il": "IL_00f4",
+          "field": "System.Single ProceduralRoom::prevMirrorSign"
+        },
+        {
+          "il": "IL_0104",
+          "field": "System.Single ProceduralRoom::mirrorSign"
+        },
+        {
+          "il": "IL_010f",
+          "field": "System.Collections.Generic.List`1<Bouncer> ProceduralRoom::bouncersAdded"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_0329",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 809,
+      "ilLabel": "IL_0329",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0332",
+          "field": "System.Int32 ProceduralRoom::prevconnectorRandPosIndex"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_0412",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 1042,
+      "ilLabel": "IL_0412",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_05e6",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 1510,
+      "ilLabel": "IL_05e6",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_05fd",
+          "field": "System.Boolean LineToggler::startOn"
+        },
+        {
+          "il": "IL_0618",
+          "field": "System.Boolean LineToggler::startOn"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_1630",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 5680,
+      "ilLabel": "IL_1630",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1652",
+          "field": "System.Single LineRotater::rotSpeed"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_1661",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 5729,
+      "ilLabel": "IL_1661",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1678",
+          "field": "System.Boolean LineToggler::startOn"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_174a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 5962,
+      "ilLabel": "IL_174a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_17b1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 6065,
+      "ilLabel": "IL_17b1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_17d2",
+          "field": "System.Boolean ProceduralRoom::preMoverSign"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008bf:IL_1852",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x060008bf",
+      "methodRawIlSha256": "e355da0f3018f187f19b183655a9eab219a3c35e0147a8d2e2d98e8fc778d023",
+      "ilOffset": 6226,
+      "ilLabel": "IL_1852",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a000244",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1873",
+          "field": "System.Boolean ProceduralRoom::preMoverSign"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060008c0:IL_001d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+      "mvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::AddArenaSpeciel(ProceduralPattern)",
+      "methodToken": "0x060008c0",
+      "methodRawIlSha256": "0cc4c09ecc199f52ab6583f5cd3425344054b9da1e3b45c0e551e3aab349a45e",
+      "ilOffset": 29,
+      "ilLabel": "IL_001d",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "apiToken": "0x0a00023d",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0046",
+          "field": "ProceduralRoom/ArenaSpeciels ProceduralRoom::prevArenaSpecial"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0017",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 23,
+      "ilLabel": "IL_0017",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0029",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        },
+        {
+          "il": "IL_0034",
+          "field": "System.Single NoiseEffect::scratchX"
+        },
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_002f",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 47,
+      "ilLabel": "IL_002f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0034",
+          "field": "System.Single NoiseEffect::scratchX"
+        },
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        },
+        {
+          "il": "IL_0051",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_003a",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 58,
+      "ilLabel": "IL_003a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        },
+        {
+          "il": "IL_0051",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        }
+      ],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0092",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 146,
+      "ilLabel": "IL_0092",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0097",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 151,
+      "ilLabel": "IL_0097",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_00dc",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 220,
+      "ilLabel": "IL_00dc",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_00ef",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 239,
+      "ilLabel": "IL_00ef",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "apiToken": "0x0a0000a9",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_013e",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 318,
+      "ilLabel": "IL_013e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a0000ae",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_014f",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 335,
+      "ilLabel": "IL_014f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a0000ae",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-UnityScript-firstpass:0x0600007c:IL_00a3",
+      "assembly": "Assembly-UnityScript-firstpass.dll",
+      "assemblySha256": "f93acb5a43f6a7f5e7e3bbfd104d44b872e106409d64842120c746e66596a484",
+      "mvid": "375034b8-3cda-4677-a9bb-fd10c498d870",
+      "type": "NoiseAndGrain",
+      "method": "System.Void NoiseAndGrain::DrawNoiseQuadGrid(UnityEngine.RenderTexture,UnityEngine.RenderTexture,UnityEngine.Material,UnityEngine.Texture2D,System.Int32)",
+      "methodToken": "0x0600007c",
+      "methodRawIlSha256": "9701b13095bfccf1ea60c55aebee17a3a33522fb83e3193b08708d7121ec4f8d",
+      "ilOffset": 163,
+      "ilLabel": "IL_00a3",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a0000ab",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    },
+    {
+      "siteId": "Assembly-UnityScript-firstpass:0x0600007c:IL_00b1",
+      "assembly": "Assembly-UnityScript-firstpass.dll",
+      "assemblySha256": "f93acb5a43f6a7f5e7e3bbfd104d44b872e106409d64842120c746e66596a484",
+      "mvid": "375034b8-3cda-4677-a9bb-fd10c498d870",
+      "type": "NoiseAndGrain",
+      "method": "System.Void NoiseAndGrain::DrawNoiseQuadGrid(UnityEngine.RenderTexture,UnityEngine.RenderTexture,UnityEngine.Material,UnityEngine.Texture2D,System.Int32)",
+      "methodToken": "0x0600007c",
+      "methodRawIlSha256": "9701b13095bfccf1ea60c55aebee17a3a33522fb83e3193b08708d7121ec4f8d",
+      "ilOffset": 177,
+      "ilLabel": "IL_00b1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "apiToken": "0x0a0000ab",
+      "nearbyFieldWrites": [],
+      "parametersStatus": "未知：此清单保留静态参数构造 CIL，实际参数和结果必须从实际回放日志读取。",
+      "affectedFieldsStatus": "未知：需结合完整 CIL 数据流或运行观察核实；nearbyFieldWrites 仅为邻近写入候选。",
+      "runtimeParameters": null,
+      "runtimeResult": null
+    }
+  ],
+  "audit": {
+    "unity-time": 221,
+    "save-or-file-write": 6,
+    "unity-input-direct": 83,
+    "reflection-or-indirect-dispatch": 17,
+    "clock-or-external-entropy": 1,
+    "thread-or-task": 25,
+    "screen-resolution": 5,
+    "steam-write": 2
+  },
+  "publicExport": "Metadata and nearby store candidates only; full original CIL windows omitted. Static sites do not prove execution."
+}

@@ -1,0 +1,2 @@
+# Preserve immutable TAS, fingerprint and report bytes on every checkout.
+* -text

@@ -33,18 +33,18 @@ Click Verify ×5 to compare independent cold processes, optionally including pau
 .\dist\host\ThothTAS.Host.exe verify .\work\combined.tas --count 2 --modes --out .\work\verification\combined
 ```
 
-## Quick reset
+## Unsaved changes and draft recovery
 
-Quick reset (same process) keeps the owned game PID and rebuilds the start using a new frozen draft and the fixed save. It is intended for practice. It is not equivalent to a new process: native absolute time and physics state are not fully reset. Exact verification always uses independent processes.
+Closing, opening another file or composing over a modified draft prompts **Save / Don't save / Cancel**. Cancel leaves the editor and game connection intact. Save failures or a cancelled Save as also keep the window open. Don't save leaves the document unchanged and archives a recoverable history copy.
 
-## Scope
+After 350 ms of idle typing, a separate checkpoint is atomically written in `work/draft-recovery`. Leaving the editor also checkpoints the draft. Saving the document clears the current checkpoint. A later startup offers recovery for checkpoints left by a crashed editor; **Recover draft…** previews checkpoints and older `.tas` backups. Save or Save as after recovery.
 
-Windows x64 editor, Unity 5.3.6p5 x86 game, THOTH `THOTH-2019-09-10-174628-r239`. Single player, ordinary fixed rooms. No instant save, rewind, seeking, two-player, Hardcore, generated modes or cross-computer determinism guarantee.
+## Reliable replay
 
-See [public verification](public/verification-20261013.md) for actual tests and their limits. Source-level pure tests do not substitute for running the actual game.
+v0.3.2 Replay restores the fixed save and starts a new game process. The former same-process option is disabled: Basic-3 showed differing physics ticks, random records and collision outcomes after warm resets. Ordinary Host sessions reject it too; `verify-reset` explicitly enables unsafe diagnostics.
 
-## Community Speedrun Mod and faster practice reset
+Inputs authored under a warm-reset state may need adjustment for the fixed cold baseline. This restores startup waiting; the former roughly 0.55 s practice reset is not a reliable authoring path. See the [actual investigation](public/draft-replay-fix-20261013.md).
 
-Optional rmadlal v2.8 timers and window support: run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers** in the editor. The game assembly is replaced in memory only. Timer clocks use complete 60 Hz game cycles, so pause and playback speed do not change the same TAS result; they are not ordinary wall-clock RTA. Changing the profile takes effect on the next Replay through a new process.
+## Community Speedrun Mod
 
-Warm reset restores the cached sound-bank hierarchy, selectors and audio settings and rebuilds other gameplay scenes and pools. Enable **Quick reset (same process)** beside Replay: measured time to the active frame-zero baseline is now about 0.55 s, down from about 2.56 s. First launch still loads normally. Native clocks and floating-point differences remain; some longer paths diverge in random records. Exact verification uses independent cold processes. `verify-reset` reports field differences throughout the replay. [Actual measurements and limitations](public/reset-subsecond-20261013.md). [Setup, controls and verification](public/community-mod-guide.md) · [Actual compatibility and reset report](public/community-reset-20261013.md).
+Run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers**. The community v2.8 assembly is loaded in memory. Timer clocks use complete 60 Hz cycles; a profile change applies on the next Replay through a fresh process. Reliable replay is used with either profile. [Setup and controls](public/community-mod-guide.md).

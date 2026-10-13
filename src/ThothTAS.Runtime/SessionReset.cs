@@ -102,12 +102,14 @@ public static partial class Hooks {
         if(oldReference!=null)oldReference.Dispose();
     }
     static void RestartAtBoundary(string cfgPath) {
+        if(C("allowUnsafePracticeReset","false")!="true")throw new InvalidOperationException("同进程重置会导致物理失步；请通过编辑器重新回放启动独立进程。仅诊断测量允许启用。");
         resetWatch=System.Diagnostics.Stopwatch.StartNew();resetTimings.Clear();
         cfgPath=Path.GetFullPath(cfgPath);
         string allowed=Path.GetFullPath(Path.Combine(Root,"work"))+Path.DirectorySeparatorChar;
         if(!cfgPath.StartsWith(allowed,StringComparison.OrdinalIgnoreCase))throw new IOException("重置配置必须位于本项目 work 中。");
         var next=new Dictionary<string,string>(StringComparer.Ordinal);
         foreach(string raw in File.ReadAllLines(cfgPath)){int p=raw.IndexOf('=');if(p>0)next[raw.Substring(0,p)]=raw.Substring(p+1);}
+        if(!next.ContainsKey("allowUnsafePracticeReset")||next["allowUnsafePracticeReset"]!="true")throw new IOException("同进程重置必须明确声明为非确定性诊断。");
         if(!next.ContainsKey("token")||next["token"]!=C("token","")||next["port"]!=C("port","")||next["width"]!=C("width","1280")||next["height"]!=C("height","720"))throw new IOException("同进程重置不得改变控制连接或窗口尺寸。");
         string nextCommunity;next.TryGetValue("communityModPath",out nextCommunity);
         if((nextCommunity??"")!=C("communityModPath",""))throw new IOException("同进程重置不得切换社区 Mod；必须启动新进程。");

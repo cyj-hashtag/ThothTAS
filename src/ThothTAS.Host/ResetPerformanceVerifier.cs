@@ -22,7 +22,7 @@ public static class ResetPerformanceVerifier
         if (count is < 2 or > 100) throw new ArgumentOutOfRangeException(nameof(count), "重置测量次数须在 2 至 100 之间。");
         var output = Path.GetFullPath(options.OutputParent ?? Path.Combine(root, "work", "reset-verification", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")));
         Directory.CreateDirectory(output);
-        options = options with { Autoplay = false, OutputParent = Path.Combine(output, "runs") };
+        options = options with { Autoplay = false, OutputParent = Path.Combine(output, "runs"), AllowUnsafePracticeReset = true };
         var samples = new List<Sample>();
         var checks = new List<string>();
         string? error = null;

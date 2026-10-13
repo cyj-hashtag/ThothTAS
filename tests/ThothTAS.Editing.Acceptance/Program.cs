@@ -26,7 +26,7 @@ async Task Execute(string name,Func<Task<object>> body) {
 }
 if(command is "warm" or "all")await Execute("同一实际游戏进程重建关卡、草稿快照和段内进度",async()=>{
     string source="Version,1\nStart,Basic-1\nSeed,1\n\n4, M=0, A=0\n4, N\n";
-    var options=new SessionOptions{OutputParent=Path.Combine(output,"warm-runs")};
+    var options=new SessionOptions{OutputParent=Path.Combine(output,"warm-runs"),AllowUnsafePracticeReset=true};
     await using var game=await GameSession.StartAsync(root,source,options);
     runs.Add(game.RunDirectory);int pid=game.ProcessId;
     await game.WaitForStatusAsync(s=>s.State=="paused"&&s.Frame==0,TimeSpan.FromSeconds(90));
@@ -53,11 +53,11 @@ if(command is "warm" or "all")await Execute("同一实际游戏进程重建关�
     await game.SendAsync("PLAY");await game.Completion.WaitAsync(TimeSpan.FromSeconds(30));
     ReplayVerifier.ValidateLogs(game.RunDirectory,3);
     Require(await Hash(Path.Combine(oldRun,"frames.jsonl"))==oldFramesHash&&await Hash(Path.Combine(oldRun,"random.tsv"))==oldRandomHash,"暖重置没有向已结束回放追加玩法或随机记录");
-    return new{pid,sameProcessResets=2,runDirectories=runs.ToArray(),baselineDifferences,coldEquivalent=false,limitation="同进程关卡重建用于编辑；Unity原生绝对时间和物理累积保持活跃，不冒充独立进程确定性验证。"};
+    return new{pid,sameProcessResets=2,runDirectories=runs.ToArray(),baselineDifferences,coldEquivalent=false,limitation="同进程重建仅作显式启用的非确定性诊断，编辑器已经停用；原生物理状态保持活跃。"};
 });
 if(command=="resources")await Execute("同一实际进程连续五次重建的资源归属清理",async()=>{
     const string source="Version,1\nStart,Basic-1\nSeed,1\n\n2, N\n";
-    var options=new SessionOptions{OutputParent=Path.Combine(output,"resource-runs")};
+    var options=new SessionOptions{OutputParent=Path.Combine(output,"resource-runs"),AllowUnsafePracticeReset=true};
     await using var game=await GameSession.StartAsync(root,source,options);
     int pid=game.ProcessId;var samples=new List<Dictionary<string,string>>();
     for(int index=0;index<=5;index++) {

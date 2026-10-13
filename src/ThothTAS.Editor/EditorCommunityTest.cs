@@ -48,7 +48,6 @@ internal static class EditorCommunityTest
             form.TestOpenPath(practice);
             await form.TestClickAsync("打开");
             form.TestCommunity(true);
-            form.TestFastReset(false);
             await form.TestClickAsync("播放");
             var baseline = form.ActiveSession!;
             runs.Add(baseline.RunDirectory);
@@ -89,13 +88,12 @@ internal static class EditorCommunityTest
             await form.TestSpeedAsync(2);
             await game.Completion.WaitAsync(TimeSpan.FromMinutes(3), cancellation);
             Require(ReplayVerifier.Compare(runs[0], runs[1]) == null, "社区模式连续与逐帧/暂停/焦点切换/编辑另存/变速的两冷进程逐帧状态及完整随机记录精确一致");
-            form.TestFastReset(true);
             var pid = game.ProcessId;
             var watch = Stopwatch.StartNew();
             await form.TestClickAsync("重新回放");
-            Require(form.ActiveSession!.ProcessId == pid, "勾选同进程快速重置后社区模式保留实际PID");
-            Require(Fields(form.ActiveSession.RunDirectory, true)["CommunityMod.realTimeTimer.frames"] == "0", "社区暖重置恢复计时零基线");
-            checks.Add("编辑器实际社区暖重置返回耗时ms=" + watch.Elapsed.TotalMilliseconds.ToString("F1"));
+            Require(form.ActiveSession!.ProcessId != pid, "社区重新回放使用独立PID，恢复物理初始状态");
+            Require(Fields(form.ActiveSession.RunDirectory, true)["CommunityMod.realTimeTimer.frames"] == "0", "社区重新回放恢复计时零基线");
+            checks.Add("编辑器实际可靠重新回放返回耗时ms=" + watch.Elapsed.TotalMilliseconds.ToString("F1"));
             runs.Add(form.ActiveSession.RunDirectory);
             await form.ActiveSession.Completion.WaitAsync(TimeSpan.FromMinutes(3), cancellation);
             form.TestCommunity(false);
@@ -114,8 +112,8 @@ internal static class EditorCommunityTest
             else if (File.Exists(settingsPath)) File.Delete(settingsPath);
         }
         var report = new { version = 1, passed = error == null, error, checks, runs, windows, beforeHashes,
-            scope = "实际社区程序集、编辑器按钮、两关自然转场、计时记录、暂停/逐帧/变速/焦点切换/编辑另存/暖重置及冷进程切换配置",
-            limitations = "文件选择路径由自测注入；未验证所有关卡、社区作弊功能、排行榜RTA或跨电脑一致性；暖重置coldEquivalent=false。" };
+            scope = "实际社区程序集、编辑器按钮、自然转场、计时、暂停/逐帧/变速/焦点切换/编辑另存/独立进程重播及切换配置",
+            limitations = "文件选择路径由自测注入；未验证所有关卡、社区作弊功能、排行榜RTA或跨电脑一致性。" };
         await File.WriteAllTextAsync(Path.Combine(output, "report.json"), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false));
         await File.WriteAllTextAsync(Path.Combine(output, "report.md"), "# 社区Mod实际编辑器验证\n\n结果：" + (error == null ? "通过" : "未通过") + "\n\n" + string.Join("\n", checks.Select(s => "- " + s)) + "\n\n" + error, new UTF8Encoding(false));
         return error == null;

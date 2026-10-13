@@ -16,7 +16,7 @@ using BepInEx;
 using ThothTAS.Core;
 
 namespace ThothTAS.Runtime {
-[BepInPlugin("local.thoth.tas", "THOTH TAS", "0.1.0")]
+[BepInPlugin("local.thoth.tas", "THOTH TAS", "0.3.2")]
 public sealed class TasPlugin : BaseUnityPlugin {
     void Awake() {
         if(!Hooks.Enabled) return;

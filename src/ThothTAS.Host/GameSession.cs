@@ -18,6 +18,8 @@ public sealed record SessionOptions
     public double Speed { get; init; } = 1;
     public bool Autoplay { get; init; }
     public bool CommunityMod { get; init; }
+    /// <summary>Diagnostics only. Native physics survives a same-process reset; authoring must use a new process.</summary>
+    public bool AllowUnsafePracticeReset { get; init; }
     public string? OutputParent { get; init; }
     public TimeSpan ConnectTimeout { get; init; } = TimeSpan.FromSeconds(90);
     public string? ReferenceFrames { get; init; }
@@ -157,7 +159,8 @@ public sealed class GameSession : IAsyncDisposable
                 ["width"] = options.Width.ToString(CultureInfo.InvariantCulture), ["height"] = options.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = options.Autoplay ? "true" : "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
                 ["seed"] = session.Script.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = session.Script.Start,
-                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(root) : ""
+                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(root) : "",
+                ["allowUnsafePracticeReset"] = options.AllowUnsafePracticeReset ? "true" : "false"
             };
             if (options.ReferenceFrames != null)
             {
@@ -250,6 +253,8 @@ public sealed class GameSession : IAsyncDisposable
     {
         var resetWatch = Stopwatch.StartNew();
         options ??= activeOptions;
+        if (!options.AllowUnsafePracticeReset || !activeOptions.AllowUnsafePracticeReset)
+            throw new InvalidOperationException("同进程重置会导致物理与随机记录失步，已停用。请启动独立进程；仅 verify-reset 诊断允许显式启用。");
         if (options.Width != activeOptions.Width || options.Height != activeOptions.Height)
             throw new ArgumentException("同进程快速重置期间窗口尺寸必须保持启动时的值。", nameof(options));
         if (options.CommunityMod != activeOptions.CommunityMod)
@@ -287,7 +292,8 @@ public sealed class GameSession : IAsyncDisposable
                 ["width"] = activeOptions.Width.ToString(CultureInfo.InvariantCulture), ["height"] = activeOptions.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
                 ["seed"] = parsed.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = parsed.Start,
-                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(Root) : ""
+                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(Root) : "",
+                ["allowUnsafePracticeReset"] = "true"
             };
             if (options.ReferenceFrames != null)
             {

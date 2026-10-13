@@ -1,0 +1,602 @@
+{
+  "version": "0.3.2",
+  "createdUtc": "2026-10-13T05:19:48.553372+00:00",
+  "passed": true,
+  "scope": "Current machine and pinned build; independent-process authoring. The native warm-reset determinism problem remains unresolved and that authoring path is disabled.",
+  "recovery": {
+    "bytes": 263,
+    "sha256": "5BACC9ECED2F31D2D78A61E13D88C67194411B4FC9E085ED7A5BACADA012718B",
+    "exactRecovery": true,
+    "existingBasic3Unchanged": true,
+    "privateInputNotPublished": true
+  },
+  "observedWarmFailure": {
+    "scriptSha256": "3ff26d21272c942a6c89bb28b3108b6aef42a71dbda6fb05514f9459791f94b3",
+    "sameScriptRuns": 3,
+    "randomRecordVariants": 3,
+    "runs": [
+      "20261013-043109-bc10d7f4f1934ed68d4c61ac75b8cf5b",
+      "20261013-043102-f45aeee6ffd34aa8bfae221401ec116b",
+      "20261013-043049-b3e85c5ccc734c1db549863617aeccc1"
+    ],
+    "firstBaselineDifference": {
+      "field": "Enemies[0]/Bouncer (1)[0]/Bouncer.Bouncer.startFreezeTimer",
+      "a": "-0.179999992@BE3851EB",
+      "b": "-0.19@BE428F5C"
+    },
+    "firstRandomDifference": {
+      "index": 355,
+      "frame": 22,
+      "method": "Bouncer.Update",
+      "argumentsA": "-0.0142945@BC6A337B,0.0142945@3C6A337B",
+      "argumentsB": "-0.0142825@BC6A0126,0.0142825@3C6A0126"
+    }
+  },
+  "evidence": {
+    "reaEvidenceId": "ev_32d819f034c1c5f31cbac0c8471ab95c617396375edc5ee4623818bd66d05121",
+    "assemblySha256": "9675A94CCE19C883F0E0927E9A9185FF8C793080698100A8717ED5AAA4B2555C",
+    "moduleMvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+    "rawBouncerCilSha256": "3ACDACC6BCF3725975AA7AE4AC094ABB285BBCBD3A54E37B61CF19F2938A68B6",
+    "method": "Bouncer.OnCollisionStay",
+    "observation": "Contact iteration reflects currentDir; after timeSinceImpact > 0.5, three Unity random calls perturb direction and speed. Static CIL does not itself observe execution."
+  },
+  "artifacts": {
+    "dist/editor/ThothTAS.Editor.dll": "C66D891C4CE68114EC3D2461DCE8302258F4A9F72B43A5461FFFB7F500E197D0",
+    "dist/host/ThothTAS.Host.dll": "C0318753F83919EF76B4A20A5282A36AADE907C7FD29CA28F1A25AFF25E56F40",
+    "game/BepInEx/plugins/ThothTAS.Runtime.dll": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+    "game/BepInEx/patchers/ThothTAS.Preloader.dll": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838"
+  },
+  "protectedFiles": {
+    "examples/basic-1.tas": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+    "examples/basic-2.tas": "B6BB34EEDE3690AC73C298393B18BD1594F82DE959D527000362FEDF77EE3A58",
+    "examples/basic-3.tas": "B6BB34EEDE3690AC73C298393B18BD1594F82DE959D527000362FEDF77EE3A58",
+    "game/settings.txt": "2A70AC9E7237852C9883E2B6F37CBC87BDA2CBB623CA3B8C792C264F21D9451B",
+    "game/THOTH_Data/Managed/Assembly-CSharp.dll": "9675A94CCE19C883F0E0927E9A9185FF8C793080698100A8717ED5AAA4B2555C"
+  },
+  "suites": [
+    {
+      "name": "stock-baseline-9",
+      "passed": true,
+      "checks": [],
+      "runs": [
+        {
+          "run": "20261013-045513-45284df5443846faac56cb6a8eec0377",
+          "pid": 31856,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045534-c8f4719df8fd44f79fb85735582c8cb0",
+          "pid": 24436,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045555-a13591b0e0b54c3d87b20021996830c3",
+          "pid": 46148,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045617-de85214a4b214bccbb987f17e65a7d67",
+          "pid": 11032,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045637-a37d2de5ad35421c86fc295a4be45188",
+          "pid": 32316,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045657-feb27a1557444bf384d456f7c795bb83",
+          "pid": 29000,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045720-d03bee39d955450f933ddf6df66426ac",
+          "pid": 48776,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045743-526bce2349a844c294a7903dc6edfb8c",
+          "pid": 31504,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-045808-ae2bd373be204931a3b9e066afe48ec8",
+          "pid": 19616,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        }
+      ],
+      "modeRuns": [
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "pause",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": true
+        },
+        {
+          "mode": "step",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 0.5,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 2,
+          "frames": 337,
+          "pauseStable": false
+        }
+      ]
+    },
+    {
+      "name": "community-baseline-9",
+      "passed": true,
+      "checks": [],
+      "runs": [
+        {
+          "run": "20261013-050312-4c986581948a4cb8a700e711692f34c3",
+          "pid": 3692,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050328-c8cad0ce0600413fa5fc64d552fa53c9",
+          "pid": 48824,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050344-bed1fc0138384a2b92f4b793a9de43b8",
+          "pid": 48024,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050401-18c3477745bc44b9a706d4afca1b6a02",
+          "pid": 27824,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050417-be1f833896f74448b89f92ebb79207c5",
+          "pid": 12124,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050434-de781dfe612b498f8891e379884c793e",
+          "pid": 4104,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050452-6daea8f8a27749528dab109fd934b0d4",
+          "pid": 47808,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050511-2c8cbc84142c43d3b7c3bbfa228c67f4",
+          "pid": 7876,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-050533-3b06cffd2d07493ea8ac1a5d27e5ab72",
+          "pid": 33508,
+          "runtimeSha256": "7635DD23A057E4B2560194B40A89E2AD325E3BB2E5DF64ED0CE167650FE0EF60",
+          "preloaderSha256": "5456E31E3E1EC684A21F5454B8A2C81CC18DB903147410D6177097883127630F",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        }
+      ],
+      "modeRuns": [
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "pause",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": true
+        },
+        {
+          "mode": "step",
+          "speed": 1,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 0.5,
+          "frames": 337,
+          "pauseStable": false
+        },
+        {
+          "mode": "play",
+          "speed": 2,
+          "frames": 337,
+          "pauseStable": false
+        }
+      ]
+    },
+    {
+      "name": "editor-draft-crash-recovery",
+      "passed": true,
+      "checks": [
+        "实际键入后350ms自动保存独立恢复文件",
+        "检查点保存完整中文文本、源路径和活动窗口身份",
+        "自动备份不覆盖用户的已保存文档",
+        "真实退出弹窗点击取消，窗口与未保存内容保留",
+        "打开其他文档前也显示真实弹窗，取消不丢失草稿",
+        "英文退出弹窗取消同样保留编辑器",
+        "确认保存或不保存后窗口实际关闭",
+        "真实退出弹窗保存完整草稿，成功保存后清理本窗口检查点",
+        "确认保存或不保存后窗口实际关闭",
+        "退出选择不保存不覆盖文档，同时保留手动恢复的历史TAS备份",
+        "退出选择保存但磁盘写入失败时窗口保持打开，草稿与备份保留",
+        "确认保存或不保存后窗口实际关闭",
+        "无路径新草稿退出保存走另存为，成功写入后才关闭",
+        "独立真实编辑器进程按普通自动备份路径写出草稿",
+        "强制终止后草稿文本精确恢复，启动恢复检测识别失去进程的检查点",
+        "真实恢复按钮恢复完整草稿并标记为未保存",
+        "恢复后的旧检查点归档，避免每次启动重复提醒",
+        "恢复后另存为保存精确文本并清理新检查点",
+        "确认保存或不保存后窗口实际关闭"
+      ],
+      "runs": [],
+      "modeRuns": []
+    },
+    {
+      "name": "editor-replay-guards",
+      "passed": true,
+      "checks": [
+        "普通Host会话拒绝不安全同进程重置，未创建新运行或改变输入",
+        "真实游戏运行时退出弹窗取消保留编辑器和控制连接",
+        "退出取消不改变暂停边界或随机序列",
+        "重新回放实际启动新的独立游戏PID：0",
+        "启动记录明确标记独立冷进程：0",
+        "Basic-3编辑器暂停取消退出及两次重新回放逐帧字段和完整随机记录精确一致：0",
+        "重新回放实际启动新的独立游戏PID：1",
+        "启动记录明确标记独立冷进程：1",
+        "Basic-3编辑器暂停取消退出及两次重新回放逐帧字段和完整随机记录精确一致：1",
+        "社区计时器模式的重新回放也使用独立PID",
+        "Basic-3社区计时器模式编辑器重复回放逐帧与随机记录精确一致",
+        "原始TCP重置命令也被运行模块拒绝，不能绕过普通会话保护"
+      ],
+      "runs": [
+        {
+          "run": "20261013-051621-fbfcf37c40b4426196eff329f0c5bae2",
+          "pid": 16496,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051638-0da821a115fc4618b38e9f2e849d51d6",
+          "pid": 47880,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051654-f89fe01f0b604b309219b02b8a1f06e2",
+          "pid": 47760,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "6DD20672550AEB2DC725B1233D4289A0FA6874835AE51AD7F98E716ED62A4554",
+          "randomSha256": "E34D793DA2A3A142D699066C3D528CBDD30F56831EE7B2986FD4543384F1C56F",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051710-8816edda02a44bc59afe3561bb0fc0e7",
+          "pid": 50244,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "BB36EA667CB9173A9C3D9260CA105908329091F99A09AC5BE504B0F1B1B19222",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051726-1a32e591945140e7a83a656b8a692df4",
+          "pid": 14932,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 338,
+          "firstDeathFrame": 122,
+          "roomCompletedEvents": [],
+          "framesSha256": "88172461F1D2DD79CF36E1F274EE5331DB7C6B512C0786EEB88DD827245A9030",
+          "randomSha256": "8CCD46CC2AC1E29A6A7D5655DFDCF3495D2E17F90D234497953A74B9BBD243BF",
+          "coldProcess": true
+        }
+      ],
+      "modeRuns": []
+    },
+    {
+      "name": "editor-editing-regression",
+      "passed": true,
+      "checks": [
+        "运行快照实时高亮实际 SourceLine：6",
+        "输入段进度与实际 segmentFrame/segmentFrames 一致",
+        "未改草稿同步显示当前执行行",
+        "改稿后仅运行快照保持准确高亮，草稿取消执行行标记",
+        "实际过关事件 Basic-1 / frame147 可见",
+        "实际玩家激活入场事件 Basic-2 / frame273 可见",
+        "编辑器过关/入场列表展示实际事件",
+        "重新回放使用独立 PID 与新 run",
+        "重新回放使用新的不可变草稿快照",
+        "编辑器重新回放逐帧状态与随机记录精确一致",
+        "真实拼接按钮按选定顺序生成两关 Room 章节",
+        "运行快照实时高亮实际 SourceLine：15",
+        "输入段进度与实际 segmentFrame/segmentFrames 一致",
+        "第二章节高亮源行按章节本地帧索引定位",
+        "实际 TCP 断线即时显示控制连接错误，取消播放/逐帧操作",
+        "断线稳定边界后实际帧和随机序列停止推进",
+        "用户两个原始脚本 SHA256 保持不变"
+      ],
+      "runs": [
+        {
+          "run": "20261013-051355-e251e2c46a3b43dba85347498290c2a8",
+          "pid": 46668,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 275,
+          "firstDeathFrame": null,
+          "roomCompletedEvents": [
+            "room completed;frame=147;scene=Basic-1"
+          ],
+          "framesSha256": "C87904FB4E279FF48BC59AF7CE57B04B0768F987F89DA269A429AD047F40C38F",
+          "randomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051410-2cfb74689bec45229798ab8d6ea5444f",
+          "pid": 32576,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 275,
+          "firstDeathFrame": null,
+          "roomCompletedEvents": [
+            "room completed;frame=147;scene=Basic-1"
+          ],
+          "framesSha256": "C87904FB4E279FF48BC59AF7CE57B04B0768F987F89DA269A429AD047F40C38F",
+          "randomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051425-6f8aa7cf18b0429c8cef222647f422c5",
+          "pid": 19656,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 496,
+          "firstDeathFrame": null,
+          "roomCompletedEvents": [
+            "room completed;frame=147;scene=Basic-1",
+            "room completed;frame=495;scene=Basic-2"
+          ],
+          "framesSha256": "06346C273F181859454542399446E720D378269DE97715FF5BBE8B85F729191D",
+          "randomSha256": "4368735EE5CD935559B574A393AD82F3063DAF834A4346E9FC21471983858C56",
+          "coldProcess": true
+        },
+        {
+          "run": "20261013-051444-203b2fbb88284578be8dafd69c4574e8",
+          "pid": 27568,
+          "runtimeSha256": "BD3F7BD0909AD14032E84CABCD5668035703142E971D5AD624001775A8806AE3",
+          "preloaderSha256": "867657FBADA25E747C4104FC77BA51728A9D770685602C4E03F68B73D7CC5838",
+          "frameRecords": 7,
+          "firstDeathFrame": null,
+          "roomCompletedEvents": [],
+          "framesSha256": "C90BF5D5AE0DF6D68AB780B0454735A9AA7C153F4E2F45941F8A300CE65A8352",
+          "randomSha256": "D5343D4426F1555D442B957AB4320805F8B939257D91EF3F85878A197965E125",
+          "coldProcess": true
+        }
+      ],
+      "modeRuns": []
+    }
+  ],
+  "failedTestAttempts": [
+    {
+      "test": "editor-replay initial helper",
+      "reason": "The test read Process.Id after Replay disposed the prior session. Fixed by capturing the PID before Replay; guarded and final entrypoint reruns passed. Not a game desync."
+    }
+  ],
+  "remaining": [
+    "Same-process native physics restoration is not implemented; editor replays pay normal process startup time.",
+    "Recovered Basic-3 input is consistent but dies at frame122 in both fixed cold profiles; its prior warm success at frame233 does not validate this cold baseline. User inputs were not modified.",
+    "Autosave has a 350ms typing debounce; a crash before persistence can lose the last uncheckpointed keystrokes. Normal close always prompts and persists first.",
+    "No cross-machine or exhaustive all-path guarantee; fresh full-suite/all-room rerun is outside this change.",
+    "System file picker cancellation and hardware power failure were not automated; real custom prompts, atomic writes, disk failure and killed-process recovery were tested."
+  ]
+}

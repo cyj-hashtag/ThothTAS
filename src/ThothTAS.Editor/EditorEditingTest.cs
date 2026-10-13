@@ -77,20 +77,15 @@ internal static class EditorEditingTest
 
             var pid = cold.ProcessId;
             var previousRun = cold.RunDirectory;
-            var resetStates = new ConcurrentQueue<GameStatus>();
-            cold.StatusChanged += resetStates.Enqueue;
-            form.TestFastReset(true);
             await Click("重新回放");
             var warm = Session();
-            runs.Add(new { warm.ProcessId, warm.RunDirectory, coldProcess = false });
-            Require(warm.ProcessId == pid && warm.RunDirectory != previousRun, "同进程快速重置保留 PID 并创建新 run 目录");
-            Require(resetStates.Any(s => s.Run == warm.RunDirectory && s.State == "paused" && s.Frame == 0), "快速重置实际回到新 run 的 frame0 暂停基线后放行播放");
-            Require(await File.ReadAllTextAsync(Path.Combine(warm.RunDirectory, "script.tas"), cancellation) == form.DraftText, "快速重置使用新的不可变草稿快照");
+            runs.Add(new { warm.ProcessId, warm.RunDirectory, coldProcess = true });
+            Require(warm.ProcessId != pid && warm.RunDirectory != previousRun, "重新回放使用独立 PID 与新 run");
+            Require(await File.ReadAllTextAsync(Path.Combine(warm.RunDirectory, "script.tas"), cancellation) == form.DraftText, "重新回放使用新的不可变草稿快照");
             await warm.Completion.WaitAsync(TimeSpan.FromSeconds(120), cancellation);
-            cold.StatusChanged -= resetStates.Enqueue;
-            await ShowAndCapture("quick-reset-complete", warm);
+            Require(ReplayVerifier.Compare(cold.RunDirectory, warm.RunDirectory) == null, "编辑器重新回放逐帧状态与随机记录精确一致");
+            await ShowAndCapture("reliable-replay-complete", warm);
             await Click("停止");
-            form.TestFastReset(false);
 
             form.TestComposePaths(inputPaths);
             await Click("拼接脚本");
@@ -139,11 +134,11 @@ internal static class EditorEditingTest
         }
         catch (Exception ex) { error = ex.ToString(); }
         finally { if (form.ActiveSession is { } remaining) { try { await form.TestClickAsync("停止"); } catch { await remaining.DisposeAsync(); } } }
-        var report = new { version = 1, passed, error, captureKind = "WinForms-control-render", captureScope = "已显示编辑器的Control.DrawToBitmap控件渲染，不依赖前台焦点；不是桌面像素截图，不验证窗口遮挡或焦点。截图可选，失败只记录。实际焦点切换证据单独见editor-runtime-final-v5。", scope = "实际显示的编辑器高亮、段进度、过关事件、暖重置、拼接和TCP断线。暖重置仅验证练习功能，不保证与冷进程等价。", seams = "打开/保存/拼接选择路径由测试入口注入，仍点击正式按钮；不覆盖系统文件选择或顺序对话框。断线只反射关闭当前拥有的TcpClient。", checks, runs, events, inputPaths, originalHashes };
+        var report = new { version = 2, passed, error, captureKind = "WinForms-control-render", captureScope = "控件渲染，不证明桌面焦点。", scope = "实际编辑器高亮、段进度、过关事件、独立进程重新回放、拼接与TCP断线。", seams = "文件选择路径注入，点击正式按钮。", checks, runs, events, inputPaths, originalHashes };
         await File.WriteAllTextAsync(Path.Combine(output, "editor-editing-report.json"), JsonSerializer.Serialize(report, new JsonSerializerOptions { WriteIndented = true }), utf8);
         var markdown = new StringBuilder("# 编辑器新增功能实际自测\n\n结果：" + (passed ? "通过" : "未通过") + "\n\n");
         foreach (var check in checks) markdown.AppendLine("- " + check);
-        markdown.AppendLine("\n选择路径为注入接缝；所有正式按钮、加载和保存逻辑执行。暖重置不证明冷进程等价。\n");
+        markdown.AppendLine("\n选择路径为注入接缝；所有正式按钮、加载和保存逻辑执行。重新回放使用独立进程。\n");
         markdown.AppendLine("截图类型：`WinForms-control-render`，通过已显示表单的 Control.DrawToBitmap 渲染控件，不要求前台焦点，不证明桌面遮挡或焦点状态。截图可选，失败只记录；实际焦点切换另见 v5 独立证据。\n");
         if (error != null) markdown.AppendLine("```text\n" + error + "\n```");
         await File.WriteAllTextAsync(Path.Combine(output, "editor-editing-report.md"), markdown.ToString(), utf8);

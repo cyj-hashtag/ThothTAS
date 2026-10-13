@@ -18,7 +18,8 @@ The release contains the .NET 10 runtime. You need your own local game files: no
 - **Compose TAS…** selects scripts and opens a window with Add, Remove, Move up/down and Create draft.
 - **语言 / Language** switches between **简体中文** and **English** during playback and remembers the choice locally.
 - Playback freezes an immutable snapshot. Editing and saving changes the draft; Replay applies it.
-- Quick reset keeps the game process for practice. Exact verification uses cold processes.
+- Unsaved drafts prompt Save / Don't save / Cancel before closing or replacing a document. Draft checkpoints persist after 350 ms of idle typing and can be recovered after a crash.
+- Replay starts a fresh game process. The old same-process authoring reset is disabled because its physics state produced divergent wall bounces.
 
 [English guide](docs/editing-guide-en.md) · [中文操作说明](docs/editing-guide-zh.md)
 
@@ -60,12 +61,12 @@ Pure core tests need no game. Actual replay verification must run the real game.
 
 Pinned build: `THOTH-2019-09-10-174628-r239`, Unity 5.3.6p5 x86 Mono. Single player, ordinary fixed rooms. The supplied Basic-1/Basic-2 composition completes at frame495; independent repeats and pause/step/speed checks have matched exact gameplay fields and complete random records on the current test machine.
 
-No cross-computer guarantee, instant save, rewind, seeking, two-player, Hardcore or generated rooms. Quick reset is not cold-start equivalent. Selected sound loading is synchronous and LaserBeat/RhythmLaser gameplay clocks are normalized by input frames; this TAS copy is not claimed to match every instantaneous ordinary realtime behavior. Not all random sites and paths have been executed.
+No cross-computer guarantee, instant save, rewind, seeking, two-player, Hardcore or generated rooms. Same-process reset is unavailable for authoring; `verify-reset` remains an explicit unsafe diagnostic. Selected sound loading is synchronous and LaserBeat/RhythmLaser gameplay clocks are normalized by input frames; this TAS copy is not claimed to match every instantaneous ordinary realtime behavior. Not all random sites and paths have been executed.
 
 [Reverse-engineering summary](docs/public/reverse-engineering.md) · [Random-call inventory](docs/public/random-calls.json) · [Third-party notices](THIRD-PARTY-NOTICES.md)
 
-## Community Speedrun Mod and faster practice reset
+## Community Speedrun Mod and reliable replay
 
-Optional rmadlal v2.8 timers and window support: run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers** in the editor. The game assembly is replaced in memory only. Timer clocks use complete 60 Hz game cycles, so pause and playback speed do not change the same TAS result; they are not ordinary wall-clock RTA. Changing the profile takes effect on the next Replay through a new process.
+Optional rmadlal v2.8 timers and window support: run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers**. Timers use complete 60 Hz game cycles; profile changes apply on the next Replay through a fresh process.
 
-Warm reset restores the already loaded sound-bank hierarchy, selectors and audio state while rebuilding gameplay scenes and pools. Measured reset-to-active-baseline time is now about **0.55 s**, down from about 2.56 s. Enable **Quick reset (same process)** beside Replay. First launch still builds the cache; warm reset remains practice-only and is not cold-start equivalent. [Sub-second reset measurements and limitations](docs/public/reset-subsecond-20261013.md). [Setup, controls and verification](docs/public/community-mod-guide.md) · [Actual compatibility and reset report](docs/public/community-reset-20261013.md).
+**v0.3.2 disables same-process reset in the editor and ordinary Host sessions.** Basic-3 demonstrated differing entry physics ticks and random records after warm resets. Replay restores the fixed save and starts a new process, resetting native physics state. This costs startup time; the former roughly 0.55 s practice reset is not a reliable authoring path. `verify-reset` explicitly opts into unsafe diagnostics only. [Draft protection and Basic-3 investigation](docs/public/draft-replay-fix-20261013.md).

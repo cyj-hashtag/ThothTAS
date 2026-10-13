@@ -12,6 +12,7 @@ internal sealed class EditorText
     {
         ["打开"] = "Open", ["保存"] = "Save", ["另存为"] = "Save as", ["校验"] = "Validate",
         ["拼接脚本"] = "Compose TAS…", ["播放"] = "Play", ["暂停"] = "Pause", ["逐帧"] = "Step",
+        ["恢复草稿"] = "Recover draft…", ["可靠重启：独立进程"] = "Reliable replay: fresh process",
         ["停止"] = "Stop", ["重新回放"] = "Replay", ["重复验证 ×5"] = "Verify ×5",
         ["速度"] = "Speed", ["启动尺寸"] = "Window size", ["打开日志目录"] = "Open logs",
         ["草稿"] = "Draft", ["运行快照（只读）"] = "Run snapshot (read only)",

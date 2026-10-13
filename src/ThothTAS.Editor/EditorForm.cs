@@ -24,9 +24,8 @@ public sealed class EditorForm : Form
     private readonly Label segmentProgress = new() { Dock = DockStyle.Top, Height = 52, Padding = new Padding(8, 4, 8, 4), Text = "输入段：尚未开始" };
     private readonly ListBox roomEvents = new() { Dock = DockStyle.Bottom, Height = 124, HorizontalScrollbar = true };
     private readonly HashSet<string> seenRoomEvents = new(StringComparer.Ordinal);
-    private readonly CheckBox fastReset = new() { AutoSize = true, Text = "同进程快速重置", Checked = false, Margin = new Padding(4, 8, 4, 0) };
+    private readonly Label reliableReplay = new() { AutoSize = true, Margin = new Padding(6, 8, 6, 0) };
     private readonly CheckBox communityMod = new() { AutoSize = true, Text = "社区计时器", Checked = false, Margin = new Padding(8, 8, 8, 0) };
-    private bool launchedCommunityMod;
     private readonly TextBox details = new() { Dock = DockStyle.Fill, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical, Font = new Font("Microsoft YaHei UI", 10), BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
     private readonly Label status = new() { AutoSize = false, Dock = DockStyle.Top, Height = 36, Padding = new Padding(8), Text = "尚未启动游戏副本" };
     private readonly Label snapshot = new() { AutoSize = false, Dock = DockStyle.Bottom, Height = 50, Padding = new Padding(8), Text = "启动时冻结脚本快照；编辑与保存更新草稿，重新回放应用草稿。" };
@@ -56,6 +55,17 @@ public sealed class EditorForm : Form
     private string? launchedText;
     private string? latestDirectory;
     private bool dirty;
+    private string savedDraftText = "";
+    private bool loadingDraft;
+    private readonly DraftRecoveryStore recovery;
+    private readonly System.Windows.Forms.Timer autosave = new() { Interval = 350 };
+    private readonly Queue<DialogResult> automationUnsavedChoices = new();
+    private string? automationRecoveryPath;
+    internal int UnsavedDialogsShown { get; private set; }
+    internal string RecoveryCheckpointPath => recovery.CheckpointPath;
+    internal bool HasUnsavedChanges => dirty;
+    internal void TestUnsavedChoice(DialogResult value) => automationUnsavedChoices.Enqueue(value);
+    internal void TestRecoverPath(string path) => automationRecoveryPath = Path.GetFullPath(path);
     private bool busy;
     private bool closing;
     private bool canClose;
@@ -84,7 +94,6 @@ public sealed class EditorForm : Form
     internal void TestLanguage(bool english) => language.SelectedIndex = english ? 1 : 0;
     internal void TestShowSnapshot() => ((TabControl)runningSnapshot.Parent!.Parent!).SelectedTab = (TabPage)runningSnapshot.Parent;
     internal void TestShowDraft() => ((TabControl)draft.Parent!.Parent!).SelectedTab = (TabPage)draft.Parent;
-    internal void TestFastReset(bool value) => fastReset.Checked = value;
     internal void TestCommunity(bool value) => communityMod.Checked = value;
     internal void TestComposePaths(params string[] paths) => automationComposePaths = paths.Select(Path.GetFullPath).ToArray();
     internal void TestSavePath(string path) => automationSavePath = Path.GetFullPath(path);
@@ -117,9 +126,10 @@ public sealed class EditorForm : Form
         if (status.Text.StartsWith("错误：", StringComparison.Ordinal) || status.Text.StartsWith("Error:", StringComparison.Ordinal)) throw new InvalidOperationException(status.Text);
     }
 
-    public EditorForm(string projectRoot, string? initialScript)
+    public EditorForm(string projectRoot, string? initialScript, bool recoveryPrompt = true)
     {
         root = projectRoot;
+        recovery = new DraftRecoveryStore(root);
         words.English = EditorText.LoadEnglish(root);
         Text = T("THOTH TAS 编辑器", "THOTH TAS Editor");
         ClientSize = new Size(1260, 820);
@@ -131,9 +141,10 @@ public sealed class EditorForm : Form
         toolbar.Controls.Add(Button("打开", OpenDraft));
         toolbar.Controls.Add(Button("保存", SaveDraft));
         toolbar.Controls.Add(Button("另存为", SaveDraftAs));
+        toolbar.Controls.Add(Button("恢复草稿", RestoreDraft));
         toolbar.Controls.Add(Button("校验", ValidateDraft));
         toolbar.Controls.Add(Button("拼接脚本", ComposeDraft));
-        Localize(fastReset, "同进程快速重置");
+        Localize(reliableReplay, "可靠重启：独立进程");
         Localize(modes, "同时验证暂停 / 逐帧 / 速度");
         Localize(communityMod, "社区计时器");
         play = AsyncButton("播放", () => RunGuardedAsync(PlayAsync));
@@ -143,7 +154,7 @@ public sealed class EditorForm : Form
         replay = AsyncButton("重新回放", () => RunGuardedAsync(ReplayAsync));
         repeat = AsyncButton("重复验证 ×5", () => RunGuardedAsync(VerifyAsync));
         sessionButtons.AddRange([play, pause, step, stop, replay, repeat]);
-        foreach (var button in sessionButtons) { toolbar.Controls.Add(button); if (button == replay) toolbar.Controls.Add(fastReset); }
+        foreach (var button in sessionButtons) { toolbar.Controls.Add(button); if (button == replay) toolbar.Controls.Add(reliableReplay); }
         speed.Items.AddRange(["0.5×", "1×", "2×"]); speed.SelectedIndex = 1;
         toolbar.Controls.Add(InlineLabel("速度")); toolbar.Controls.Add(speed);
         var sizePicker = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = Padding.Empty };
@@ -185,14 +196,25 @@ public sealed class EditorForm : Form
             "A=(x,y)：世界坐标目标；N：不移动。",
             "Game copy: " + Path.Combine(root, "game", "THOTH.exe") + "\r\n\r\n" +
             "Cold replays restore the fixed save and validate the game fingerprint.\r\n" +
-            "Quick reset reuses the game process for practice.\r\n" +
+            "Replay uses a fresh process to restore native physics and random state.\r\n" +
             "You can edit while playback continues in the background.\r\n" +
             "Verification compares the actual baseline, frames and random calls.\r\n\r\n" +
             "Angles: right 0°, up 90°, left 180°, down 270°.\r\n" +
             "M=x:y: analog movement; A=x:y: aim vector.\r\n" +
             "A=(x,y): world target; N: no movement.\r\n" +
             "The blue --- frame marker is display-only, not part of the script.");
-        draft.TextChanged += (_, _) => { if (formattingInputLine) return; dirty = true; UpdateDraftLabel(); if (draftHighlightedLine >= 0 && draft.Text != launchedText) ClearDraftHighlight(); SynchronizeHighlight(); };
+        draft.TextChanged += (_, _) =>
+        {
+            if (formattingInputLine || loadingDraft) return;
+            dirty = draft.Text != savedDraftText;
+            autosave.Stop();
+            if (dirty) autosave.Start(); else ClearCheckpoint();
+            UpdateDraftLabel();
+            if (draftHighlightedLine >= 0 && draft.Text != launchedText) ClearDraftHighlight();
+            SynchronizeHighlight();
+        };
+        autosave.Tick += (_, _) => { autosave.Stop(); CheckpointDraft(); };
+        Deactivate += (_, _) => { if (!closing) CheckpointDraft(); };
         speed.SelectedIndexChanged += async (_, _) =>
         {
             if (session != null && !busy) await RunGuardedAsync(() => session.SetSpeedAsync(CurrentSpeed, lifetime.Token));
@@ -202,6 +224,8 @@ public sealed class EditorForm : Form
         {
             draft.Text = "Version,1\nStart,Basic-1\nSeed,1\n\n60, M=45, A=270\n60, M=45, A=(30,40)\n30, N\n60, M=0.5:0, A=1:0\n";
             dirty = false;
+            savedDraftText = draft.Text;
+            autosave.Stop();
             UpdateDraftLabel();
         }
         UpdateButtons();
@@ -211,6 +235,10 @@ public sealed class EditorForm : Form
             words.English = language.SelectedIndex == 1;
             ApplyLanguage();
             try { words.SaveLanguage(root); } catch (Exception ex) { ShowError(ex); }
+        };
+        if (recoveryPrompt) Shown += (_, _) =>
+        {
+            if (recovery.List().Any(DraftRecoveryStore.Pending)) RestoreDraft();
         };
     }
 
@@ -237,7 +265,7 @@ public sealed class EditorForm : Form
     {
         SuspendLayout();
         foreach (var (control, key) in localizedControls) control.Text = T(key, EditorText.ControlEnglish(key));
-        hints.SetToolTip(fastReset, T("适合练习：复用当前进程；原生时间和物理内部状态不会全部清零。精确复核使用独立进程。", "Practice only: reuse the process; native time and physics state are not fully reset. Use cold processes for exact verification."));
+        hints.SetToolTip(reliableReplay, T("重新回放启动独立进程，恢复物理初始状态。旧同进程重置会使撞墙反弹失步，已从编辑器停用。", "Replay starts a fresh process to restore native physics. The old same-process reset caused divergent collisions and is disabled in the editor."));
         hints.SetToolTip(communityMod, T("加载社区Speedrun Mod v2.8计时器和窗口功能；TAS按固定帧计时。切换在下次重新回放生效，并启动新进程。首次使用请先准备社区Mod。", "Community Speedrun Mod v2.8 timers and window behavior; TAS clocks use fixed frames. A changed choice applies on Replay with a new process. Prepare the community Mod before first use."));
         status.Text = T(statusWords.Chinese, statusWords.English);
         details.Text = T(detailsWords.Chinese, detailsWords.English);
@@ -257,15 +285,14 @@ public sealed class EditorForm : Form
             {
                 var path = automationOpenPath;
                 automationOpenPath = null;
-                if (dirty) RecoverDraft();
+                if (!ConfirmUnsaved()) return;
                 LoadDraft(path);
                 return;
             }
             using var dialog = new OpenFileDialog { Filter = T("TAS 脚本 (*.tas)|*.tas|UTF-8 文本 (*.txt)|*.txt|所有文件|*.*", "TAS scripts (*.tas)|*.tas|UTF-8 text (*.txt)|*.txt|All files|*.*"), Title = T("打开 TAS 脚本", "Open TAS script"), InitialDirectory = Path.Combine(root, "examples") };
             if (dialog.ShowDialog(this) == DialogResult.OK)
             {
-                // Keep unsaved drafts recoverable without an extra confirmation flow.
-                if (dirty) RecoverDraft();
+                if (!ConfirmUnsaved()) return;
                 LoadDraft(dialog.FileName);
             }
         }
@@ -274,10 +301,15 @@ public sealed class EditorForm : Form
 
     private void LoadDraft(string path)
     {
-        draft.Text = File.ReadAllText(path, Encoding.UTF8);
+        var text = File.ReadAllText(path, Encoding.UTF8);
+        loadingDraft = true;
+        try { draft.Text = text; } finally { loadingDraft = false; }
         scriptPath = path;
+        savedDraftText = draft.Text;
         dirty = false;
+        ClearCheckpoint();
         UpdateDraftLabel();
+        SynchronizeHighlight();
     }
 
     private void ComposeDraft()
@@ -297,10 +329,12 @@ public sealed class EditorForm : Form
             var sources = ordered.Select(path => new ScriptSource(path, File.ReadAllText(path, Encoding.UTF8))).ToArray();
             var starts = File.ReadAllLines(Path.Combine(root, "docs", "levels.txt")).Select(s => s.Trim()).Where(s => s.Length > 0 && !s.StartsWith('#')).ToList();
             var composed = ScriptComposer.Compose(sources, starts);
-            if (dirty) RecoverDraft();
+            if (!ConfirmUnsaved()) return;
             scriptPath = null;
+            savedDraftText = "";
             draft.Text = composed;
             dirty = true;
+            CheckpointDraft();
             UpdateDraftLabel();
             SetStatus("已生成拼接草稿。请另存为新文件；单关通过不代表整段连续回放已通过。", "Composed draft created. Save as a new file, then verify the complete continuous replay.");
         }
@@ -319,9 +353,20 @@ public sealed class EditorForm : Form
     {
         try
         {
-            File.WriteAllText(path, draft.Text, new UTF8Encoding(false));
+            path = Path.GetFullPath(path);
+            var temporary = path + ".tas-saving-" + Guid.NewGuid().ToString("N") + ".tmp";
+            try
+            {
+                var bytes = new UTF8Encoding(false).GetBytes(draft.Text);
+                using (var file = new FileStream(temporary, FileMode.CreateNew, FileAccess.Write, FileShare.None))
+                { file.Write(bytes); file.Flush(true); }
+                File.Move(temporary, path, true);
+            }
+            finally { if (File.Exists(temporary)) File.Delete(temporary); }
             scriptPath = path;
             dirty = false;
+            savedDraftText = draft.Text;
+            ClearCheckpoint();
             UpdateDraftLabel();
         }
         catch (Exception ex) { ShowError(ex); }
@@ -332,6 +377,60 @@ public sealed class EditorForm : Form
         var directory = Path.Combine(root, "work", "draft-recovery");
         Directory.CreateDirectory(directory);
         File.WriteAllText(Path.Combine(directory, DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N") + ".tas"), draft.Text, new UTF8Encoding(false));
+    }
+
+    private void ClearCheckpoint()
+    {
+        autosave.Stop();
+        try { recovery.Clear(); } catch (Exception ex) { ShowError(ex); }
+    }
+    private bool CheckpointDraft()
+    {
+        if (!dirty) return true;
+        try { recovery.Write(scriptPath, draft.Text); return true; }
+        catch (Exception ex) { ShowError(ex); return false; }
+    }
+    private bool ConfirmUnsaved()
+    {
+        if (!dirty) return true;
+        // Persist before displaying a modal window or stopping the game.
+        CheckpointDraft();
+        using var dialog = new UnsavedDraftForm(words, scriptPath ?? T("未保存草稿", "Unsaved draft"));
+        UnsavedDialogsShown++;
+        if (automationUnsavedChoices.Count > 0)
+        {
+            var choice = automationUnsavedChoices.Dequeue();
+            dialog.Shown += (_, _) => BeginInvoke(() => dialog.TestChoose(choice));
+        }
+        var result = dialog.ShowDialog(this);
+        if (result == DialogResult.Yes) { SaveDraft(); return !dirty; }
+        if (result != DialogResult.No) return false;
+        try { RecoverDraft(); recovery.Clear(); autosave.Stop(); }
+        catch (Exception ex) { ShowError(ex); return false; }
+        return true;
+    }
+    private void RestoreDraft()
+    {
+        try
+        {
+            RecoveredDraft? selected;
+            if (automationRecoveryPath != null) { selected = recovery.Read(automationRecoveryPath); automationRecoveryPath = null; }
+            else
+            {
+                using var picker = new DraftRecoveryForm(recovery.List(), words);
+                if (picker.ShowDialog(this) != DialogResult.OK) return;
+                selected = picker.Selected;
+            }
+            if (selected == null || !ConfirmUnsaved()) return;
+            loadingDraft = true;
+            try { draft.Text = selected.Text; } finally { loadingDraft = false; }
+            scriptPath = selected.SourcePath;
+            savedDraftText = ""; dirty = true;
+            if (CheckpointDraft()) recovery.MarkRecovered(selected);
+            UpdateDraftLabel(); SynchronizeHighlight();
+            SetStatus("已恢复草稿，请保存或另存为。备份文件仍保留。", "Draft recovered. Save or Save as to keep it. The original backup is preserved.");
+        }
+        catch (Exception ex) { ShowError(ex); }
     }
 
     private void UpdateDraftLabel()
@@ -358,7 +457,6 @@ public sealed class EditorForm : Form
         var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, Autoplay = false, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked };
         SetStatus("校验指纹、恢复固定存档并启动独立游戏副本…", "Checking fingerprints, restoring the fixed save and starting a cold game copy…");
         session = await GameSession.StartAsync(root, immutable, options, lifetime.Token);
-        launchedCommunityMod = communityMod.Checked;
         var owned = session;
         controlFaulted = false;
         sessionStatusHandler = value => UI(() => { if (!closing && ReferenceEquals(session, owned)) RenderStatus(value); });
@@ -415,25 +513,9 @@ public sealed class EditorForm : Form
 
     private async Task ReplayAsync()
     {
-        if (fastReset.Checked && session != null && communityMod.Checked == launchedCommunityMod)
-        {
-            var immutable = draft.Text;
-            var owned = session;
-            SetStatus("暂停到帧边界并同进程重置…", "Pausing at a frame boundary and resetting the same process…");
-            await owned.RestartAsync(immutable, new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked }, lifetime.Token);
-            controlFaulted = false;
-            launchedText = immutable;
-            runningSnapshot.Text = immutable;
-            snapshotHighlightedLine = -1;
-            seenRoomEvents.Clear();
-            renderedRoomEvents.Clear();
-            roomEvents.Items.Clear();
-            latestDirectory = owned.RunDirectory;
-            _ = ObserveCompletionAsync(owned);
-            UpdateDraftLabel();
-            RenderStatus(owned.Latest);
-        }
-        else { await StopAsync(); await StartAsync(); }
+        // PhysX's native accumulator/contact state survives a scene reload.
+        // A fresh process is required for reliable authoring, including after death.
+        await StopAsync(); await StartAsync();
         await session!.SendAsync("PLAY", lifetime.Token);
     }
 
@@ -628,7 +710,6 @@ public sealed class EditorForm : Form
         width.Enabled = height.Enabled = !busy && session == null;
         modes.Enabled = !busy;
         speed.Enabled = !busy;
-        fastReset.Enabled = !busy;
         communityMod.Enabled = !busy;
     }
 
@@ -640,16 +721,23 @@ public sealed class EditorForm : Form
     protected override async void OnFormClosing(FormClosingEventArgs e)
     {
         if (canClose) { base.OnFormClosing(e); return; }
-        e.Cancel = true;
         base.OnFormClosing(e);
+        if (e.Cancel) return;
+        e.Cancel = true;
         if (closing) return;
+        if (!ConfirmUnsaved()) return;
         closing = true;
+        autosave.Stop();
         UpdateButtons();
         lifetime.Cancel();
-        try { if (dirty) RecoverDraft(); } catch (Exception) { }
         try { if (busy) await operationEnded.Task; await StopAsync(); }
         catch (Exception) { }
         canClose = true;
         Close();
+    }
+    protected override void Dispose(bool disposing)
+    {
+        if (disposing) { autosave.Dispose(); hints.Dispose(); lifetime.Dispose(); }
+        base.Dispose(disposing);
     }
 }

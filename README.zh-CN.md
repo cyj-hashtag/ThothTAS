@@ -63,3 +63,11 @@ dotnet run --project .\tests\ThothTAS.Core.Tests -c Release
 固定 `THOTH-2019-09-10-174628-r239`、Unity 5.3.6p5、32 位 Mono，单人普通固定关卡。未提供即时存档、倒放、寻址跳帧、双人、Hardcore、程序生成模式或跨电脑一致性保证。同进程快速重置不等价于冷启动。TAS 副本同步部分声音加载，并按输入帧归一化 LaserBeat/RhythmLaser 玩法时钟；不声明与普通实时原版逐瞬间相同。尚未执行全部随机调用点和玩法路径。
 
 [第三方组件说明](THIRD-PARTY-NOTICES.md)
+
+## 社区计时器与重置提速
+
+已适配 rmadlal v2.8 的计时器和窗口。首次运行 `scripts/Prepare-CommunityMod.ps1`，然后在编辑器勾选“社区计时器”。只在内存中加载社区程序集，窗口仍由编辑器配置；计时器按完整60Hz周期推进，暂停与变速不改变同一TAS结果，不能视为普通墙钟RTA。切换配置在下次重新回放生效并自动启动新进程。
+
+同进程重置通过首次校验后持续持有文件读锁，免去重复哈希。同脚本实测约6.35秒→2.56秒，等待减少59.7%；仍完整重建场景和资源，且 `coldEquivalent=false`。完整一致性验证继续使用独立冷进程。
+
+[启用与操作说明](docs/public/community-mod-guide.md) · [实际兼容和重置报告](docs/public/community-reset-20261013.md)

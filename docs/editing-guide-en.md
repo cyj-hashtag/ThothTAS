@@ -42,3 +42,9 @@ Quick reset (same process) keeps the owned game PID and rebuilds the start using
 Windows x64 editor, Unity 5.3.6p5 x86 game, THOTH `THOTH-2019-09-10-174628-r239`. Single player, ordinary fixed rooms. No instant save, rewind, seeking, two-player, Hardcore, generated modes or cross-computer determinism guarantee.
 
 See [public verification](public/verification-20261013.md) for actual tests and their limits. Source-level pure tests do not substitute for running the actual game.
+
+## Community Speedrun Mod and faster practice reset
+
+Optional rmadlal v2.8 timers and window support: run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers** in the editor. The game assembly is replaced in memory only. Timer clocks use complete 60 Hz game cycles, so pause and playback speed do not change the same TAS result; they are not ordinary wall-clock RTA. Changing the profile takes effect on the next Replay through a new process.
+
+Warm reset now reuses startup fingerprints protected by held read locks. Actual same-script timing improved from 6.35 s to 2.56 s (59.7% less wait); full scene/resource rebuild remains necessary. Warm reset is still not cold-start equivalent. [Setup, controls and verification](public/community-mod-guide.md) · [Actual compatibility and reset report](public/community-reset-20261013.md).

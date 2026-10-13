@@ -1,0 +1,308 @@
+{
+  "version": 1,
+  "date": "2026-10-13",
+  "kind": "actual-game-reset-speed",
+  "gameBuild": "THOTH-2019-09-10-174628-r239",
+  "game": "stock",
+  "sameScriptBenchmark": {
+    "fixture": "Version,1 / Start,Basic-1 / Seed,1 / 8,N",
+    "oldWarmMilliseconds": [
+      6150.1617,
+      6358.466,
+      6454.4888,
+      6439.1147
+    ],
+    "newWarmMilliseconds": [
+      2589.8521,
+      2565.8321,
+      2523.8199,
+      2555.7053
+    ],
+    "oldMeanMilliseconds": 6350.5578000000005,
+    "oldMedianMilliseconds": 6398.79035,
+    "newMeanMilliseconds": 2558.80235,
+    "newMedianMilliseconds": 2560.7687,
+    "meanTimeReductionPercent": 59.70743940004767,
+    "oldRuntimeSha256": "E8761BE957F459A1A837B4CCB14AFCA22A1C504B5B49228B3E6DD6948F10A61F",
+    "oldPreloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3"
+  },
+  "fiveWarmActualScript": {
+    "passed": true,
+    "checksPassed": 41,
+    "fixture": "examples/basic-1.tas",
+    "sourceSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+    "medianWarmMilliseconds": 2552.2646,
+    "allColdAndWarmRandomRecordsEqual": true,
+    "samples": [
+      {
+        "Reset": 0,
+        "Pid": 28368,
+        "Milliseconds": 12040.2778,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [],
+        "Resources": "resource baseline;reset=0;owned=207;meshes=122;materials=320;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=none",
+        "Timing": "cold startup",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      },
+      {
+        "Reset": 1,
+        "Pid": 28368,
+        "Milliseconds": 2711.2033,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "4.88@409C28F6"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "4.883333@409C4444"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=1;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=239;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=1.499;cleanupMs=14.864;preparedMs=21.197;bootstrapLoadedMs=22.426;menuReadyMs=2536.234;roomRequestedMs=2540.264;baselineMs=2655.510;fingerprint=held-read-locks;coldEquivalent=false",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      },
+      {
+        "Reset": 2,
+        "Pid": 28368,
+        "Milliseconds": 2540.0942,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "9.63@411A147B"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "9.633333@411A2222"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=2;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=12.040;cleanupMs=21.457;preparedMs=25.557;bootstrapLoadedMs=26.085;menuReadyMs=2348.935;roomRequestedMs=2354.247;baselineMs=2499.439;fingerprint=held-read-locks;coldEquivalent=false",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      },
+      {
+        "Reset": 3,
+        "Pid": 28368,
+        "Milliseconds": 2419.7834,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "14.38@4166147B"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "14.3833332@41662222"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=3;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=13.614;cleanupMs=23.633;preparedMs=27.834;bootstrapLoadedMs=28.382;menuReadyMs=2267.359;roomRequestedMs=2272.090;baselineMs=2386.236;fingerprint=held-read-locks;coldEquivalent=false",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      },
+      {
+        "Reset": 4,
+        "Pid": 28368,
+        "Milliseconds": 2585.8303,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "19.13@41990A3D"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "19.1333332@41991111"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=4;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=7.654;cleanupMs=21.049;preparedMs=26.206;bootstrapLoadedMs=26.940;menuReadyMs=2382.071;roomRequestedMs=2387.835;baselineMs=2532.368;fingerprint=held-read-locks;coldEquivalent=false",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      },
+      {
+        "Reset": 5,
+        "Pid": 28368,
+        "Milliseconds": 2552.2646,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "23.88@41BF0A3D"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "23.8833332@41BF1111"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=5;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=8.868;cleanupMs=23.630;preparedMs=38.688;bootstrapLoadedMs=39.500;menuReadyMs=2367.799;roomRequestedMs=2372.863;baselineMs=2503.205;fingerprint=held-read-locks;coldEquivalent=false",
+        "Artifacts": {
+          "runtimeSha256": "A699F3D0C27D0E07711C0B09FD3014CE3E4475B42C2F6D806F3D6DC9D7B33393",
+          "preloaderSha256": "D2066F78DEFF03B615B55CA2432C4D2E14B232540D90057CFFBB7949CFE64BF3",
+          "gameManifestSha256": "90A4AB06911DA89B8D6EAEBF5E8B4E6A788B67AFB80F6EEA61B5DB8076826E7D",
+          "scriptSha256": "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+          "baselineSha256": "AFCB6B465D05796D3CA8179FBEEFA11CCF315A0115C4B87AB49BACB579BE581E"
+        }
+      }
+    ]
+  },
+  "fingerprintPolicy": "SHA256 before first process start plus SHA256 in runtime; manifests and every listed artifact stay FileShare.Read locked; warm resets reuse the pinned verified identity.",
+  "resourceAdditionGuard": "New unlisted level/shared resource detection added after the 41-check run; verification is recorded separately by the final integration report.",
+  "coldEquivalent": false,
+  "verified": "Actual game PID, warm reset latency, zero input/alive/uncompleted player baseline, initial player coordinates, 274 input frames, complete random-file hashes, six cold/warm baseline differences, five warm resource counts, write-access rejection and release after owned process exit.",
+  "notClaimed": [
+    "Full cold/warm state equality",
+    "Instant reload",
+    "All levels",
+    "Cross-computer equality",
+    "Unlimited long-term resource stability",
+    "Community-mod behavior (tested in a separate report)"
+  ]
+}

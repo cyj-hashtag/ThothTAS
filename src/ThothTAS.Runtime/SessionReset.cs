@@ -16,6 +16,17 @@ public static partial class Hooks {
     static double initialPhysicsPhase;
     static int phaseAlignmentWait;
     static Dictionary<FieldInfo,object> staticBaseline;
+    static System.Diagnostics.Stopwatch resetWatch;
+    static readonly List<string> resetTimings=new List<string>();
+    static void ResetTiming(string stage) {
+        if(resetWatch!=null)resetTimings.Add(stage+"="+resetWatch.Elapsed.TotalMilliseconds.ToString("F3",System.Globalization.CultureInfo.InvariantCulture));
+    }
+    static void ResetReachedBaseline() {
+        if(resetWatch==null)return;
+        ResetTiming("baselineMs");
+        eventLog.WriteLine("reset timing;"+string.Join(";",resetTimings.ToArray())+";fingerprint=held-read-locks;coldEquivalent=false");
+        resetWatch=null;resetTimings.Clear();
+    }
 
     // This is a scene/resource rebuild for editing. Unity's native clocks and
     // physics accumulator remain live; exact cold-process validation stays separate.
@@ -90,12 +101,15 @@ public static partial class Hooks {
         if(oldReference!=null)oldReference.Dispose();
     }
     static void RestartAtBoundary(string cfgPath) {
+        resetWatch=System.Diagnostics.Stopwatch.StartNew();resetTimings.Clear();
         cfgPath=Path.GetFullPath(cfgPath);
         string allowed=Path.GetFullPath(Path.Combine(Root,"work"))+Path.DirectorySeparatorChar;
         if(!cfgPath.StartsWith(allowed,StringComparison.OrdinalIgnoreCase))throw new IOException("重置配置必须位于本项目 work 中。");
         var next=new Dictionary<string,string>(StringComparer.Ordinal);
         foreach(string raw in File.ReadAllLines(cfgPath)){int p=raw.IndexOf('=');if(p>0)next[raw.Substring(0,p)]=raw.Substring(p+1);}
         if(!next.ContainsKey("token")||next["token"]!=C("token","")||next["port"]!=C("port","")||next["width"]!=C("width","1280")||next["height"]!=C("height","720"))throw new IOException("同进程重置不得改变控制连接或窗口尺寸。");
+        string nextCommunity;next.TryGetValue("communityModPath",out nextCommunity);
+        if((nextCommunity??"")!=C("communityModPath",""))throw new IOException("同进程重置不得切换社区 Mod；必须启动新进程。");
         string newRun=Path.GetFullPath(next["run"]);
         if(!newRun.StartsWith(allowed,StringComparison.OrdinalIgnoreCase)||newRun==run)throw new IOException("重置必须使用独立的新记录目录。");
         string scriptPath=Path.GetFullPath(next["script"]);
@@ -103,6 +117,7 @@ public static partial class Hooks {
         var nextScript=ScriptParser.Parse(File.ReadAllText(scriptPath,Encoding.UTF8),new HashSet<string>(File.ReadAllLines(Path.Combine(Root,"docs/levels.txt")),StringComparer.Ordinal));
         if(staticBaseline==null)throw new InvalidOperationException("首次关卡尚未建立，不能快速重置。");
         VerifyFingerprint();
+        ResetTiming("verifiedMs");
         suppressTrace=true;
         try {
             CloseRunLogs();
@@ -132,9 +147,11 @@ public static partial class Hooks {
             persistentGameRoots.Clear();
             if(survivingRoots!=0)throw new InvalidOperationException("重置后仍有 "+survivingRoots+" 个旧持久游戏根存活。");
             ReleaseOwnedResources();
+            ResetTiming("cleanupMs");
             RestoreGameStatics();
             audioClocks.Clear();teleportBefore.Clear();
             config=next;script=nextScript;run=newRun;Directory.CreateDirectory(run);
+            ResetCommunityTimers();
             error="";requested=false;baseline=false;complete=false;frame=-1;line=0;
             input=new TasFrameInput(0,0,AimKind.None,0,0);aimOrigin=Vector3.zero;aimResolved=Vector3.zero;
             ResetChapterPlayback();
@@ -149,9 +166,11 @@ public static partial class Hooks {
             suppressTrace=false;EngineReady();
             eventLog.WriteLine("same-process reset="+resetCount+";pid="+System.Diagnostics.Process.GetCurrentProcess().Id+";nativeTime="+F(Time.time)+";nativeFixedTime="+F(Time.fixedTime)+";coldEquivalent=false");
             UpdateStatus("loading");Send(status);
+            ResetTiming("preparedMs");
             // Scene zero owns RoomMusic, texture banks and the sound-bank loader.
             // Loading NewMenu directly would omit those destroyed persistent roots.
             SceneManager.LoadScene(0);
+            ResetTiming("bootstrapLoadedMs");
         } finally {suppressTrace=false;}
     }
 }

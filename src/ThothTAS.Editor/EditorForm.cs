@@ -25,6 +25,8 @@ public sealed class EditorForm : Form
     private readonly ListBox roomEvents = new() { Dock = DockStyle.Bottom, Height = 124, HorizontalScrollbar = true };
     private readonly HashSet<string> seenRoomEvents = new(StringComparer.Ordinal);
     private readonly CheckBox fastReset = new() { AutoSize = true, Text = "同进程快速重置", Checked = false, Margin = new Padding(4, 8, 4, 0) };
+    private readonly CheckBox communityMod = new() { AutoSize = true, Text = "社区计时器", Checked = false, Margin = new Padding(8, 8, 8, 0) };
+    private bool launchedCommunityMod;
     private readonly TextBox details = new() { Dock = DockStyle.Fill, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical, Font = new Font("Microsoft YaHei UI", 10), BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
     private readonly Label status = new() { AutoSize = false, Dock = DockStyle.Top, Height = 36, Padding = new Padding(8), Text = "尚未启动游戏副本" };
     private readonly Label snapshot = new() { AutoSize = false, Dock = DockStyle.Bottom, Height = 50, Padding = new Padding(8), Text = "启动时冻结脚本快照；编辑与保存更新草稿，重新回放应用草稿。" };
@@ -83,6 +85,7 @@ public sealed class EditorForm : Form
     internal void TestShowSnapshot() => ((TabControl)runningSnapshot.Parent!.Parent!).SelectedTab = (TabPage)runningSnapshot.Parent;
     internal void TestShowDraft() => ((TabControl)draft.Parent!.Parent!).SelectedTab = (TabPage)draft.Parent;
     internal void TestFastReset(bool value) => fastReset.Checked = value;
+    internal void TestCommunity(bool value) => communityMod.Checked = value;
     internal void TestComposePaths(params string[] paths) => automationComposePaths = paths.Select(Path.GetFullPath).ToArray();
     internal void TestSavePath(string path) => automationSavePath = Path.GetFullPath(path);
     [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -132,6 +135,7 @@ public sealed class EditorForm : Form
         toolbar.Controls.Add(Button("拼接脚本", ComposeDraft));
         Localize(fastReset, "同进程快速重置");
         Localize(modes, "同时验证暂停 / 逐帧 / 速度");
+        Localize(communityMod, "社区计时器");
         play = AsyncButton("播放", () => RunGuardedAsync(PlayAsync));
         pause = AsyncButton("暂停", () => RunGuardedAsync(() => CommandAsync("PAUSE")));
         step = AsyncButton("逐帧", () => RunGuardedAsync(StepAsync));
@@ -146,6 +150,7 @@ public sealed class EditorForm : Form
         sizePicker.Controls.Add(InlineLabel("启动尺寸")); sizePicker.Controls.Add(width); sizePicker.Controls.Add(InlineLabel("×")); sizePicker.Controls.Add(height);
         toolbar.Controls.Add(sizePicker);
         toolbar.Controls.Add(modes);
+        toolbar.Controls.Add(communityMod);
         toolbar.Controls.Add(Button("打开日志目录", OpenLogs));
         var languagePicker = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = Padding.Empty };
         languagePicker.Controls.Add(InlineLabel("语言 / Language"));
@@ -233,6 +238,7 @@ public sealed class EditorForm : Form
         SuspendLayout();
         foreach (var (control, key) in localizedControls) control.Text = T(key, EditorText.ControlEnglish(key));
         hints.SetToolTip(fastReset, T("适合练习：复用当前进程；原生时间和物理内部状态不会全部清零。精确复核使用独立进程。", "Practice only: reuse the process; native time and physics state are not fully reset. Use cold processes for exact verification."));
+        hints.SetToolTip(communityMod, T("加载社区Speedrun Mod v2.8计时器和窗口功能；TAS按固定帧计时。切换在下次重新回放生效，并启动新进程。首次使用请先准备社区Mod。", "Community Speedrun Mod v2.8 timers and window behavior; TAS clocks use fixed frames. A changed choice applies on Replay with a new process. Prepare the community Mod before first use."));
         status.Text = T(statusWords.Chinese, statusWords.English);
         details.Text = T(detailsWords.Chinese, detailsWords.English);
         UpdateDraftLabel();
@@ -349,9 +355,10 @@ public sealed class EditorForm : Form
     private async Task StartAsync()
     {
         var immutable = draft.Text;
-        var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, Autoplay = false, OutputParent = automationOutputParent };
+        var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, Autoplay = false, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked };
         SetStatus("校验指纹、恢复固定存档并启动独立游戏副本…", "Checking fingerprints, restoring the fixed save and starting a cold game copy…");
         session = await GameSession.StartAsync(root, immutable, options, lifetime.Token);
+        launchedCommunityMod = communityMod.Checked;
         var owned = session;
         controlFaulted = false;
         sessionStatusHandler = value => UI(() => { if (!closing && ReferenceEquals(session, owned)) RenderStatus(value); });
@@ -408,12 +415,12 @@ public sealed class EditorForm : Form
 
     private async Task ReplayAsync()
     {
-        if (fastReset.Checked && session != null)
+        if (fastReset.Checked && session != null && communityMod.Checked == launchedCommunityMod)
         {
             var immutable = draft.Text;
             var owned = session;
             SetStatus("暂停到帧边界并同进程重置…", "Pausing at a frame boundary and resetting the same process…");
-            await owned.RestartAsync(immutable, new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, OutputParent = automationOutputParent }, lifetime.Token);
+            await owned.RestartAsync(immutable, new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked }, lifetime.Token);
             controlFaulted = false;
             launchedText = immutable;
             runningSnapshot.Text = immutable;
@@ -437,7 +444,7 @@ public sealed class EditorForm : Form
         ProjectFiles.Parse(root, immutable);
         var directory = Path.Combine(root, "work", "verification", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N"));
         latestDirectory = directory;
-        var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, OutputParent = directory };
+        var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, OutputParent = directory, CommunityMod = communityMod.Checked };
         var report = await ReplayVerifier.VerifyAsync(root, immutable, options, 5, modes.Checked, message => UI(() => { SetStatus(message, words.Reason(message)); SetDetails(detailsWords.Chinese + message + Environment.NewLine, detailsWords.English + words.Reason(message) + Environment.NewLine); }), lifetime.Token);
         SetStatus(report.Passed ? "实际重复回放验证通过" : "实际重复回放验证未通过", report.Passed ? "Actual replay verification passed" : "Actual replay verification failed");
         SetDetails(File.ReadAllText(Path.Combine(directory, "report.md")), $"Actual-game verification: {(report.Passed ? "PASSED" : "FAILED")}\r\nCompleted runs: {report.Runs.Count}\r\nFailed runs: {report.FailedRuns.Count}\r\nDifferences: {report.Differences.Count}\r\n\r\n{words.Reason(report.Error ?? "")}\r\n\r\nFull report and logs:\r\n{directory}");
@@ -622,6 +629,7 @@ public sealed class EditorForm : Form
         modes.Enabled = !busy;
         speed.Enabled = !busy;
         fastReset.Enabled = !busy;
+        communityMod.Enabled = !busy;
     }
 
     private void OpenLogs()

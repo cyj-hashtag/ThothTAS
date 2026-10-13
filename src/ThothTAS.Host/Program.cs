@@ -10,7 +10,7 @@ internal static class Program
     {
         if (args.Length == 0 || args[0] is "help" or "--help" or "-h")
         {
-            Console.WriteLine("THOTH TAS 控制与实际回放验证\nrun <script.tas> [--control play|pause|step] [--speed 0.5|1|2] [--out dir]\nverify <script.tas> [--count 5] [--modes] [--out dir]\ncompose --out <combined.tas> <input1.tas> <input2.tas> ...（按顺序拼接，拒绝覆盖）\ncompare <run-dir-1> <run-dir-2>\nvalidate <script.tas>\ncheck-game（只读检查副本路径和所有游戏指纹）\n所有命令可用 --root <project-root>；启动可用 --width 1280 --height 720。\nverify 的 --modes 在重复连续回放外加入暂停继续、逐帧和两种速度。\nrun --control pause 验证暂停后继续播放；交互暂停请用编辑器。");
+            Console.WriteLine("THOTH TAS 控制与实际回放验证\nrun <script.tas> [--control play|pause|step] [--speed 0.5|1|2] [--out dir]\nverify <script.tas> [--count 5] [--modes] [--out dir]\nverify-reset <script.tas> [--count 5] [--out dir]（实际同进程重置测量）\ncompose --out <combined.tas> <input1.tas> <input2.tas> ...（按顺序拼接，拒绝覆盖）\ncompare <run-dir-1> <run-dir-2>\nvalidate <script.tas>\ncheck-game（只读检查副本路径和所有游戏指纹）\n所有命令可用 --root <project-root>；启动可用 --width 1280 --height 720。\nrun/verify/verify-reset 可加 --community-mod，先运行 scripts/Prepare-CommunityMod.ps1。\nverify 的 --modes 在重复连续回放外加入暂停继续、逐帧和两种速度。\nrun --control pause 验证暂停后继续播放；交互暂停请用编辑器。");
             return 0;
         }
         using var cancellation = new CancellationTokenSource();
@@ -62,7 +62,7 @@ internal static class Program
             {
                 Width = int.Parse(Option("--width") ?? "1280", CultureInfo.InvariantCulture),
                 Height = int.Parse(Option("--height") ?? "720", CultureInfo.InvariantCulture),
-                Speed = double.Parse(Option("--speed") ?? "1", CultureInfo.InvariantCulture), OutputParent = Option("--out")
+                Speed = double.Parse(Option("--speed") ?? "1", CultureInfo.InvariantCulture), OutputParent = Option("--out"), CommunityMod = args.Contains("--community-mod")
             };
             if (args[0] == "run")
             {
@@ -76,6 +76,12 @@ internal static class Program
                 if (report.Error != null) Console.Error.WriteLine(report.Error);
                 if (report.Differences.Count != 0) { var d = report.Differences[0]; Console.Error.WriteLine($"首个失步：帧 {d.Frame}，{d.Field}，{d.Expected} → {d.Actual}"); }
                 Console.WriteLine(report.Passed ? "实际重复回放验证通过。" : "实际重复回放验证未通过，请查看报告。");
+                return report.Passed ? 0 : 2;
+            }
+            if (args[0] == "verify-reset")
+            {
+                var report = await ResetPerformanceVerifier.VerifyAsync(root, text, options, int.Parse(Option("--count") ?? "5", CultureInfo.InvariantCulture), Console.WriteLine, cancellation.Token);
+                Console.WriteLine(report.Passed ? "实际同进程重置测量通过；暖重置不等价于冷启动。" : "实际同进程重置测量未通过，请查看 reset-report.json。");
                 return report.Passed ? 0 : 2;
             }
             throw new ArgumentException("未知命令：" + args[0]);

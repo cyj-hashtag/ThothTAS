@@ -17,13 +17,44 @@ public static class Patcher {
         hooks=bridge.Types.First(t=>t.FullName=="ThothTAS.Runtime.Hooks");
     }
     static IEnumerable<TypeDefinition> Types(IEnumerable<TypeDefinition> ts) { foreach(var t in ts) {yield return t;foreach(var n in Types(t.NestedTypes))yield return n;} }
-    public static void Patch(AssemblyDefinition assembly) {
+    public static void Patch(ref AssemblyDefinition assembly) {
+        bool community=false;
+        if(assembly.Name.Name=="Assembly-CSharp") {
+            string session=Environment.GetEnvironmentVariable("THOTH_TAS_SESSION");
+            string communityPath=null;
+            if(!string.IsNullOrEmpty(session))foreach(string line in File.ReadAllLines(session))if(line.StartsWith("communityModPath=",StringComparison.Ordinal))communityPath=line.Substring("communityModPath=".Length);
+            if(!string.IsNullOrEmpty(communityPath)) {
+                using(var sha=System.Security.Cryptography.SHA256.Create())using(var file=File.OpenRead(communityPath)) {
+                    string actual=BitConverter.ToString(sha.ComputeHash(file)).Replace("-","");
+                    if(actual!="2A35DDEA8A48144E926AC33796FFD63267A5AC129FD2495EF7F10A7D893E33FD")throw new IOException("Community Speedrun Mod v2.8 hash mismatch; refusing load.");
+                }
+                var replacement=AssemblyDefinition.ReadAssembly(communityPath,new ReaderParameters {AssemblyResolver=assembly.MainModule.AssemblyResolver,ReadingMode=ReadingMode.Immediate});
+                if(replacement.Name.Name!="Assembly-CSharp"||!replacement.MainModule.Types.Any(t=>t.Name=="SpeedrunTimers"))throw new IOException("Unsupported community assembly.");
+                assembly=replacement;
+                community=true;
+                Console.WriteLine("THOTH TAS community Speedrun Mod v2.8 loaded in memory; original disk assembly unchanged.");
+            }
+        }
         var m=assembly.MainModule;
         var methods=Types(m.Types).SelectMany(t=>t.Methods).Where(x=>x.HasBody).ToArray();
         var proxy=new TypeDefinition("ThothTAS.Generated","Proxies",TypeAttributes.NotPublic|TypeAttributes.Abstract|TypeAttributes.Sealed,m.TypeSystem.Object); m.Types.Add(proxy);
         int random=0,input=0,resources=0;
         foreach(var method in methods) {
             ExpandBranches(method);
+            if(community&&method.DeclaringType.FullName=="SimpleLauncher"&&method.Name=="Start") {
+                // The old mod rewrites the stock ten-line settings file. Keep the
+                // copy's quality preferences and let the TAS session own its window.
+                method.Body.Instructions.Clear();method.Body.ExceptionHandlers.Clear();method.Body.Variables.Clear();
+                var launcherIl=method.Body.GetILProcessor();
+                launcherIl.Append(launcherIl.Create(OpCodes.Call,Hook(m,"CommunityLauncherStart")));
+                launcherIl.Append(launcherIl.Create(OpCodes.Ret));
+            }
+            if(community&&method.DeclaringType.FullName=="SpeedrunTimers"&&method.Name=="FormatTime") {
+                // Correct the original display's <100 ms centisecond rounding.
+                method.Body.Instructions.Clear();method.Body.ExceptionHandlers.Clear();method.Body.Variables.Clear();
+                var timerIl=method.Body.GetILProcessor();timerIl.Append(timerIl.Create(OpCodes.Ldarg_0));
+                timerIl.Append(timerIl.Create(OpCodes.Call,Hook(m,"CommunityFormatTime")));timerIl.Append(timerIl.Create(OpCodes.Ret));
+            }
             // Main gameplay owns these constructed/instanced resources. Retain
             // .cctor assets and leave other assemblies' static post-effect caches
             // to their original cleanup methods. Shared/imported getters are untouched.
@@ -56,6 +87,8 @@ public static class Patcher {
                     if(mr.ReturnType.FullName!="System.Void") {var v=new VariableDefinition(m.ImportReference(mr.ReturnType));wrap.Body.Variables.Add(v);wrap.Body.InitLocals=true;il.Append(il.Create(OpCodes.Stloc,v));il.Append(il.Create(OpCodes.Ldloc,v));if(mr.ReturnType.IsValueType)il.Append(il.Create(OpCodes.Box,m.ImportReference(mr.ReturnType)));il.Append(il.Create(OpCodes.Call,Hook(m,"AfterRandom")));il.Append(il.Create(OpCodes.Ldloc,v));}
                     else {il.Append(il.Create(OpCodes.Ldnull));il.Append(il.Create(OpCodes.Call,Hook(m,"AfterRandom")));}
                     il.Append(il.Create(OpCodes.Ret));ins.OpCode=OpCodes.Call;ins.Operand=wrap;
+                } else if(community&&mr.DeclaringType.FullName=="System.Diagnostics.Stopwatch" && new[]{"Room","Globals","SpeedrunTimers"}.Contains(method.DeclaringType.FullName) && mr.Parameters.Count==0 && new[]{"Start","Stop","get_Elapsed"}.Contains(mr.Name)) {
+                    ins.OpCode=OpCodes.Call;ins.Operand=Hook(m,mr.Name=="Start"?"CommunityTimerStart":mr.Name=="Stop"?"CommunityTimerStop":"CommunityTimerElapsed");
                 } else if(mr.DeclaringType.FullName=="UnityEngine.Input" && !mr.HasThis) {
                     var wrap=Wrapper(m,proxy,mr,"I"+(input++));DefaultReturn(wrap);ins.OpCode=OpCodes.Call;ins.Operand=wrap;
                 } else if(mr.DeclaringType.FullName=="UnityEngine.Screen" && mr.Name=="SetResolution" && mr.Parameters.Count==3) {ins.Operand=Hook(m,"SetResolution");}

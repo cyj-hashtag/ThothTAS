@@ -15,12 +15,13 @@ internal static class Program
             var scriptIndex = Array.IndexOf(args, "--script");
             var testIndex = Array.IndexOf(args, "--self-test-runtime");
             var editingIndex = Array.IndexOf(args, "--self-test-editing");
+            var communityIndex = Array.IndexOf(args, "--self-test-community");
             var presentationIndex = Array.IndexOf(args, "--self-test-presentation");
-            if (testIndex >= 0 || editingIndex >= 0 || presentationIndex >= 0)
+            if (testIndex >= 0 || editingIndex >= 0 || presentationIndex >= 0 || communityIndex >= 0)
             {
-                var selectedTest = presentationIndex >= 0 ? presentationIndex : editingIndex >= 0 ? editingIndex : testIndex;
+                var selectedTest = communityIndex >= 0 ? communityIndex : presentationIndex >= 0 ? presentationIndex : editingIndex >= 0 ? editingIndex : testIndex;
                 if (selectedTest + 1 >= args.Length) throw new ArgumentException("自测缺少脚本路径。");
-                if ((editingIndex >= 0 || presentationIndex >= 0) && (selectedTest + 2 >= args.Length || args[selectedTest + 2].StartsWith("--"))) throw new ArgumentException("此自测需要两个按关卡顺序排列的脚本路径。");
+                if ((editingIndex >= 0 || presentationIndex >= 0 || communityIndex >= 0) && (selectedTest + 2 >= args.Length || args[selectedTest + 2].StartsWith("--"))) throw new ArgumentException("此自测需要两个按关卡顺序排列的脚本路径。");
                 var outIndex = Array.IndexOf(args, "--out");
                 var output = Path.GetFullPath(outIndex >= 0 && outIndex + 1 < args.Length ? args[outIndex + 1] : Path.Combine(root, "work", "editor-runtime-test", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss") + "-" + Guid.NewGuid().ToString("N")));
                 using var form = new EditorForm(root, args[selectedTest + 1]);
@@ -30,7 +31,9 @@ internal static class Program
                 form.FormClosing += (_, e) => { if (!testEnded) { e.Cancel = true; testCancellation.Cancel(); } };
                 form.Shown += async (_, _) =>
                 {
-                    var passed = presentationIndex >= 0
+                    var passed = communityIndex >= 0
+                        ? await EditorCommunityTest.RunAsync(form, root, args[communityIndex + 1], args[communityIndex + 2], output, testCancellation.Token)
+                        : presentationIndex >= 0
                         ? await EditorPresentationTest.RunAsync(form, root, args[presentationIndex + 1], args[presentationIndex + 2], output, testCancellation.Token)
                         : editingIndex >= 0
                         ? await EditorEditingTest.RunAsync(form, root, args[editingIndex + 1], args[editingIndex + 2], output, testCancellation.Token)

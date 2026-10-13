@@ -1,0 +1,674 @@
+{
+  "version": 1,
+  "date": "2026-10-13",
+  "gameBuild": "THOTH-2019-09-10-174628-r239",
+  "passed": true,
+  "identity": {
+    "communityVersion": "v2.8",
+    "communitySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+    "communityMvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+    "stockSha256": "9675a94cce19c883f0e0927e9a9185ff8c793080698100a8717ed5aaa4b2555c",
+    "stockMvid": "25f80738-c9ed-41af-8c1e-1674c7fbcfe6",
+    "freshReaEvidenceIds": [
+      "ev_8b134e9051f0b49b480808b0fbacf526e0b6a01727bdc6b0e07e4cb5685df36a",
+      "ev_32d819f034c1c5f31cbac0c8471ab95c617396375edc5ee4623818bd66d05121"
+    ],
+    "localReaEvidenceSha256": "9f5251318a7a051f2bb41f5007b91a178b8fd800fe25da211813fe1a681b76b7"
+  },
+  "deliveryModules": {
+    "dist/module/ThothTAS.Runtime.dll": "0f6653a8b3ade1ecd107e9a2bc30c86a6a2f5b9d8bf09227bae1c754530162ef",
+    "dist/module/ThothTAS.Preloader.dll": "beab766fbc96809e99f178e419225197f560430dbea22697a15f684d725f471e",
+    "dist/editor/ThothTAS.Editor.dll": "8354a2ff946f5b8f975507ff2131d6a36cfa432ef8fd24a4c0980d1dbe14bc4c",
+    "dist/host/ThothTAS.Host.dll": "203e281d29302e571dbf6c97430217e4ebb78fbb5d5f05a28871ee4c4ec0f30d"
+  },
+  "communityCold": {
+    "passed": true,
+    "differenceCount": 0,
+    "runs": [
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 47436,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031116-51aacfff659f4735a9b09f532b9e6860",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 44100,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031140-ef13de46099a4eaabff7c806888e22e0",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 54836,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031205-8baa858f65894e908fd05749f6830768",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 23976,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031231-0c3f006a9cf4431183016051591e7768",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 11080,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031257-b5998063415844f7b3810bc5606f1cfc",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "pause",
+        "speed": 1,
+        "pid": 41996,
+        "frames": 495,
+        "pauseStable": true,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031322-7adab7e6bd1c4ec6b1f8a4185f854eb9",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "step",
+        "speed": 1,
+        "pid": 8784,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031349-38b0eeaa5d754c61a7e1f64f4d4a421d",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 0.5,
+        "pid": 50584,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031418-7c77b091e44d486190c9ebb124da70b2",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 2,
+        "pid": 41760,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/community-mod/final-cold-composed/cold/20261013-031448-b1e0164613ff4fcc9f8f9cef256f818b",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "e2363a73068059a117f6411497b130b6f414dc6a6147945f479e13b23b6e3752",
+        "randomSha256": "798b58b9ec1fe7decb911109bb82fa1f75ad56d9bfdf1dc7efdf951e77be7210",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      }
+    ]
+  },
+  "communityEditor": {
+    "passed": true,
+    "checks": [
+      "社区模式实际两关自然转场并完成495输入帧",
+      "实际加载社区v2.8程序集，计时字段进入逐帧记录",
+      "实际34帧的社区计时器均按完整输入周期计数",
+      "四计时显示开启，原行旁帧标记继续正常显示",
+      "社区模式实际窗口1280×720、有标题边框且尺寸固定",
+      "真实暂停650ms时输入帧、计时字段及玩法状态不变",
+      "社区模式连续与逐帧/暂停/焦点切换/编辑另存/变速的两冷进程逐帧状态及完整随机记录精确一致",
+      "勾选同进程快速重置后社区模式保留实际PID",
+      "社区暖重置恢复计时零基线",
+      "编辑器实际社区暖重置返回耗时ms=2673.2",
+      "播放中修改社区选项后重新回放自动新建进程，拒绝同进程切换程序集",
+      "取消社区选项后实际回到原版程序集模式",
+      "用户两份输入、原版程序集及游戏设置的SHA256全部保持不变"
+    ],
+    "localEvidence": "work/community-mod/editor-test",
+    "runs": [
+      "work/community-mod/editor-test/runs/20261013-030539-48d54bd2460540da8c5af984ebbeb145",
+      "work/community-mod/editor-test/runs/20261013-030603-9be64e7d90724dc0820c0cbbc14ab80b",
+      "work/community-mod/editor-test/runs/20261013-030645-741b0636d5344b1e8d13682523e97ae3",
+      "work/community-mod/editor-test/runs/20261013-030700-c19b110562824848865a151250ff4473"
+    ],
+    "windows": [
+      {
+        "ProcessId": 43676,
+        "Style": "0x14CA0000",
+        "ClientWidth": 1280,
+        "ClientHeight": 720,
+        "Left": 629,
+        "Top": 412,
+        "Width": 1286,
+        "Height": 760,
+        "HasCaption": true,
+        "CanResize": false,
+        "CanMaximize": false
+      }
+    ],
+    "protectedFiles": [
+      "examples/basic-1.tas",
+      "examples/basic-2.tas",
+      "game/settings.txt",
+      "game/THOTH_Data/Managed/Assembly-CSharp.dll"
+    ],
+    "unchangedSha256": [
+      "8AB166FAB902F48334C4D3ED7D51C81DF37CFC6BED32DA6FDC415AF6878D0521",
+      "B6BB34EEDE3690AC73C298393B18BD1594F82DE959D527000362FEDF77EE3A58",
+      "2A70AC9E7237852C9883E2B6F37CBC87BDA2CBB623CA3B8C792C264F21D9451B",
+      "9675A94CCE19C883F0E0927E9A9185FF8C793080698100A8717ED5AAA4B2555C"
+    ]
+  },
+  "communityReset": {
+    "passed": true,
+    "medianWarmMilliseconds": 2566.0463,
+    "coldEquivalent": false,
+    "allColdAndWarmRandomEqual": true,
+    "checks": [
+      "重置 0 保留实际游戏 PID。",
+      "重置 0 的基线输入为零。",
+      "重置 0 恢复实际玩家初始位置。",
+      "重置 0 的玩家存活。",
+      "重置 0 的关卡尚未完成。",
+      "运行期间已校验文件禁止写入：docs\\game-fingerprint.json",
+      "运行期间已校验文件禁止写入：docs\\game-fingerprint.tsv",
+      "运行期间已校验文件禁止写入：game\\THOTH_Data\\Managed\\Assembly-CSharp.dll",
+      "运行期间已校验文件禁止写入：work\\community-mod\\v2.8\\Assembly-CSharp.dll",
+      "暖重置仍拒绝清单以外的新关卡/共享资源；已删除自己创建的空探针文件。",
+      "重置 1 保留实际游戏 PID。",
+      "重置 1 的基线输入为零。",
+      "重置 1 恢复实际玩家初始位置。",
+      "重置 1 的玩家存活。",
+      "重置 1 的关卡尚未完成。",
+      "重置 2 保留实际游戏 PID。",
+      "重置 2 的基线输入为零。",
+      "重置 2 恢复实际玩家初始位置。",
+      "重置 2 的玩家存活。",
+      "重置 2 的关卡尚未完成。",
+      "重置 3 保留实际游戏 PID。",
+      "重置 3 的基线输入为零。",
+      "重置 3 恢复实际玩家初始位置。",
+      "重置 3 的玩家存活。",
+      "重置 3 的关卡尚未完成。",
+      "重置 4 保留实际游戏 PID。",
+      "重置 4 的基线输入为零。",
+      "重置 4 恢复实际玩家初始位置。",
+      "重置 4 的玩家存活。",
+      "重置 4 的关卡尚未完成。",
+      "重置 5 保留实际游戏 PID。",
+      "重置 5 的基线输入为零。",
+      "重置 5 恢复实际玩家初始位置。",
+      "重置 5 的玩家存活。",
+      "重置 5 的关卡尚未完成。",
+      "本次连续暖重置的 gameObjects 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 meshes 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 materials 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 textures 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 persistentRoots 计数没有逐次累积（资源波动最多 10）。",
+      "本工具游戏退出后释放文件锁：docs\\game-fingerprint.json",
+      "本工具游戏退出后释放文件锁：docs\\game-fingerprint.tsv",
+      "本工具游戏退出后释放文件锁：game\\THOTH_Data\\Managed\\Assembly-CSharp.dll",
+      "本工具游戏退出后释放文件锁：work\\community-mod\\v2.8\\Assembly-CSharp.dll"
+    ],
+    "samples": [
+      {
+        "Reset": 0,
+        "Pid": 48148,
+        "Milliseconds": 11985.455,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [],
+        "Resources": "resource baseline;reset=0;owned=207;meshes=124;materials=321;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=none",
+        "Timing": "cold startup",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030735-b7d65ce2fb604590ad08bdc293ddf017",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 1,
+        "Pid": 48148,
+        "Milliseconds": 2620.9605,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "4.88@409C28F6"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "4.883333@409C4444"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=1;owned=206;meshes=124;materials=320;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=239;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=2.387;cleanupMs=16.695;preparedMs=21.670;bootstrapLoadedMs=23.186;menuReadyMs=2421.433;roomRequestedMs=2427.060;baselineMs=2567.156;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030753-cc4ac361bea146de93aaba62d9f98baa",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 2,
+        "Pid": 48148,
+        "Milliseconds": 2557.2732,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "9.63@411A147B"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "9.633333@411A2222"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=2;owned=206;meshes=124;materials=320;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=10.886;cleanupMs=19.162;preparedMs=24.524;bootstrapLoadedMs=25.220;menuReadyMs=2373.161;roomRequestedMs=2378.223;baselineMs=2515.198;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030801-6b3deb25c2d84f08a17b45409df7af88",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 3,
+        "Pid": 48148,
+        "Milliseconds": 2566.5008,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "14.38@4166147B"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "14.3833332@41662222"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=3;owned=206;meshes=124;materials=320;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=3.449;cleanupMs=20.067;preparedMs=25.429;bootstrapLoadedMs=26.082;menuReadyMs=2381.309;roomRequestedMs=2386.333;baselineMs=2517.108;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030810-768e64830fae434481ef1f065b6f9d47",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 4,
+        "Pid": 48148,
+        "Milliseconds": 2479.178,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "19.13@41990A3D"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "19.1333332@41991111"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=4;owned=206;meshes=124;materials=320;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=6.486;cleanupMs=14.979;preparedMs=19.550;bootstrapLoadedMs=19.964;menuReadyMs=2300.876;roomRequestedMs=2305.911;baselineMs=2439.736;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030819-c9523dbac8844f70b0aff1b564884d4a",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 5,
+        "Pid": 48148,
+        "Milliseconds": 2566.0463,
+        "Frames": 274,
+        "RandomSha256": "9D047CA88C03EDD6C5C142123DCA733100960BD3D54B64617D97238EA19D5B3C",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "23.88@41BF0A3D"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "23.8833332@41BF1111"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=5;owned=206;meshes=124;materials=320;textures=199;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=5.560;cleanupMs=19.525;preparedMs=23.936;bootstrapLoadedMs=24.629;menuReadyMs=2377.811;roomRequestedMs=2382.774;baselineMs=2519.404;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/community-mod/verify-reset/runs/20261013-030828-495bfbdf55894955ba065e336e7f568c",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      }
+    ]
+  },
+  "finalStockReset": {
+    "passed": true,
+    "medianWarmMilliseconds": 2479.28395,
+    "coldEquivalent": false,
+    "allColdAndWarmRandomEqual": true,
+    "checks": [
+      "重置 0 保留实际游戏 PID。",
+      "重置 0 的基线输入为零。",
+      "重置 0 恢复实际玩家初始位置。",
+      "重置 0 的玩家存活。",
+      "重置 0 的关卡尚未完成。",
+      "运行期间已校验文件禁止写入：docs\\game-fingerprint.json",
+      "运行期间已校验文件禁止写入：docs\\game-fingerprint.tsv",
+      "运行期间已校验文件禁止写入：game\\THOTH_Data\\Managed\\Assembly-CSharp.dll",
+      "暖重置仍拒绝清单以外的新关卡/共享资源；已删除自己创建的空探针文件。",
+      "重置 1 保留实际游戏 PID。",
+      "重置 1 的基线输入为零。",
+      "重置 1 恢复实际玩家初始位置。",
+      "重置 1 的玩家存活。",
+      "重置 1 的关卡尚未完成。",
+      "重置 2 保留实际游戏 PID。",
+      "重置 2 的基线输入为零。",
+      "重置 2 恢复实际玩家初始位置。",
+      "重置 2 的玩家存活。",
+      "重置 2 的关卡尚未完成。",
+      "本次连续暖重置的 gameObjects 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 meshes 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 materials 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 textures 计数没有逐次累积（资源波动最多 10）。",
+      "本次连续暖重置的 persistentRoots 计数没有逐次累积（资源波动最多 10）。",
+      "冷启动与全部暖重置的实际完成帧数一致。",
+      "冷启动与全部暖重置的完整随机记录SHA256一致。",
+      "本工具游戏退出后释放文件锁：docs\\game-fingerprint.json",
+      "本工具游戏退出后释放文件锁：docs\\game-fingerprint.tsv",
+      "本工具游戏退出后释放文件锁：game\\THOTH_Data\\Managed\\Assembly-CSharp.dll"
+    ],
+    "samples": [
+      {
+        "Reset": 0,
+        "Pid": 17288,
+        "Milliseconds": 11572.9125,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [],
+        "Resources": "resource baseline;reset=0;owned=207;meshes=122;materials=320;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=none",
+        "Timing": "cold startup",
+        "localEvidence": "work/reset-speed/final-integrated-stock/runs/20261013-031638-ec91d43d655641f2ba4ae23e8bec2e83",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 1,
+        "Pid": 17288,
+        "Milliseconds": 2542.1304,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "4.88@409C28F6"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "4.883333@409C4444"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=1;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=239;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=2.167;cleanupMs=23.810;preparedMs=32.088;bootstrapLoadedMs=33.022;menuReadyMs=2358.878;roomRequestedMs=2363.898;baselineMs=2486.247;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/reset-speed/final-integrated-stock/runs/20261013-031655-83a86e776d9b47bcb7e89b70b4c0130d",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      },
+      {
+        "Reset": 2,
+        "Pid": 17288,
+        "Milliseconds": 2416.4375,
+        "Frames": 274,
+        "RandomSha256": "006B9570AF5D5B7D3334E5F7C072515401F06E024140A25B314EE58A77DA8684",
+        "BaselineDifferences": [
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "ReceiverSoundsPlayer1[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "Time.fixedTime",
+            "Cold": "0.13@3E051EB8",
+            "Warm": "9.63@411A147B"
+          },
+          {
+            "Field": "Time.time",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "9.633333@411A2222"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpact",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          },
+          {
+            "Field": "____COPY_ReceiverSoundsPlayer2[0]/ReceiverTrailsGlobalAudioList.ReceiverTrailsGlobalAudioList.timeSinceImpactSamplePlayed",
+            "Cold": "0.13333334@3E088889",
+            "Warm": "0.183333337@3E3BBBBC"
+          }
+        ],
+        "Resources": "resource baseline;reset=2;owned=206;meshes=122;materials=319;textures=171;gameObjects=3321;privateBytes=0;persistentRoots=15;trackingFailures=0;cleanup=destroyed=238;baselineRetained=0;alreadyGone=0",
+        "Timing": "reset timing;verifiedMs=2.157;cleanupMs=16.674;preparedMs=21.380;bootstrapLoadedMs=22.025;menuReadyMs=2255.520;roomRequestedMs=2259.488;baselineMs=2369.724;fingerprint=held-read-locks;coldEquivalent=false",
+        "localEvidence": "work/reset-speed/final-integrated-stock/runs/20261013-031703-3a32eea7823c4f348d5fc941765d77ac",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E"
+      }
+    ]
+  },
+  "finalStockCold": {
+    "passed": true,
+    "runs": [
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 23164,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/reset-speed/final-stock-cold-composed/20261013-032028-6332d21e3a3545d2aa2022c4201e7a42",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "06346c273f181859454542399446e720d378269de97715ff5bbe8b85f729191d",
+        "randomSha256": "4368735ee5cd935559b574a393ad82f3063daf834a4346e9fc21471983858c56",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      },
+      {
+        "mode": "play",
+        "speed": 1,
+        "pid": 49344,
+        "frames": 495,
+        "pauseStable": false,
+        "localEvidence": "work/reset-speed/final-stock-cold-composed/20261013-032051-86bb8a873a8a4d9a86b563cfb36e0c89",
+        "runtimeSha256": "0F6653A8B3ADE1ECD107E9A2BC30C86A6A2F5B9D8BF09227BAE1C754530162EF",
+        "preloaderSha256": "BEAB766FBC96809E99F178E419225197F560430DBEA22697A15F684D725F471E",
+        "framesSha256": "06346c273f181859454542399446e720d378269de97715ff5bbe8b85f729191d",
+        "randomSha256": "4368735ee5cd935559b574a393ad82f3063daf834a4346e9fc21471983858c56",
+        "phasesSha256": "d98ebc1f15dcd11cadec27fc6f517f6dbf78969f06445ad9f275756c5a6dba3c"
+      }
+    ]
+  },
+  "pureCoreChecks": 113,
+  "staticRandomSites": 158,
+  "observedRandomSites": 26,
+  "failuresFixed": [
+    {
+      "localEvidence": "work/community-mod/verify-basic1",
+      "description": "First integration failed before baseline: legacy Mono cannot load InvalidDataException in the preloader. Replaced it with IOException; retained failed logs. No failed run counted as successful."
+    }
+  ],
+  "limits": [
+    "Current machine and pinned assembly only; no other Mod versions or cross-machine guarantee.",
+    "Only Basic-1/Basic-2 gameplay and this suite; all-room, teleporter/Boss and community cheat paths were not revalidated in community mode.",
+    "Community timers use 60 Hz complete native frame cycles, not wall-clock leaderboard RTA; normal HUD rendering may show the previous presented cycle at a pause.",
+    "Warm resets remain coldEquivalent=false; six baseline absolute-time/audio fields differ. Full random equality does not imply full gameplay-state equality.",
+    "File-picker paths are injected in UI tests; no assertion about native picker dialogs. Actual focus switching and game windows are tested.",
+    "Earlier v0.2.0 acceptance evidence applies to its recorded module hashes and is not blanket proof of new modules."
+  ]
+}

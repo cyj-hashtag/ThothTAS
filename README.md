@@ -63,3 +63,9 @@ Pinned build: `THOTH-2019-09-10-174628-r239`, Unity 5.3.6p5 x86 Mono. Single pla
 No cross-computer guarantee, instant save, rewind, seeking, two-player, Hardcore or generated rooms. Quick reset is not cold-start equivalent. Selected sound loading is synchronous and LaserBeat/RhythmLaser gameplay clocks are normalized by input frames; this TAS copy is not claimed to match every instantaneous ordinary realtime behavior. Not all random sites and paths have been executed.
 
 [Reverse-engineering summary](docs/public/reverse-engineering.md) · [Random-call inventory](docs/public/random-calls.json) · [Third-party notices](THIRD-PARTY-NOTICES.md)
+
+## Community Speedrun Mod and faster practice reset
+
+Optional rmadlal v2.8 timers and window support: run `scripts/Prepare-CommunityMod.ps1`, then select **Community timers** in the editor. The game assembly is replaced in memory only. Timer clocks use complete 60 Hz game cycles, so pause and playback speed do not change the same TAS result; they are not ordinary wall-clock RTA. Changing the profile takes effect on the next Replay through a new process.
+
+Warm reset now reuses startup fingerprints protected by held read locks. Actual same-script timing improved from 6.35 s to 2.56 s (59.7% less wait); full scene/resource rebuild remains necessary. Warm reset is still not cold-start equivalent. [Setup, controls and verification](docs/public/community-mod-guide.md) · [Actual compatibility and reset report](docs/public/community-reset-20261013.md).

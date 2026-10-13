@@ -23,7 +23,7 @@ internal static class EditorRuntimeTest
     [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true)] private static extern bool QueryFullProcessImageName(IntPtr processHandle, int flags, StringBuilder exeName, ref int size);
     private static readonly HashSet<int> OwnedPids = [];
 
-    private sealed record WindowEvidence(int ProcessId, string Path, long Handle, string Style, int ClientWidth, int ClientHeight, int Left, int Top, int Width, int Height, bool HasCaption, bool CanResize, bool CanMaximize);
+    internal sealed record WindowEvidence(int ProcessId, string Path, long Handle, string Style, int ClientWidth, int ClientHeight, int Left, int Top, int Width, int Height, bool HasCaption, bool CanResize, bool CanMaximize);
     private sealed class Report
     {
         public int Version { get; init; } = 1;
@@ -219,7 +219,7 @@ internal static class EditorRuntimeTest
         return report.Passed;
     }
 
-    private static async Task<IntPtr> WaitForGameWindowAsync(GameSession session)
+    internal static async Task<IntPtr> WaitForGameWindowAsync(GameSession session)
     {
         using var process = Process.GetProcessById(session.ProcessId);
         for (int i = 0; i < 200; i++)
@@ -232,7 +232,7 @@ internal static class EditorRuntimeTest
         throw new TimeoutException("未找到本工具启动的游戏可见窗口。");
     }
 
-    private static WindowEvidence InspectWindow(GameSession session, IntPtr window)
+    internal static WindowEvidence InspectWindow(GameSession session, IntPtr window)
     {
         GetWindowThreadProcessId(window, out var pid);
         if (pid != session.ProcessId) throw new InvalidOperationException("窗口不属于本工具启动的游戏进程。");

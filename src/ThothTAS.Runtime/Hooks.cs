@@ -47,6 +47,8 @@ public static partial class Hooks {
     static TcpListener listener;
     static string status="{\"protocol\":1,\"type\":\"status\",\"state\":\"loading\",\"frame\":-1}";
     static Assembly gameAssembly;
+    static readonly List<FileStream> fingerprintLocks=new List<FileStream>();
+    static bool fingerprintVerified;
     static Stopwatch pace=Stopwatch.StartNew();
     static Vector3 aimOrigin,aimResolved;
     static double releasedAt;
@@ -82,14 +84,24 @@ public static partial class Hooks {
         eventLog.WriteLine("engine initialized before first game callback/random;captureFramerate="+Time.captureFramerate+";fixedDeltaTime="+F(Time.fixedDeltaTime));
     }
     static void VerifyFingerprint() {
+        if(fingerprintVerified)return; // Verified files and manifest remain write/delete locked.
         string game=Path.GetFullPath(Path.Combine(Application.dataPath,".."));
-        foreach(string s in File.ReadAllLines(Path.Combine(Root,"docs/game-fingerprint.tsv"))) {
+        string manifest=Path.Combine(Root,"docs/game-fingerprint.tsv");
+        fingerprintLocks.Add(new FileStream(manifest,FileMode.Open,FileAccess.Read,FileShare.Read));
+        try {foreach(string s in File.ReadAllLines(manifest)) {
             string[] a=s.Split('\t');if(a.Length!=2)continue;
             string p=Path.GetFullPath(Path.Combine(game,a[0]));if(!p.StartsWith(game+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new IOException("Unsafe fingerprint path");
-            using(var sha=System.Security.Cryptography.SHA256.Create()) using(var f=File.OpenRead(p)) {string h=BitConverter.ToString(sha.ComputeHash(f)).Replace("-","").ToLowerInvariant();if(h!=a[1])throw new IOException("游戏版本指纹不匹配: "+a[0]);}
-        }
+            var f=new FileStream(p,FileMode.Open,FileAccess.Read,FileShare.Read);fingerprintLocks.Add(f);
+            using(var sha=System.Security.Cryptography.SHA256.Create()) {string h=BitConverter.ToString(sha.ComputeHash(f)).Replace("-","").ToLowerInvariant();if(h!=a[1])throw new IOException("游戏版本指纹不匹配: "+a[0]);}
+        }fingerprintVerified=true;
+        }catch{foreach(var f in fingerprintLocks)f.Dispose();fingerprintLocks.Clear();throw;}
     }
-    public static void SetResolution(int w,int h,bool full) {Ensure();Screen.SetResolution(int.Parse(C("width","1280")),int.Parse(C("height","720")),false);}
+    public static void SetResolution(int w,int h,bool full) {
+        Ensure();w=int.Parse(C("width","1280"));h=int.Parse(C("height","720"));
+        // This session's client size is fixed; avoid a redundant device request
+        // when the recreated launcher asks for the already established window.
+        if(Screen.width!=w||Screen.height!=h||Screen.fullScreen)Screen.SetResolution(w,h,false);
+    }
     // LaserBeat uses a muted AudioSource as a gameplay timer. Device time is a
     // wall clock even under captureFramerate; virtualize only that audited path.
     sealed class AudioClock {public int startedFrame;public bool playing,observed;public float pitch;}
@@ -164,6 +176,8 @@ public static partial class Hooks {
     }
     static bool CallBool(object obj,string name){return obj!=null&&(bool)obj.GetType().GetMethod(name,flags).Invoke(obj,null);}
     static void StartScene() {
+        InitializeCommunityTimers();
+        ResetTiming("menuReadyMs");
         RememberStaticBaseline();
         var globals=GetGlobal("instance");var names=(IList)Get(globals,"levelNames");
         int dash=script.Start.LastIndexOf('-');string family=script.Start.Substring(0,dash);int room=int.Parse(script.Start.Substring(dash+1));int group=-1;
@@ -173,7 +187,7 @@ public static partial class Hooks {
         Set(GT("Room"),"coopRoom",false);Set(GT("Room"),"doSlideAtStart",false);Set(GT("HardcoreArena"),"hardcoreModeActive",false);
         Set(GT("PlayerInput"),"keyboardControlEnabled",false);Set(GT("PlayerInput"),"cursorActive",false);Set(GT("PlayerInput"),"lockPlayer1ToKeyboardAndMouse",false);
         var rm=GT("RoomMusic").GetMethod("GetInstance",flags).Invoke(null,null);if(rm!=null)rm.GetType().GetMethod("StartRoomSound",flags).Invoke(rm,null);
-        requested=true;eventLog.WriteLine("requested scene="+script.Start);SceneManager.LoadScene(script.Start);
+        requested=true;eventLog.WriteLine("requested scene="+script.Start);SceneManager.LoadScene(script.Start);ResetTiming("roomRequestedMs");
     }
     public static void EndFrame() {
         Ensure();if(error.Length>0){Boundary();return;}
@@ -184,7 +198,7 @@ public static partial class Hooks {
         if(!baseline) {
             var room=GetGlobal("currentRoom");var player=GetGlobal("player") as Component;
             if(SceneManager.GetActiveScene().name!=script.Start||room==null||player==null||!player.gameObject.activeInHierarchy||!CallBool(room,"GetPlayersAreActive"))return;
-            baseline=true;frame=0;line=0;eventLog.WriteLine("baseline;nativeFrame="+Time.frameCount+";randomCount="+randomCount+";time="+F(Time.time)+";fixedTime="+F(Time.fixedTime));RecordResources();
+            baseline=true;frame=0;line=0;eventLog.WriteLine("baseline;nativeFrame="+Time.frameCount+";randomCount="+randomCount+";time="+F(Time.time)+";fixedTime="+F(Time.fixedTime));RecordResources();ResetReachedBaseline();
         } else if(!complete){frame++;if(chapterInputIssued)chapterFrame++;}
         LockWindow();
         if(!complete) {
@@ -281,6 +295,7 @@ public static partial class Hooks {
             map[key+".time"]=Value(ClockTime(source,pair.Value));map[key+".playing"]=Value(AudioIsPlaying(source));
             map[key+".pitch"]=Value(pair.Value.pitch);map[key+".clipLength"]=Value(source.clip==null?0:source.clip.length);
         }
+        AppendCommunityTimerState(map);
         var sb=new StringBuilder("{\"frame\":");sb.Append(frame).Append(",\"line\":").Append(line).Append(",\"scene\":").Append(Q(SceneManager.GetActiveScene().name)).Append(",\"chapter\":").Append(chapterIndex).Append(",\"chapterFrame\":").Append(script.HasExplicitRooms?chapterFrame:Math.Max(frame,0)).Append(",\"segmentFrame\":").Append(segmentFrame).Append(",\"segmentFrames\":").Append(segmentFrames).Append(",\"randomCount\":").Append(randomCount).Append(",\"randomHash\":").Append(Q(randomHash.ToString("X16"))).Append(",\"phases\":{\"count\":").Append(phaseFrameCount).Append(",\"hash\":").Append(Q(phaseHash.ToString("X16"))).Append("},\"fields\":{");
         bool first=true;foreach(var kv in map){if(!first)sb.Append(',');first=false;sb.Append(Q(kv.Key)).Append(':').Append(Q(kv.Value));}sb.Append("}}");string actual=sb.ToString();framesLog.WriteLine(actual);
         if(reference!=null) {

@@ -1,0 +1,4021 @@
+{
+  "version": 1,
+  "profile": "rmadlal/v2.8",
+  "staticCounts": {
+    "Assembly-CSharp.dll": 147,
+    "Assembly-CSharp-firstpass.dll": 9,
+    "Assembly-UnityScript-firstpass.dll": 2
+  },
+  "totalSites": 158,
+  "observedSites": 26,
+  "scope": "Static CIL scan, 0 body parsing errors; observed samples from the listed actual Basic-1/Basic-2 suite. Static existence does not prove all paths executed.",
+  "sites": [
+    {
+      "siteId": "Assembly-CSharp:0x0600061e:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossMusic",
+      "method": "System.Void BossMusic::PlayBossCymbal()",
+      "methodToken": "0x0600061e",
+      "methodRawIlSha256": "761db04cf6014cb2d8be07d49500199420bff9b96d81f2ada87f49ac55d675da",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0024",
+          "field": "UnityEngine.AudioSource BossMusic::currentCymbal"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600062c:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayPlayerKilledSound()",
+      "methodToken": "0x0600062c",
+      "methodRawIlSha256": "5914e791ab71d0825032c01b4976a71d5b4e292c60998b302f7562a8f0fa5792",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600062d:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayEnemyBullet(Receiver)",
+      "methodToken": "0x0600062d",
+      "methodRawIlSha256": "1d375fcde228021455cc1fb9b5af4780845d87cefa6e83a42facfd76aadb2c5e",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600062e:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayBossBullets()",
+      "methodToken": "0x0600062e",
+      "methodRawIlSha256": "c9f465dcdbf6f1a63609f98deddc5ff6f2d1954bb47c0eb8a265a6cf346e1581",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::timeSincePlayBossBullets"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600062f:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayTeleportJump()",
+      "methodToken": "0x0600062f",
+      "methodRawIlSha256": "21c204e97e2aaa50c581e2ea7db9c28db843af5815df872ca8ca13783936ac45",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_002c",
+          "field": "System.Single GeneralSoundBank::timeSinceTeleported"
+        },
+        {
+          "il": "IL_0033",
+          "field": "System.Boolean GeneralSoundBank::nextTeleporterActive"
+        },
+        {
+          "il": "IL_003a",
+          "field": "System.Boolean GeneralSoundBank::firstTeleportedDone"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000633:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayToggleOn()",
+      "methodToken": "0x06000633",
+      "methodRawIlSha256": "b6f17cf1602e25721ee2c1ef54bbcd35a708e32d1503aeda183655de641429fc",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000634:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayToggleOff()",
+      "methodToken": "0x06000634",
+      "methodRawIlSha256": "f61c61521315370ec6700170cf64529d609e9d90d136235b1c38f85a05052b62",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000635:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayRotaterUp()",
+      "methodToken": "0x06000635",
+      "methodRawIlSha256": "0806bb19969d850066dfd302e2ce8795630e8985506c823e5f26a3ddf8c5ae4c",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0039",
+          "field": "System.Single GeneralSoundBank::timeSinceRotaterSound"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000636:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayRotaterDown()",
+      "methodToken": "0x06000636",
+      "methodRawIlSha256": "120242935909c8e9129cf9cd004c277fb43ae9d6b57b324aead703b6515c6ec4",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0039",
+          "field": "System.Single GeneralSoundBank::timeSinceRotaterSound"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000637:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayScalerUp()",
+      "methodToken": "0x06000637",
+      "methodRawIlSha256": "b82eb9cf91436e0c4307ecbdc31c8d462b4777f15ec5602a26f7db73fef31f1b",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0039",
+          "field": "System.Single GeneralSoundBank::timeSinceScalerSound"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000638:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayScalerDown()",
+      "methodToken": "0x06000638",
+      "methodRawIlSha256": "c42cbfe7f5891e3cb411ab95cde9d2d8006b9e2030d2b6dcad1e71a49d9e6a2d",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0039",
+          "field": "System.Single GeneralSoundBank::timeSinceScalerSound"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000639:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayZapperIsBack()",
+      "methodToken": "0x06000639",
+      "methodRawIlSha256": "a7147ef9eb8d6bc0420fd60d49b0a1d8b5dbb004ab13589b949d4e97ce529b76",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600063f:IL_0055",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayExpanderSound(System.Int32,System.Single)",
+      "methodToken": "0x0600063f",
+      "methodRawIlSha256": "18a08b73295949823683f589867d24a109415fb72f1589072ca83f65ea2ded2e",
+      "ilOffset": 85,
+      "ilLabel": "IL_0055",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000640:IL_003a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::ResetExpanderSound(System.Int32)",
+      "methodToken": "0x06000640",
+      "methodRawIlSha256": "b443d2590bb8b74bc8e56235224da898823df538f8b9ab057986ed528ad3ebbe",
+      "ilOffset": 58,
+      "ilLabel": "IL_003a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_004f",
+          "field": "UnityEngine.AudioSource GeneralSoundBank::currentExpanderSound"
+        },
+        {
+          "il": "IL_005c",
+          "field": "UnityEngine.AudioSource GeneralSoundBank::currentExpanderSound2"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000642:IL_0033",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayConnector()",
+      "methodToken": "0x06000642",
+      "methodRawIlSha256": "88b000af57250c91e510b56f8d328532a9a4e07af75f74ba41f2bd794bbfea78",
+      "ilOffset": 51,
+      "ilLabel": "IL_0033",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000646:IL_001f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayFlowerSound()",
+      "methodToken": "0x06000646",
+      "methodRawIlSha256": "163d80d48f1d13883aa4e77e447ea31b9acd936a7a0cd6071ac80301ab42696b",
+      "ilOffset": 31,
+      "ilLabel": "IL_001f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "System.Single GeneralSoundBank::flowerTimer"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000647:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayLavaEnableSound()",
+      "methodToken": "0x06000647",
+      "methodRawIlSha256": "5dc1ff9ccb685f4a1b8f372223e0c5ee9361447f22dbafce85a81637a13391fd",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000648:IL_0020",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GeneralSoundBank",
+      "method": "System.Void GeneralSoundBank::PlayHardcoreDeathSound()",
+      "methodToken": "0x06000648",
+      "methodRawIlSha256": "91c9d61684c9b6b735cbf3201010f355783a395c86acecd2ff1672f4bed4258c",
+      "ilOffset": 32,
+      "ilLabel": "IL_0020",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600068b:IL_0039",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "PlayerAudio",
+      "method": "System.Void PlayerAudio::OnBulletsFired()",
+      "methodToken": "0x0600068b",
+      "methodRawIlSha256": "5242918bd990c4a5d968acc15f0ed836937c97eda8ca2d1fc3dc2369a51460f8",
+      "ilOffset": 57,
+      "ilLabel": "IL_0039",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_004b",
+          "field": "UnityEngine.AudioSource PlayerAudio::currentShootSound"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 30,
+      "sampleCalls": [
+        {
+          "frame": "1",
+          "phase": "PlayerAim.Update",
+          "arguments": "0,4",
+          "result": "3"
+        },
+        {
+          "frame": "274",
+          "phase": "PlayerAim.Update",
+          "arguments": "0,4",
+          "result": "0"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000691:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::Play(System.Boolean)",
+      "methodToken": "0x06000691",
+      "methodRawIlSha256": "c3aad4191710956ffba44d431a06cbe6b747695e80f57434f6549ae9a682d4cf",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000691:IL_007d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::Play(System.Boolean)",
+      "methodToken": "0x06000691",
+      "methodRawIlSha256": "c3aad4191710956ffba44d431a06cbe6b747695e80f57434f6549ae9a682d4cf",
+      "ilOffset": 125,
+      "ilLabel": "IL_007d",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0091",
+          "field": "System.Int32 ProceduralMusic::lastIndexChosen"
+        },
+        {
+          "il": "IL_0098",
+          "field": "System.Int32 ProceduralMusic::lastFolderUsed"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000694:IL_0052",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::UpdateMusic()",
+      "methodToken": "0x06000694",
+      "methodRawIlSha256": "4ffd9abbcc303d8785a8441fdd1b9ee772577798468289ea87a25972e4071aa7",
+      "ilOffset": 82,
+      "ilLabel": "IL_0052",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000694:IL_0073",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralMusic",
+      "method": "System.Void ProceduralMusic::UpdateMusic()",
+      "methodToken": "0x06000694",
+      "methodRawIlSha256": "4ffd9abbcc303d8785a8441fdd1b9ee772577798468289ea87a25972e4071aa7",
+      "ilOffset": 115,
+      "ilLabel": "IL_0073",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0087",
+          "field": "System.Int32 ProceduralMusic::lastFolderUsed"
+        },
+        {
+          "il": "IL_008e",
+          "field": "System.Int32 ProceduralMusic::lastIndexChosen"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_0076",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 118,
+      "ilLabel": "IL_0076",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_007b",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_009e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_0099",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 153,
+      "ilLabel": "IL_0099",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_009e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_00bc",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_00c3",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_00f1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 241,
+      "ilLabel": "IL_00f1",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00f6",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0119",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 42,
+      "sampleCalls": [
+        {
+          "frame": "84",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,136",
+          "result": "74"
+        },
+        {
+          "frame": "352",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,136",
+          "result": "9"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_0114",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 276,
+      "ilLabel": "IL_0114",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0119",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0137",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_013e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_0177",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 375,
+      "ilLabel": "IL_0177",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_017c",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_019f",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 30,
+      "sampleCalls": [
+        {
+          "frame": "147",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,136",
+          "result": "49"
+        },
+        {
+          "frame": "495",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,136",
+          "result": "118"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_019a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 410,
+      "ilLabel": "IL_019a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_019f",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_01bd",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_01c4",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_01db",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 475,
+      "ilLabel": "IL_01db",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_01e0",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0203",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_01fe",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 510,
+      "ilLabel": "IL_01fe",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0203",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0223",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_022a",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069e:IL_0288",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayRandomTrailSound(Receiver)",
+      "methodToken": "0x0600069e",
+      "methodRawIlSha256": "25ca767400c08ce5cf5c52ce89d142f07832063391d3f6bc01fcc901306d456a",
+      "ilOffset": 648,
+      "ilLabel": "IL_0288",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 72,
+      "sampleCalls": [
+        {
+          "frame": "84",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,15",
+          "result": "14"
+        },
+        {
+          "frame": "147",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "0,15",
+          "result": "7"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600069f:IL_0024",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayPlayerDiedSound()",
+      "methodToken": "0x0600069f",
+      "methodRawIlSha256": "1de590938a9494690dfa60245b6e4928922a2474910a5cae0aa43a87e7d2fb6b",
+      "ilOffset": 36,
+      "ilLabel": "IL_0024",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0029",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailIndex"
+        },
+        {
+          "il": "IL_0047",
+          "field": "UnityEngine.AudioSource ReceiverTrailsGlobalAudioList::currentTrailSound"
+        },
+        {
+          "il": "IL_004e",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::currentTrailSize"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a0:IL_0061",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayNextImpact()",
+      "methodToken": "0x060006a0",
+      "methodRawIlSha256": "bfc8597cca20cd66c49896fac370daa30fc2eadb291e3dfc2d40b35a97726313",
+      "ilOffset": 97,
+      "ilLabel": "IL_0061",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 858,
+      "sampleCalls": [
+        {
+          "frame": "19",
+          "phase": "Bullet.OnTriggerEnter",
+          "arguments": "0,6",
+          "result": "1"
+        },
+        {
+          "frame": "24",
+          "phase": "ReceiverTrailsGlobalAudioList.Update",
+          "arguments": "0,6",
+          "result": "1"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a0:IL_0140",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayNextImpact()",
+      "methodToken": "0x060006a0",
+      "methodRawIlSha256": "bfc8597cca20cd66c49896fac370daa30fc2eadb291e3dfc2d40b35a97726313",
+      "ilOffset": 320,
+      "ilLabel": "IL_0140",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0145",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::impactIndex"
+        },
+        {
+          "il": "IL_015a",
+          "field": "System.Int32 ReceiverTrailsGlobalAudioList::impactIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 198,
+      "sampleCalls": [
+        {
+          "frame": "47",
+          "phase": "ReceiverTrailsGlobalAudioList.Update",
+          "arguments": "0,90",
+          "result": "71"
+        },
+        {
+          "frame": "70",
+          "phase": "ReceiverTrailsGlobalAudioList.Update",
+          "arguments": "0,74",
+          "result": "51"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006a3:IL_000f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ReceiverTrailsGlobalAudioList",
+      "method": "System.Void ReceiverTrailsGlobalAudioList::PlayWallImpactSound(System.Single)",
+      "methodToken": "0x060006a3",
+      "methodRawIlSha256": "0978e65027cea10fbe94a65780d14a6e8fedeeaf54b151a7e5a10434b3440422",
+      "ilOffset": 15,
+      "ilLabel": "IL_000f",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c6:IL_0086",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006c6",
+      "methodRawIlSha256": "0f2342e5749af56ff1c064e0f8db53f74b78d16eba6c91301f95d22d0d04ceb4",
+      "ilOffset": 134,
+      "ilLabel": "IL_0086",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c6:IL_0095",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006c6",
+      "methodRawIlSha256": "0f2342e5749af56ff1c064e0f8db53f74b78d16eba6c91301f95d22d0d04ceb4",
+      "ilOffset": 149,
+      "ilLabel": "IL_0095",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c6:IL_00a4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006c6",
+      "methodRawIlSha256": "0f2342e5749af56ff1c064e0f8db53f74b78d16eba6c91301f95d22d0d04ceb4",
+      "ilOffset": 164,
+      "ilLabel": "IL_00a4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Int32 BigBoss::onCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006c7:IL_0038",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BigBoss",
+      "method": "System.Void BigBoss::ShuffleColors()",
+      "methodToken": "0x060006c7",
+      "methodRawIlSha256": "b307cdb47081b09480cf6902286ebcc10b84061e6de9b1f3ef433c653cf78d18",
+      "ilOffset": 56,
+      "ilLabel": "IL_0038",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0028",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "aa9989b4506c037f31f8f3512818b66e855a737b1687bb04fd65edfd95c22e9d",
+      "ilOffset": 40,
+      "ilLabel": "IL_0028",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0037",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "aa9989b4506c037f31f8f3512818b66e855a737b1687bb04fd65edfd95c22e9d",
+      "ilOffset": 55,
+      "ilLabel": "IL_0037",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006cb:IL_0046",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Start()",
+      "methodToken": "0x060006cb",
+      "methodRawIlSha256": "aa9989b4506c037f31f8f3512818b66e855a737b1687bb04fd65edfd95c22e9d",
+      "ilOffset": 70,
+      "ilLabel": "IL_0046",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0050",
+          "field": "UnityEngine.Vector3 BossBouncer::randomStartTorque"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ce:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006ce",
+      "methodRawIlSha256": "515444896f64515cfb46e130097db1803bcd742d0e868f506a6d35c5d983c2c2",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006ce:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006ce",
+      "methodRawIlSha256": "515444896f64515cfb46e130097db1803bcd742d0e868f506a6d35c5d983c2c2",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00c3",
+          "field": "System.Single BossBouncer::speedScale"
+        },
+        {
+          "il": "IL_00d9",
+          "field": "System.Single BossBouncer::timeSinceImpact"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d4:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::StartBlink()",
+      "methodToken": "0x060006d4",
+      "methodRawIlSha256": "f8a77064abe08f48860c3f7f6dd8ac669aa2618f60005cc26c21b795329ed03e",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0017",
+          "field": "System.Single BossBouncer::blinkTimer"
+        },
+        {
+          "il": "IL_002a",
+          "field": "System.Boolean Receiver::dontToggleRenderer"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d6:IL_002a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateBlinksAndEffects()",
+      "methodToken": "0x060006d6",
+      "methodRawIlSha256": "97c087afe849b890c37985583ec2d589ab35fba56bc18ac201e45517cb28efaa",
+      "ilOffset": 42,
+      "ilLabel": "IL_002a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d7:IL_00a2",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006d7",
+      "methodRawIlSha256": "7bfd023b3314a35f8f31e980bbb0f4b4a20cfd6ba5961e5998e2affdb06c9ee6",
+      "ilOffset": 162,
+      "ilLabel": "IL_00a2",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d7:IL_018e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006d7",
+      "methodRawIlSha256": "7bfd023b3314a35f8f31e980bbb0f4b4a20cfd6ba5961e5998e2affdb06c9ee6",
+      "ilOffset": 398,
+      "ilLabel": "IL_018e",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0193",
+          "field": "System.Int32 BossBouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_01a0",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_01a7",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d7:IL_019b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006d7",
+      "methodRawIlSha256": "7bfd023b3314a35f8f31e980bbb0f4b4a20cfd6ba5961e5998e2affdb06c9ee6",
+      "ilOffset": 411,
+      "ilLabel": "IL_019b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_01a0",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_01a7",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d7:IL_0253",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006d7",
+      "methodRawIlSha256": "7bfd023b3314a35f8f31e980bbb0f4b4a20cfd6ba5961e5998e2affdb06c9ee6",
+      "ilOffset": 595,
+      "ilLabel": "IL_0253",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0258",
+          "field": "System.Int32 BossBouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_0265",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_026c",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d7:IL_0260",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006d7",
+      "methodRawIlSha256": "7bfd023b3314a35f8f31e980bbb0f4b4a20cfd6ba5961e5998e2affdb06c9ee6",
+      "ilOffset": 608,
+      "ilLabel": "IL_0260",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0265",
+          "field": "System.Int32 BossBouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_026c",
+          "field": "System.Int32 BossBouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d8:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006d8",
+      "methodRawIlSha256": "0c440cdb72847f2c5aec1d5c924df92860f96b2c8b2895c5a8847a0068bde68f",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_013f",
+          "field": "System.Int32 BossBouncer::frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d8:IL_0124",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006d8",
+      "methodRawIlSha256": "0c440cdb72847f2c5aec1d5c924df92860f96b2c8b2895c5a8847a0068bde68f",
+      "ilOffset": 292,
+      "ilLabel": "IL_0124",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_013f",
+          "field": "System.Int32 BossBouncer::frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d8:IL_018f",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006d8",
+      "methodRawIlSha256": "0c440cdb72847f2c5aec1d5c924df92860f96b2c8b2895c5a8847a0068bde68f",
+      "ilOffset": 399,
+      "ilLabel": "IL_018f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d8:IL_01a3",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006d8",
+      "methodRawIlSha256": "0c440cdb72847f2c5aec1d5c924df92860f96b2c8b2895c5a8847a0068bde68f",
+      "ilOffset": 419,
+      "ilLabel": "IL_01a3",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006d8:IL_01b7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncer",
+      "method": "System.Void BossBouncer::Update()",
+      "methodToken": "0x060006d8",
+      "methodRawIlSha256": "0c440cdb72847f2c5aec1d5c924df92860f96b2c8b2895c5a8847a0068bde68f",
+      "ilOffset": 439,
+      "ilLabel": "IL_01b7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e5:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006e5",
+      "methodRawIlSha256": "29b0128432f596a9ff7ed399a4da481326eb7198b3f82ae752785dfd7cf9c76b",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e5:IL_0124",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006e5",
+      "methodRawIlSha256": "29b0128432f596a9ff7ed399a4da481326eb7198b3f82ae752785dfd7cf9c76b",
+      "ilOffset": 292,
+      "ilLabel": "IL_0124",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e5:IL_0133",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnReceiverOn(Receiver)",
+      "methodToken": "0x060006e5",
+      "methodRawIlSha256": "29b0128432f596a9ff7ed399a4da481326eb7198b3f82ae752785dfd7cf9c76b",
+      "ilOffset": 307,
+      "ilLabel": "IL_0133",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e8:IL_008d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006e8",
+      "methodRawIlSha256": "bdb41f26e82b9ffecd68d0d9530c8f3ff68476b51525ac2906331e8d0343bba9",
+      "ilOffset": 141,
+      "ilLabel": "IL_008d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0099",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e8:IL_00b4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006e8",
+      "methodRawIlSha256": "bdb41f26e82b9ffecd68d0d9530c8f3ff68476b51525ac2906331e8d0343bba9",
+      "ilOffset": 180,
+      "ilLabel": "IL_00b4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00d5",
+          "field": "System.Single BossBouncerSphere::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006e8:IL_00d0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BossBouncerSphere",
+      "method": "System.Void BossBouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006e8",
+      "methodRawIlSha256": "bdb41f26e82b9ffecd68d0d9530c8f3ff68476b51525ac2906331e8d0343bba9",
+      "ilOffset": 208,
+      "ilLabel": "IL_00d0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d5",
+          "field": "System.Single BossBouncerSphere::speedScale"
+        },
+        {
+          "il": "IL_0101",
+          "field": "UnityEngine.Vector3 BossBouncerSphere::velocity"
+        },
+        {
+          "il": "IL_010c",
+          "field": "System.Single BossBouncerSphere::timeSinceImpact"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006eb:IL_000b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006eb",
+      "methodRawIlSha256": "7cdf5cecf3b62d22f9065c81c74528916622620d5507d03839586f08ff42caea",
+      "ilOffset": 11,
+      "ilLabel": "IL_000b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 90,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.9993694@BF7FD6AC"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.188854814@BE416328"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006eb:IL_001a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006eb",
+      "methodRawIlSha256": "7cdf5cecf3b62d22f9065c81c74528916622620d5507d03839586f08ff42caea",
+      "ilOffset": 26,
+      "ilLabel": "IL_001a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.Transform Bouncer::myTransform"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 90,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.5485256@BF0C6C2C"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.5695789@BF11CFEC"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006eb:IL_0029",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006eb",
+      "methodRawIlSha256": "7cdf5cecf3b62d22f9065c81c74528916622620d5507d03839586f08ff42caea",
+      "ilOffset": 41,
+      "ilLabel": "IL_0029",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003e",
+          "field": "UnityEngine.Vector3 Bouncer::randomStartTorque"
+        },
+        {
+          "il": "IL_004a",
+          "field": "UnityEngine.Rigidbody Bouncer::my_rigidBody"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.Transform Bouncer::myTransform"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 90,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.361967683@BEB953D4"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Start",
+          "arguments": "-1@BF800000,1@3F800000",
+          "result": "-0.828767538@BF542A1C"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006eb:IL_0158",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Start()",
+      "methodToken": "0x060006eb",
+      "methodRawIlSha256": "7cdf5cecf3b62d22f9065c81c74528916622620d5507d03839586f08ff42caea",
+      "ilOffset": 344,
+      "ilLabel": "IL_0158",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_015d",
+          "field": "System.Int32 Bouncer::randomStartNoiseMeshIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 90,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Receiver.Start",
+          "arguments": "0,100",
+          "result": "62"
+        },
+        {
+          "frame": "-1",
+          "phase": "Receiver.Start",
+          "arguments": "0,100",
+          "result": "90"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f0:IL_000b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::SetRandomSpeedScale()",
+      "methodToken": "0x060006f0",
+      "methodRawIlSha256": "d90a2e9112fad399c05f806315b087b3ab73ec5c3132293630e0132c2792233c",
+      "ilOffset": 11,
+      "ilLabel": "IL_000b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0010",
+          "field": "System.Single Bouncer::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f1:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f1",
+      "methodRawIlSha256": "295dbf270f2abaf6229ad25c2603a06ea50de0292f03da3ee575984687bffd55",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 12,
+      "sampleCalls": [
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "-0.25@BE800000,0.25@3E800000",
+          "result": "0.123400077@3DFCB92E"
+        },
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "-0.25@BE800000,0.25@3E800000",
+          "result": "0.123400077@3DFCB92E"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f1:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f1",
+      "methodRawIlSha256": "295dbf270f2abaf6229ad25c2603a06ea50de0292f03da3ee575984687bffd55",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00cd",
+          "field": "System.Single Bouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean Bouncer::firstImpactHappened"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 12,
+      "sampleCalls": [
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "-0.25@BE800000,0.25@3E800000",
+          "result": "-0.163558483@BE277BE0"
+        },
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "-0.25@BE800000,0.25@3E800000",
+          "result": "-0.163558483@BE277BE0"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f1:IL_00c8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060006f1",
+      "methodRawIlSha256": "295dbf270f2abaf6229ad25c2603a06ea50de0292f03da3ee575984687bffd55",
+      "ilOffset": 200,
+      "ilLabel": "IL_00c8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "System.Single Bouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean Bouncer::firstImpactHappened"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "System.Single Bouncer::timeSinceImpact"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 12,
+      "sampleCalls": [
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "0.9@3F666666,1.1@3F8CCCCD",
+          "result": "0.9288395@3F6DC86D"
+        },
+        {
+          "frame": "478",
+          "phase": "Bouncer.OnCollisionStay",
+          "arguments": "0.9@3F666666,1.1@3F8CCCCD",
+          "result": "0.9288395@3F6DC86D"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f5:IL_0012",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::StartBlink()",
+      "methodToken": "0x060006f5",
+      "methodRawIlSha256": "ceb69e4b1338dc4b12a4ffce9aabfadc705d60d18dd63540da4a22f2d2887597",
+      "ilOffset": 18,
+      "ilLabel": "IL_0012",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0017",
+          "field": "System.Single Bouncer::blinkTimer"
+        },
+        {
+          "il": "IL_002a",
+          "field": "System.Boolean Receiver::dontToggleRenderer"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 180,
+      "sampleCalls": [
+        {
+          "frame": "65",
+          "phase": "Bouncer.Update",
+          "arguments": "0.08@3DA3D70A,0.11@3DE147AE",
+          "result": "0.09551428@3DC39CFE"
+        },
+        {
+          "frame": "71",
+          "phase": "Bouncer.Update",
+          "arguments": "0.08@3DA3D70A,0.11@3DE147AE",
+          "result": "0.100353763@3DCD8646"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f7:IL_002a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateBlinksAndEffects()",
+      "methodToken": "0x060006f7",
+      "methodRawIlSha256": "434c9bb62a72dee5a92295e1fe53e29d4451abea539b015a01c7eb8cbb6c7988",
+      "ilOffset": 42,
+      "ilLabel": "IL_002a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 72,
+      "sampleCalls": [
+        {
+          "frame": "71",
+          "phase": "Bouncer.Update",
+          "arguments": "0@00000000,1@3F800000",
+          "result": "0.934762239@3F6F4C94"
+        },
+        {
+          "frame": "135",
+          "phase": "Bouncer.Update",
+          "arguments": "0@00000000,1@3F800000",
+          "result": "0.914714336@3F6A2AB8"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f9:IL_00b0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006f9",
+      "methodRawIlSha256": "2c3da64acab8395d73ca1ec813b62e025a9e6f3fb483ffcb311175fe893b1498",
+      "ilOffset": 176,
+      "ilLabel": "IL_00b0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 8076,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@00000000,1@3F800000",
+          "result": "0.7431083@3F3E3C58"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@00000000,1@3F800000",
+          "result": "0.0388972759@3D1F52C0"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f9:IL_0333",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006f9",
+      "methodRawIlSha256": "2c3da64acab8395d73ca1ec813b62e025a9e6f3fb483ffcb311175fe893b1498",
+      "ilOffset": 819,
+      "ilLabel": "IL_0333",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0338",
+          "field": "System.Int32 Bouncer::meshUpRotIndex"
+        },
+        {
+          "il": "IL_0345",
+          "field": "System.Int32 Bouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_034c",
+          "field": "System.Int32 Bouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 5262,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0,2",
+          "result": "1"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0,2",
+          "result": "1"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006f9:IL_0340",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x060006f9",
+      "methodRawIlSha256": "2c3da64acab8395d73ca1ec813b62e025a9e6f3fb483ffcb311175fe893b1498",
+      "ilOffset": 832,
+      "ilLabel": "IL_0340",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0345",
+          "field": "System.Int32 Bouncer::meshBackRotIndex"
+        },
+        {
+          "il": "IL_034c",
+          "field": "System.Int32 Bouncer::prevMeshIndex"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 5262,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0,4",
+          "result": "1"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0,4",
+          "result": "3"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fa:IL_0095",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006fa",
+      "methodRawIlSha256": "69d4b320caeeee1aab06607f32e14dc8786898848d3467bb020eba48601814aa",
+      "ilOffset": 149,
+      "ilLabel": "IL_0095",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bf",
+          "field": "System.Int32 Bouncer::noiseFrameCount"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 9432,
+      "sampleCalls": [
+        {
+          "frame": "1",
+          "phase": "Bouncer.Update",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "51.21004@424CD715"
+        },
+        {
+          "frame": "1",
+          "phase": "Bouncer.Update",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "73.25864@4292846C"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fa:IL_00a4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006fa",
+      "methodRawIlSha256": "69d4b320caeeee1aab06607f32e14dc8786898848d3467bb020eba48601814aa",
+      "ilOffset": 164,
+      "ilLabel": "IL_00a4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bf",
+          "field": "System.Int32 Bouncer::noiseFrameCount"
+        },
+        {
+          "il": "IL_00e0",
+          "field": "System.Single Bouncer::timeHasBeenCompleted"
+        }
+      ],
+      "observedInThisSuite": true,
+      "observedCalls": 9432,
+      "sampleCalls": [
+        {
+          "frame": "1",
+          "phase": "Bouncer.Update",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "27.7800732@41DE3D97"
+        },
+        {
+          "frame": "1",
+          "phase": "Bouncer.Update",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "58.49678@4269FCB4"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fa:IL_0130",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006fa",
+      "methodRawIlSha256": "69d4b320caeeee1aab06607f32e14dc8786898848d3467bb020eba48601814aa",
+      "ilOffset": 304,
+      "ilLabel": "IL_0130",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 18936,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fa:IL_0144",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006fa",
+      "methodRawIlSha256": "69d4b320caeeee1aab06607f32e14dc8786898848d3467bb020eba48601814aa",
+      "ilOffset": 324,
+      "ilLabel": "IL_0144",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 18936,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060006fa:IL_0158",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Bouncer",
+      "method": "System.Void Bouncer::Update()",
+      "methodToken": "0x060006fa",
+      "methodRawIlSha256": "69d4b320caeeee1aab06607f32e14dc8786898848d3467bb020eba48601814aa",
+      "ilOffset": 344,
+      "ilLabel": "IL_0158",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 18936,
+      "sampleCalls": [
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        },
+        {
+          "frame": "-1",
+          "phase": "Bouncer.Update",
+          "arguments": "0@80000000,0@00000000",
+          "result": "0@00000000"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600071c:IL_00e7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x0600071c",
+      "methodRawIlSha256": "f46215b9acdc36101a91ab66b889af9993334c488f214237d58e8ba2721ac300",
+      "ilOffset": 231,
+      "ilLabel": "IL_00e7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600071c:IL_00f6",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x0600071c",
+      "methodRawIlSha256": "f46215b9acdc36101a91ab66b889af9993334c488f214237d58e8ba2721ac300",
+      "ilOffset": 246,
+      "ilLabel": "IL_00f6",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600071c:IL_0105",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::Shoot()",
+      "methodToken": "0x0600071c",
+      "methodRawIlSha256": "f46215b9acdc36101a91ab66b889af9993334c488f214237d58e8ba2721ac300",
+      "ilOffset": 261,
+      "ilLabel": "IL_0105",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000721:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000721",
+      "methodRawIlSha256": "9f431cd0c92210d88044f124842690797c2dc918f96c4a99e4c9c61077408c12",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00aa",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000721:IL_00c5",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000721",
+      "methodRawIlSha256": "9f431cd0c92210d88044f124842690797c2dc918f96c4a99e4c9c61077408c12",
+      "ilOffset": 197,
+      "ilLabel": "IL_00c5",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e6",
+          "field": "System.Single BouncerSphere::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000721:IL_00e1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerSphere",
+      "method": "System.Void BouncerSphere::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000721",
+      "methodRawIlSha256": "9f431cd0c92210d88044f124842690797c2dc918f96c4a99e4c9c61077408c12",
+      "ilOffset": 225,
+      "ilLabel": "IL_00e1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e6",
+          "field": "System.Single BouncerSphere::speedScale"
+        },
+        {
+          "il": "IL_0113",
+          "field": "UnityEngine.Vector3 BouncerSphere::velocity"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000730:IL_008c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000730",
+      "methodRawIlSha256": "f4ecdc105ddb0254d59418a2933a3ce0576adfc47c88da123d7d3f756a1bde1a",
+      "ilOffset": 140,
+      "ilLabel": "IL_008c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0098",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000730:IL_00ac",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000730",
+      "methodRawIlSha256": "f4ecdc105ddb0254d59418a2933a3ce0576adfc47c88da123d7d3f756a1bde1a",
+      "ilOffset": 172,
+      "ilLabel": "IL_00ac",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00b8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00cd",
+          "field": "System.Single EvilPlayerBouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean EvilPlayerBouncer::firstImpactHappened"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000730:IL_00c8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x06000730",
+      "methodRawIlSha256": "f4ecdc105ddb0254d59418a2933a3ce0576adfc47c88da123d7d3f756a1bde1a",
+      "ilOffset": 200,
+      "ilLabel": "IL_00c8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "System.Single EvilPlayerBouncer::speedScale"
+        },
+        {
+          "il": "IL_00df",
+          "field": "System.Boolean EvilPlayerBouncer::firstImpactHappened"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "System.Single EvilPlayerBouncer::timeSinceImpact"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_009a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 154,
+      "ilLabel": "IL_009a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_00c0",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 192,
+      "ilLabel": "IL_00c0",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_00dc",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 220,
+      "ilLabel": "IL_00dc",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_015a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 346,
+      "ilLabel": "IL_015a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_0169",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 361,
+      "ilLabel": "IL_0169",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000731:IL_0178",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "EvilPlayerBouncer",
+      "method": "System.Void EvilPlayerBouncer::Update()",
+      "methodToken": "0x06000731",
+      "methodRawIlSha256": "2d67b2ae80926a4404a0dcc5accc5828c2880a93ba2cbf67c0a39019ad4b1c6e",
+      "ilOffset": 376,
+      "ilLabel": "IL_0178",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0189",
+          "field": "System.Int32 EvilPlayerBouncer::rotFrameCounter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600073a:IL_001b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Start()",
+      "methodToken": "0x0600073a",
+      "methodRawIlSha256": "8d9fe19ad2008919af1ea62ad4df9cbc0ebb8f16e31bc03dc1051e9dcedbb77d",
+      "ilOffset": 27,
+      "ilLabel": "IL_001b",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0020",
+          "field": "System.Int32 Expander::randomStartNoiseMeshIndex"
+        },
+        {
+          "il": "IL_0056",
+          "field": "UnityEngine.MeshFilter Expander::rotaterMeshFilter"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000741:IL_00ec",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x06000741",
+      "methodRawIlSha256": "623645bf3accbaca248b748b56896e29b9b75f57df08f91a3504dd6a3439cda9",
+      "ilOffset": 236,
+      "ilLabel": "IL_00ec",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00f1",
+          "field": "System.Int32 Expander::meshUpRotIndex"
+        },
+        {
+          "il": "IL_00fe",
+          "field": "System.Int32 Expander::meshBackRotIndex"
+        },
+        {
+          "il": "IL_0105",
+          "field": "System.Int32 Expander::prevIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000741:IL_00f9",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::UpdateNEWNoiseMeshes()",
+      "methodToken": "0x06000741",
+      "methodRawIlSha256": "623645bf3accbaca248b748b56896e29b9b75f57df08f91a3504dd6a3439cda9",
+      "ilOffset": 249,
+      "ilLabel": "IL_00f9",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00fe",
+          "field": "System.Int32 Expander::meshBackRotIndex"
+        },
+        {
+          "il": "IL_0105",
+          "field": "System.Int32 Expander::prevIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000742:IL_0039",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x06000742",
+      "methodRawIlSha256": "151ca2918001b2ab97397eabbbc166bb3fc15a8acdbb5e38d30417eaf0c8ee05",
+      "ilOffset": 57,
+      "ilLabel": "IL_0039",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000742:IL_004d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x06000742",
+      "methodRawIlSha256": "151ca2918001b2ab97397eabbbc166bb3fc15a8acdbb5e38d30417eaf0c8ee05",
+      "ilOffset": 77,
+      "ilLabel": "IL_004d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000742:IL_0061",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x06000742",
+      "methodRawIlSha256": "151ca2918001b2ab97397eabbbc166bb3fc15a8acdbb5e38d30417eaf0c8ee05",
+      "ilOffset": 97,
+      "ilLabel": "IL_0061",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000742:IL_013d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x06000742",
+      "methodRawIlSha256": "151ca2918001b2ab97397eabbbc166bb3fc15a8acdbb5e38d30417eaf0c8ee05",
+      "ilOffset": 317,
+      "ilLabel": "IL_013d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0167",
+          "field": "System.Int32 Expander::my_frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000742:IL_014c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Expander",
+      "method": "System.Void Expander::Update()",
+      "methodToken": "0x06000742",
+      "methodRawIlSha256": "151ca2918001b2ab97397eabbbc166bb3fc15a8acdbb5e38d30417eaf0c8ee05",
+      "ilOffset": 332,
+      "ilLabel": "IL_014c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0167",
+          "field": "System.Int32 Expander::my_frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000776:IL_0002",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::Start()",
+      "methodToken": "0x06000776",
+      "methodRawIlSha256": "4b21019cbec814d70b63e2ae504f47278b5bde027380fbfd4a3ceaf62dbb1d21",
+      "ilOffset": 2,
+      "ilLabel": "IL_0002",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600077a:IL_013b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x0600077a",
+      "methodRawIlSha256": "6db78bc16cafdc63014242cb8d0a9c767f04b38d8c4767aaa92dbd059e49ad6d",
+      "ilOffset": 315,
+      "ilLabel": "IL_013b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0141",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_0162",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600077a:IL_015c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x0600077a",
+      "methodRawIlSha256": "6db78bc16cafdc63014242cb8d0a9c767f04b38d8c4767aaa92dbd059e49ad6d",
+      "ilOffset": 348,
+      "ilLabel": "IL_015c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0162",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_0182",
+          "field": "System.Single OLD_Bouncer::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600077a:IL_017d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "OLD_Bouncer",
+      "method": "System.Void OLD_Bouncer::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x0600077a",
+      "methodRawIlSha256": "6db78bc16cafdc63014242cb8d0a9c767f04b38d8c4767aaa92dbd059e49ad6d",
+      "ilOffset": 381,
+      "ilLabel": "IL_017d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0182",
+          "field": "System.Single OLD_Bouncer::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600078f:IL_001e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x0600078f",
+      "methodRawIlSha256": "18f78576c344aafffff53bbbda7cf3745a007a920bfd03f9cc5234343778944d",
+      "ilOffset": 30,
+      "ilLabel": "IL_001e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 72,
+      "sampleCalls": [
+        {
+          "frame": "84",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "-80.0693741@C2A02385"
+        },
+        {
+          "frame": "147",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "63.675663@427EB3E1"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600078f:IL_002d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x0600078f",
+      "methodRawIlSha256": "18f78576c344aafffff53bbbda7cf3745a007a920bfd03f9cc5234343778944d",
+      "ilOffset": 45,
+      "ilLabel": "IL_002d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 72,
+      "sampleCalls": [
+        {
+          "frame": "84",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "89.28573@42B2924B"
+        },
+        {
+          "frame": "147",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "-64.9616241@C281EC5A"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600078f:IL_003c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Receiver",
+      "method": "System.Void Receiver::TurnOn()",
+      "methodToken": "0x0600078f",
+      "methodRawIlSha256": "18f78576c344aafffff53bbbda7cf3745a007a920bfd03f9cc5234343778944d",
+      "ilOffset": 60,
+      "ilLabel": "IL_003c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": true,
+      "observedCalls": 72,
+      "sampleCalls": [
+        {
+          "frame": "84",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "35.9855576@420FF136"
+        },
+        {
+          "frame": "147",
+          "phase": "Receiver.FixedUpdate",
+          "arguments": "-100@C2C80000,100@42C80000",
+          "result": "86.1374359@42AC465E"
+        }
+      ]
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007ac:IL_008d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Scaler",
+      "method": "System.Void Scaler::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007ac",
+      "methodRawIlSha256": "46296ec4efbbb90b593c5bdeb3ad723c9d1950d646092c287bd2ebe5344e1b01",
+      "ilOffset": 141,
+      "ilLabel": "IL_008d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0099",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007ac:IL_00b4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Scaler",
+      "method": "System.Void Scaler::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007ac",
+      "methodRawIlSha256": "46296ec4efbbb90b593c5bdeb3ad723c9d1950d646092c287bd2ebe5344e1b01",
+      "ilOffset": 180,
+      "ilLabel": "IL_00b4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00c0",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e1",
+          "field": "UnityEngine.Vector3 Scaler::velocity"
+        },
+        {
+          "il": "IL_00ec",
+          "field": "System.Single Scaler::timeSinceImpact"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007de:IL_0075",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007de",
+      "methodRawIlSha256": "8a584fdafdbdb3fe16b5fc3f26007fa7474a3da45fd6db5e99fa18c0f8867124",
+      "ilOffset": 117,
+      "ilLabel": "IL_0075",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0081",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00a8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007de:IL_009c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007de",
+      "methodRawIlSha256": "8a584fdafdbdb3fe16b5fc3f26007fa7474a3da45fd6db5e99fa18c0f8867124",
+      "ilOffset": 156,
+      "ilLabel": "IL_009c",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00a8",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00bd",
+          "field": "System.Single Teleporter::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007de:IL_00b8",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnTriggerEnter(UnityEngine.Collider)",
+      "methodToken": "0x060007de",
+      "methodRawIlSha256": "8a584fdafdbdb3fe16b5fc3f26007fa7474a3da45fd6db5e99fa18c0f8867124",
+      "ilOffset": 184,
+      "ilLabel": "IL_00b8",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00bd",
+          "field": "System.Single Teleporter::speedScale"
+        },
+        {
+          "il": "IL_00ea",
+          "field": "UnityEngine.Vector3 Teleporter::velocity"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007df:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007df",
+      "methodRawIlSha256": "8a77d193e61b2dda74655b4d8ddccac5f31d659d727ef8d6f886fe4919028992",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00aa",
+          "field": "System.Single UnityEngine.Vector3::x"
+        },
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007df:IL_00c5",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007df",
+      "methodRawIlSha256": "8a77d193e61b2dda74655b4d8ddccac5f31d659d727ef8d6f886fe4919028992",
+      "ilOffset": 197,
+      "ilLabel": "IL_00c5",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00d1",
+          "field": "System.Single UnityEngine.Vector3::y"
+        },
+        {
+          "il": "IL_00e6",
+          "field": "System.Single Teleporter::speedScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007df:IL_00e1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Teleporter",
+      "method": "System.Void Teleporter::OnCollisionStay(UnityEngine.Collision)",
+      "methodToken": "0x060007df",
+      "methodRawIlSha256": "8a77d193e61b2dda74655b4d8ddccac5f31d659d727ef8d6f886fe4919028992",
+      "ilOffset": 225,
+      "ilLabel": "IL_00e1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e6",
+          "field": "System.Single Teleporter::speedScale"
+        },
+        {
+          "il": "IL_0113",
+          "field": "UnityEngine.Vector3 Teleporter::velocity"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007f0:IL_005b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007f0",
+      "methodRawIlSha256": "636996a8bb0c8bb9050292d1ea38b321bea03543e226874913099b73eab15cd1",
+      "ilOffset": 91,
+      "ilLabel": "IL_005b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0060",
+          "field": "System.Single BouncerGfxBlock::rand"
+        },
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007f0:IL_007b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007f0",
+      "methodRawIlSha256": "636996a8bb0c8bb9050292d1ea38b321bea03543e226874913099b73eab15cd1",
+      "ilOffset": 123,
+      "ilLabel": "IL_007b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007f0:IL_008b",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007f0",
+      "methodRawIlSha256": "636996a8bb0c8bb9050292d1ea38b321bea03543e226874913099b73eab15cd1",
+      "ilOffset": 139,
+      "ilLabel": "IL_008b",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0092",
+          "field": "System.Single BouncerGfxBlock::timer"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007f0:IL_00a7",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007f0",
+      "methodRawIlSha256": "636996a8bb0c8bb9050292d1ea38b321bea03543e226874913099b73eab15cd1",
+      "ilOffset": 167,
+      "ilLabel": "IL_00a7",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00cd",
+          "field": "UnityEngine.Vector3 BouncerGfxBlock::targetScale"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007f0:IL_0115",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "BouncerGfxBlock",
+      "method": "System.Void BouncerGfxBlock::Update()",
+      "methodToken": "0x060007f0",
+      "methodRawIlSha256": "636996a8bb0c8bb9050292d1ea38b321bea03543e226874913099b73eab15cd1",
+      "ilOffset": 277,
+      "ilLabel": "IL_0115",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007fa:IL_0013",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "Flicker",
+      "method": "System.Void Flicker::Update()",
+      "methodToken": "0x060007fa",
+      "methodRawIlSha256": "36ecb39c954dfa0cc173c5d71a34e97e41ed071dd208258840ad6b7f2839ebda",
+      "ilOffset": 19,
+      "ilLabel": "IL_0013",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0018",
+          "field": "System.Single UnityEngine.Color::a"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007fe:IL_0035",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "UnityEngine.Mesh GenerateNoiseMeshes::ReturnRandomSphereMesh(Receiver)",
+      "methodToken": "0x060007fe",
+      "methodRawIlSha256": "207aaba351189eeeeeb298006aee26a0202a63cb52884a5fa4bce8aa53b6f0f0",
+      "ilOffset": 53,
+      "ilLabel": "IL_0035",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x060007fe:IL_0056",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "UnityEngine.Mesh GenerateNoiseMeshes::ReturnRandomSphereMesh(Receiver)",
+      "methodToken": "0x060007fe",
+      "methodRawIlSha256": "207aaba351189eeeeeb298006aee26a0202a63cb52884a5fa4bce8aa53b6f0f0",
+      "ilOffset": 86,
+      "ilLabel": "IL_0056",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000803:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddMesh(System.Int32,System.Single)",
+      "methodToken": "0x06000803",
+      "methodRawIlSha256": "eeb36c589d6c3648090cae8f97036a712785d97ba05c2b9f42af6f7ff96ef445",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000803:IL_009e",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddMesh(System.Int32,System.Single)",
+      "methodToken": "0x06000803",
+      "methodRawIlSha256": "eeb36c589d6c3648090cae8f97036a712785d97ba05c2b9f42af6f7ff96ef445",
+      "ilOffset": 158,
+      "ilLabel": "IL_009e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000804:IL_0068",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddSphereMesh(System.Int32,System.Single)",
+      "methodToken": "0x06000804",
+      "methodRawIlSha256": "301021fa0765acf13a4867697e34f4bf689b46a5d31b7c176db47d29e3a6d532",
+      "ilOffset": 104,
+      "ilLabel": "IL_0068",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000804:IL_007a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "GenerateNoiseMeshes",
+      "method": "System.Void GenerateNoiseMeshes::AddSphereMesh(System.Int32,System.Single)",
+      "methodToken": "0x06000804",
+      "methodRawIlSha256": "301021fa0765acf13a4867697e34f4bf689b46a5d31b7c176db47d29e3a6d532",
+      "ilOffset": 122,
+      "ilLabel": "IL_007a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000825:IL_0044",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "WhiteNoiseAnim",
+      "method": "System.Void WhiteNoiseAnim::Update()",
+      "methodToken": "0x06000825",
+      "methodRawIlSha256": "9753fd5ecdc5f93ea58de28d5994c1546e1a60c2a5e5fa3d1918258b787c79ee",
+      "ilOffset": 68,
+      "ilLabel": "IL_0044",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0064",
+          "field": "System.Int32 WhiteNoiseAnim::frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000825:IL_0053",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "WhiteNoiseAnim",
+      "method": "System.Void WhiteNoiseAnim::Update()",
+      "methodToken": "0x06000825",
+      "methodRawIlSha256": "9753fd5ecdc5f93ea58de28d5994c1546e1a60c2a5e5fa3d1918258b787c79ee",
+      "ilOffset": 83,
+      "ilLabel": "IL_0053",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0064",
+          "field": "System.Int32 WhiteNoiseAnim::frameCount"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x06000901:IL_0017",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "HardcoreArenaChanger",
+      "method": "System.Void HardcoreArenaChanger::Awake()",
+      "methodToken": "0x06000901",
+      "methodRawIlSha256": "26ba09609affdb6cbaa45e0616882c21526453bbb16902ed81609981690fcfbe",
+      "ilOffset": 23,
+      "ilLabel": "IL_0017",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090c:IL_014d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::Awake()",
+      "methodToken": "0x0600090c",
+      "methodRawIlSha256": "b6d2cafa1e1ff854e037ccbe7f946a8a51b928ccc0cc1b74f5b18e414cab6408",
+      "ilOffset": 333,
+      "ilLabel": "IL_014d",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090c:IL_025c",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::Awake()",
+      "methodToken": "0x0600090c",
+      "methodRawIlSha256": "b6d2cafa1e1ff854e037ccbe7f946a8a51b928ccc0cc1b74f5b18e414cab6408",
+      "ilOffset": 604,
+      "ilLabel": "IL_025c",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_006d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 109,
+      "ilLabel": "IL_006d",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_007e",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_008a",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_0094",
+          "field": "System.Boolean ProceduralPattern::isHorizontal"
+        },
+        {
+          "il": "IL_009b",
+          "field": "System.Boolean ProceduralRoom::prevIsHorizontal"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_00d4",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 212,
+      "ilLabel": "IL_00d4",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_00e9",
+          "field": "System.Single ProceduralRoom::mirrorSign"
+        },
+        {
+          "il": "IL_00f4",
+          "field": "System.Single ProceduralRoom::prevMirrorSign"
+        },
+        {
+          "il": "IL_0104",
+          "field": "System.Single ProceduralRoom::mirrorSign"
+        },
+        {
+          "il": "IL_010f",
+          "field": "System.Collections.Generic.List`1<Bouncer> ProceduralRoom::bouncersAdded"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_0329",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 809,
+      "ilLabel": "IL_0329",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0332",
+          "field": "System.Int32 ProceduralRoom::prevconnectorRandPosIndex"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_0412",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 1042,
+      "ilLabel": "IL_0412",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_05e6",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 1510,
+      "ilLabel": "IL_05e6",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_05fd",
+          "field": "System.Boolean LineToggler::startOn"
+        },
+        {
+          "il": "IL_0618",
+          "field": "System.Boolean LineToggler::startOn"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_1630",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 5680,
+      "ilLabel": "IL_1630",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1652",
+          "field": "System.Single LineRotater::rotSpeed"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_1661",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 5729,
+      "ilLabel": "IL_1661",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1678",
+          "field": "System.Boolean LineToggler::startOn"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_174a",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 5962,
+      "ilLabel": "IL_174a",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_17b1",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 6065,
+      "ilLabel": "IL_17b1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_17d2",
+          "field": "System.Boolean ProceduralRoom::preMoverSign"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090e:IL_1852",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::GenerateLevel(ProceduralPattern)",
+      "methodToken": "0x0600090e",
+      "methodRawIlSha256": "74dd44c6b5e25938cf061ee0402ea255a2c6f561f3672d4b7fdce1edd5c92a8e",
+      "ilOffset": 6226,
+      "ilLabel": "IL_1852",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_1873",
+          "field": "System.Boolean ProceduralRoom::preMoverSign"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp:0x0600090f:IL_001d",
+      "assembly": "Assembly-CSharp.dll",
+      "assemblySha256": "2a35ddea8a48144e926ac33796ffd63267a5ac129fd2495ef7f10a7d893e33fd",
+      "mvid": "80bdfd5c-cf00-42e8-8f14-03cc2e3ac00e",
+      "type": "ProceduralRoom",
+      "method": "System.Void ProceduralRoom::AddArenaSpeciel(ProceduralPattern)",
+      "methodToken": "0x0600090f",
+      "methodRawIlSha256": "0378bf819dc74665abe976016100a9aa5c207226a9692a6082eea76b7dbbe6c7",
+      "ilOffset": 29,
+      "ilLabel": "IL_001d",
+      "opcode": "call",
+      "api": "System.Int32 UnityEngine.Random::Range(System.Int32,System.Int32)",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0046",
+          "field": "ProceduralRoom/ArenaSpeciels ProceduralRoom::prevArenaSpecial"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0017",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 23,
+      "ilLabel": "IL_0017",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0029",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        },
+        {
+          "il": "IL_0034",
+          "field": "System.Single NoiseEffect::scratchX"
+        },
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_002f",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 47,
+      "ilLabel": "IL_002f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_0034",
+          "field": "System.Single NoiseEffect::scratchX"
+        },
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        },
+        {
+          "il": "IL_0051",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_003a",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 58,
+      "ilLabel": "IL_003a",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [
+        {
+          "il": "IL_003f",
+          "field": "System.Single NoiseEffect::scratchY"
+        },
+        {
+          "il": "IL_0051",
+          "field": "System.Single NoiseEffect::scratchTimeLeft"
+        }
+      ],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0092",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 146,
+      "ilLabel": "IL_0092",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_0097",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 151,
+      "ilLabel": "IL_0097",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_00dc",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 220,
+      "ilLabel": "IL_00dc",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_00ef",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 239,
+      "ilLabel": "IL_00ef",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::get_value()",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_013e",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 318,
+      "ilLabel": "IL_013e",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-CSharp-firstpass:0x06000865:IL_014f",
+      "assembly": "Assembly-CSharp-firstpass.dll",
+      "assemblySha256": "fe69544f7b80cfd3a4f7155888cbf83394424cb61916fe025daeee5dfdb29bb3",
+      "mvid": "e914bc0a-d803-449c-a14e-8495acc9ae9a",
+      "type": "NoiseEffect",
+      "method": "System.Void NoiseEffect::OnRenderImage(UnityEngine.RenderTexture,UnityEngine.RenderTexture)",
+      "methodToken": "0x06000865",
+      "methodRawIlSha256": "27ad91b246663316a0c2203c4be381607ec950f498ec1caedefa389b3aae1f7e",
+      "ilOffset": 335,
+      "ilLabel": "IL_014f",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-UnityScript-firstpass:0x0600007c:IL_00a3",
+      "assembly": "Assembly-UnityScript-firstpass.dll",
+      "assemblySha256": "f93acb5a43f6a7f5e7e3bbfd104d44b872e106409d64842120c746e66596a484",
+      "mvid": "375034b8-3cda-4677-a9bb-fd10c498d870",
+      "type": "NoiseAndGrain",
+      "method": "System.Void NoiseAndGrain::DrawNoiseQuadGrid(UnityEngine.RenderTexture,UnityEngine.RenderTexture,UnityEngine.Material,UnityEngine.Texture2D,System.Int32)",
+      "methodToken": "0x0600007c",
+      "methodRawIlSha256": "9701b13095bfccf1ea60c55aebee17a3a33522fb83e3193b08708d7121ec4f8d",
+      "ilOffset": 163,
+      "ilLabel": "IL_00a3",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    },
+    {
+      "siteId": "Assembly-UnityScript-firstpass:0x0600007c:IL_00b1",
+      "assembly": "Assembly-UnityScript-firstpass.dll",
+      "assemblySha256": "f93acb5a43f6a7f5e7e3bbfd104d44b872e106409d64842120c746e66596a484",
+      "mvid": "375034b8-3cda-4677-a9bb-fd10c498d870",
+      "type": "NoiseAndGrain",
+      "method": "System.Void NoiseAndGrain::DrawNoiseQuadGrid(UnityEngine.RenderTexture,UnityEngine.RenderTexture,UnityEngine.Material,UnityEngine.Texture2D,System.Int32)",
+      "methodToken": "0x0600007c",
+      "methodRawIlSha256": "9701b13095bfccf1ea60c55aebee17a3a33522fb83e3193b08708d7121ec4f8d",
+      "ilOffset": 177,
+      "ilLabel": "IL_00b1",
+      "opcode": "call",
+      "api": "System.Single UnityEngine.Random::Range(System.Single,System.Single)",
+      "nearbyFieldWrites": [],
+      "observedInThisSuite": false,
+      "observedCalls": 0,
+      "sampleCalls": []
+    }
+  ]
+}

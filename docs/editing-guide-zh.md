@@ -59,3 +59,11 @@ Room 章节按实际过关和入场边界执行。关卡提前完成后，当前
 用户当前两份脚本预算为 274 + 525 = 799 帧；这一对已完成上述六次真实流程，实际连续回放均在第 495 帧完成两关，逐帧与完整随机记录一致。已生成 `examples/composed/basic-1-basic-2.tas`，可以直接打开。证据在 `work/acceptance/editing-final/joined/report.json` 与 `report.md`。新增编辑器操作专项也已通过：`work/acceptance/editor-editing-final/editor-editing-report.json`，17 项检查覆盖高亮、段进度、事件列表、同 PID 新运行、拼接与实际断线错误显示。此结果仅覆盖该版本和这些脚本，不表示任意单关组合都可直接连贯运行。
 
 最终模块的焦点专项在 `work/acceptance/editor-runtime-release-2`，已验证六轮真实游戏/编辑器焦点切换、实体方向键、播放中改稿保存及速度/暂停/逐帧的逐帧一致性。总报告见 [公开实际验证摘要](public/verification-20261013.md)。
+
+## 社区计时器与重置提速
+
+已适配 rmadlal v2.8 的计时器和窗口。首次运行 `scripts/Prepare-CommunityMod.ps1`，然后在编辑器勾选“社区计时器”。只在内存中加载社区程序集，窗口仍由编辑器配置；计时器按完整60Hz周期推进，暂停与变速不改变同一TAS结果，不能视为普通墙钟RTA。切换配置在下次重新回放生效并自动启动新进程。
+
+同进程重置通过首次校验后持续持有文件读锁，免去重复哈希。同脚本实测约6.35秒→2.56秒，等待减少59.7%；仍完整重建场景和资源，且 `coldEquivalent=false`。完整一致性验证继续使用独立冷进程。
+
+[启用与操作说明](public/community-mod-guide.md) · [实际兼容和重置报告](public/community-reset-20261013.md)

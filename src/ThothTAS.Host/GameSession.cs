@@ -17,6 +17,7 @@ public sealed record SessionOptions
     public int Height { get; init; } = 720;
     public double Speed { get; init; } = 1;
     public bool Autoplay { get; init; }
+    public bool CommunityMod { get; init; }
     public string? OutputParent { get; init; }
     public TimeSpan ConnectTimeout { get; init; } = TimeSpan.FromSeconds(90);
     public string? ReferenceFrames { get; init; }
@@ -72,6 +73,8 @@ public sealed class GameSession : IAsyncDisposable
     private StreamWriter? protocolLog;
     private StreamWriter? commandLog;
     private FileStream? instanceLock;
+    private readonly List<FileStream> fingerprintLocks = [];
+    private readonly HashSet<string> pinnedFingerprintNames = new(StringComparer.OrdinalIgnoreCase);
     private Task? readerTask;
     private bool disposed;
     private string gameExe = "";
@@ -106,7 +109,10 @@ public sealed class GameSession : IAsyncDisposable
             var baseline = Path.Combine(root, "docs", "baseline", "THOTH.sav");
             if (!File.Exists(baseline)) throw new FileNotFoundException("缺少固定初始存档 docs/baseline/THOTH.sav。", baseline);
             session.instanceLock = new FileStream(Path.Combine(root, "game", ".thoth-tas.lock"), FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.None);
+            session.LockFingerprintFiles();
             await ProjectFiles.ValidateFingerprintAsync(root, cancellation);
+            var communityLock = CommunityModProfile.ValidateAndLock(root, options.CommunityMod);
+            if (communityLock != null) session.fingerprintLocks.Add(communityLock);
             var artifacts = new Dictionary<string, string>(StringComparer.Ordinal);
             foreach (var name in new[] { "docs/game-fingerprint.json", "game/BepInEx/plugins/ThothTAS.Runtime.dll", "game/BepInEx/patchers/ThothTAS.Preloader.dll", "game/BepInEx/config/BepInEx.cfg" })
             {
@@ -150,7 +156,8 @@ public sealed class GameSession : IAsyncDisposable
                 ["run"] = session.RunDirectory, ["port"] = port.ToString(CultureInfo.InvariantCulture), ["token"] = token,
                 ["width"] = options.Width.ToString(CultureInfo.InvariantCulture), ["height"] = options.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = options.Autoplay ? "true" : "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
-                ["seed"] = session.Script.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = session.Script.Start
+                ["seed"] = session.Script.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = session.Script.Start,
+                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(root) : ""
             };
             if (options.ReferenceFrames != null)
             {
@@ -173,6 +180,7 @@ public sealed class GameSession : IAsyncDisposable
                 protocol = ProtocolVersion, pid = session.ProcessId, exe = session.gameExe, coldProcess = true, initialUnityLogPath = session.initialUnityLogPath, baselineSha256 = baselineHash,
                 scriptSha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(scriptText))),
                 start = session.Script.Start, seed = session.Script.Seed, frames = session.Script.TotalFrames,
+                communityModEnabled = options.CommunityMod, communityModVersion = options.CommunityMod ? CommunityModProfile.Version : null, communityModSha256 = options.CommunityMod ? CommunityModProfile.ExpectedSha256 : null,
                 width = options.Width, height = options.Height, speed = options.Speed, startedUtc = DateTime.UtcNow,
                 gameManifestSha256 = artifacts["docs/game-fingerprint.json"], runtimeSha256 = artifacts["game/BepInEx/plugins/ThothTAS.Runtime.dll"],
                 preloaderSha256 = artifacts["game/BepInEx/patchers/ThothTAS.Preloader.dll"], bepInExConfigSha256 = artifacts["game/BepInEx/config/BepInEx.cfg"], artifacts
@@ -205,11 +213,47 @@ public sealed class GameSession : IAsyncDisposable
         finally { listener.Stop(); }
     }
 
+    private void LockFingerprintFiles()
+    {
+        // Pin both the manifest and every listed artifact before hashing. Windows
+        // disallows writes, replacement and deletion while these handles are open.
+        // A warm reset can reuse that verified identity without reading 176 MB again.
+        foreach (var name in new[] { "docs/game-fingerprint.json", "docs/game-fingerprint.tsv" })
+            fingerprintLocks.Add(new FileStream(Path.Combine(Root, name.Replace('/', Path.DirectorySeparatorChar)), FileMode.Open, FileAccess.Read, FileShare.Read));
+        using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(Root, "docs/game-fingerprint.json")));
+        var game = Path.GetFullPath(Path.Combine(Root, "game")) + Path.DirectorySeparatorChar;
+        foreach (var entry in manifest.RootElement.GetProperty("files").EnumerateArray())
+        {
+            var name = entry.GetProperty("name").GetString() ?? throw new InvalidDataException("指纹条目缺少 name。");
+            pinnedFingerprintNames.Add(name.Replace('\\', '/'));
+            var path = Path.GetFullPath(Path.Combine(game, name.Replace('/', Path.DirectorySeparatorChar)));
+            if (!path.StartsWith(game, StringComparison.OrdinalIgnoreCase)) throw new InvalidDataException("指纹路径越界：" + name);
+            fingerprintLocks.Add(new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read));
+        }
+    }
+
+    private void CheckPinnedFingerprint()
+    {
+        if (fingerprintLocks.Count < 7 || fingerprintLocks.Any(file => file.SafeFileHandle.IsClosed || file.SafeFileHandle.IsInvalid))
+            throw new InvalidDataException("同进程重置的已校验版本文件锁失效，请重新启动游戏。");
+        foreach (var path in Directory.EnumerateFiles(Path.Combine(Root, "game", "THOTH_Data"), "*", SearchOption.TopDirectoryOnly))
+        {
+            var name = Path.GetFileName(path);
+            bool resource = name.StartsWith("level", StringComparison.OrdinalIgnoreCase) || name.StartsWith("sharedassets", StringComparison.OrdinalIgnoreCase)
+                || name.StartsWith("resources", StringComparison.OrdinalIgnoreCase) || name.StartsWith("globalgamemanagers", StringComparison.OrdinalIgnoreCase) || name == "mainData";
+            if (resource && !pinnedFingerprintNames.Contains("THOTH_Data/" + name))
+                throw new InvalidDataException("发现未列入已锁定版本指纹的新资源，拒绝同进程重置：" + name);
+        }
+    }
+
     public async Task RestartAsync(string scriptText, SessionOptions? options = null, CancellationToken cancellation = default)
     {
+        var resetWatch = Stopwatch.StartNew();
         options ??= activeOptions;
         if (options.Width != activeOptions.Width || options.Height != activeOptions.Height)
             throw new ArgumentException("同进程快速重置期间窗口尺寸必须保持启动时的值。", nameof(options));
+        if (options.CommunityMod != activeOptions.CommunityMod)
+            throw new ArgumentException("切换社区 Mod 必须重新启动游戏进程，不能同进程重置。", nameof(options));
         ValidateSpeed(options.Speed);
         var parsed = ProjectFiles.Parse(Root, scriptText);
         var parent = Path.GetFullPath(options.OutputParent ?? Path.Combine(Root, "work", "runs"));
@@ -225,7 +269,7 @@ public sealed class GameSession : IAsyncDisposable
             await SendAsync("PAUSE", cancellation);
             await WaitForStatusAsync(s => s.State is "paused" or "complete" or "error", TimeSpan.FromSeconds(20), cancellation);
             ProjectFiles.EnsurePrivateGameCopy(Root);
-            await ProjectFiles.ValidateFingerprintAsync(Root, cancellation);
+            CheckPinnedFingerprint();
             var directory = Path.Combine(parent, DateTime.UtcNow.ToString("yyyyMMdd-HHmmss", CultureInfo.InvariantCulture) + "-" + Guid.NewGuid().ToString("N"));
             Directory.CreateDirectory(directory);
             var snapshotPath = Path.Combine(directory, "script.tas");
@@ -242,7 +286,8 @@ public sealed class GameSession : IAsyncDisposable
                 ["port"] = activePort.ToString(CultureInfo.InvariantCulture), ["token"] = activeToken,
                 ["width"] = activeOptions.Width.ToString(CultureInfo.InvariantCulture), ["height"] = activeOptions.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
-                ["seed"] = parsed.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = parsed.Start
+                ["seed"] = parsed.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = parsed.Start,
+                ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(Root) : ""
             };
             if (options.ReferenceFrames != null)
             {
@@ -262,9 +307,10 @@ public sealed class GameSession : IAsyncDisposable
             var previousRun = RunDirectory;
             await File.WriteAllTextAsync(Path.Combine(directory, "host-run.json"), JsonSerializer.Serialize(new
             {
-                protocol = ProtocolVersion, pid = ProcessId, exe = gameExe, coldProcess = false, reusedPid = ProcessId, sameProcessReset = true, coldEquivalent = false, initialUnityLogPath, previousRun,
+                protocol = ProtocolVersion, pid = ProcessId, exe = gameExe, coldProcess = false, reusedPid = ProcessId, sameProcessReset = true, coldEquivalent = false, fingerprintPolicy = "startup-sha256-held-read-locks", initialUnityLogPath, previousRun,
                 baselineSha256 = Convert.ToHexString(SHA256.HashData(baselineBytes)), scriptSha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(scriptText))),
                 start = parsed.Start, seed = parsed.Seed, frames = parsed.TotalFrames, width = options.Width, height = options.Height, speed = options.Speed, startedUtc = DateTime.UtcNow,
+                communityModEnabled = options.CommunityMod, communityModVersion = options.CommunityMod ? CommunityModProfile.Version : null, communityModSha256 = options.CommunityMod ? CommunityModProfile.ExpectedSha256 : null,
                 gameManifestSha256 = artifacts["docs/game-fingerprint.json"], runtimeSha256 = artifacts["game/BepInEx/plugins/ThothTAS.Runtime.dll"],
                 preloaderSha256 = artifacts["game/BepInEx/patchers/ThothTAS.Preloader.dll"], bepInExConfigSha256 = artifacts["game/BepInEx/config/BepInEx.cfg"], artifacts
             }, JsonOptions), cancellation);
@@ -288,7 +334,9 @@ public sealed class GameSession : IAsyncDisposable
             }
             finally { logGate.Release(); }
             await SendAsync("RESTART\t" + config, cancellation);
+            var preparedMilliseconds = resetWatch.Elapsed.TotalMilliseconds;
             await WaitForStatusAsync(s => s.Run == directory && s.Frame >= 0 && s.State == "paused", TimeSpan.FromSeconds(90), cancellation);
+            await File.WriteAllTextAsync(Path.Combine(directory, "reset-performance.json"), JsonSerializer.Serialize(new { version = 1, pid = ProcessId, totalMilliseconds = resetWatch.Elapsed.TotalMilliseconds, preparedMilliseconds, fingerprintPolicy = "startup-sha256-held-read-locks", coldEquivalent = false }, JsonOptions), cancellation);
             activeOptions = options;
         }
         catch (Exception ex) { ex.Data["runDirectory"] = RunDirectory; throw; }
@@ -474,6 +522,9 @@ public sealed class GameSession : IAsyncDisposable
         if (protocolLog != null) await protocolLog.DisposeAsync();
         if (commandLog != null) await commandLog.DisposeAsync();
         instanceLock?.Dispose();
+        foreach (var file in fingerprintLocks) file.Dispose();
+        fingerprintLocks.Clear();
+        pinnedFingerprintNames.Clear();
         lifetime.Dispose();
     }
 }

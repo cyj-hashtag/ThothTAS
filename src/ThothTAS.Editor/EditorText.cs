@@ -16,6 +16,7 @@ internal sealed class EditorText
         ["速度"] = "Speed", ["启动尺寸"] = "Window size", ["打开日志目录"] = "Open logs",
         ["草稿"] = "Draft", ["运行快照（只读）"] = "Run snapshot (read only)",
         ["同进程快速重置"] = "Quick reset (same process)", ["同时验证暂停 / 逐帧 / 速度"] = "Include pause / step / speed",
+        ["社区计时器"] = "Community timers",
         ["上移"] = "Move up", ["下移"] = "Move down", ["添加脚本"] = "Add scripts…", ["移除"] = "Remove",
         ["生成拼接草稿"] = "Create composed draft", ["取消"] = "Cancel",
     };

@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace ThothTAS.Host;
 
@@ -117,11 +118,25 @@ public static class ReplayVerifier
         }
         if (expectedFrame != totalFrames + 1) throw new InvalidDataException($"帧日志不完整：应有基线及 {totalFrames} 个输入帧，实际 {expectedFrame} 条。");
         if (new FileInfo(randomPath).Length == 0) throw new InvalidDataException("随机日志为空，缺少记录格式或调用内容。");
+        var nativeLog = Path.Combine(directory, "unity.log");
+        var metadata = Path.Combine(directory, "host-run.json");
+        if (File.Exists(metadata))
+        {
+            using var document = JsonDocument.Parse(File.ReadAllText(metadata));
+            if (document.RootElement.TryGetProperty("initialUnityLogPath", out var log)) nativeLog = log.GetString() ?? nativeLog;
+        }
+        if (File.Exists(nativeLog))
+        {
+            using var log = OpenLog(nativeLog);
+            while ((line = log.ReadLine()) != null)
+                if (Regex.IsMatch(line, "NullReferenceException|MissingReferenceException|MissingMethodException|InvalidProgramException|Crash!!!|THOTH TAS:", RegexOptions.CultureInvariant))
+                    throw new InvalidDataException("实际游戏日志含异常，不能将相同但损坏的回放计为通过：" + line + "；日志 " + nativeLog);
+        }
     }
 
     public static ReplayDifference? Compare(string expectedDirectory, string actualDirectory)
     {
-        foreach (var filename in new[] { "frames.jsonl", "random.tsv" })
+        foreach (var filename in new[] { "frames.jsonl", "random.tsv", "phases.tsv" })
         {
             var expectedPath = Path.Combine(expectedDirectory, filename);
             var actualPath = Path.Combine(actualDirectory, filename);
@@ -153,7 +168,7 @@ public static class ReplayVerifier
                     var column = left.Split('\t');
                     var frameColumn = column.Length >= 3 ? column[1] : column[0];
                     int? frame = int.TryParse(frameColumn, CultureInfo.InvariantCulture, out var f) ? f : null;
-                    return new(filename, record, frame, "$random-call", left, right);
+                    return new(filename, record, frame, filename == "phases.tsv" ? "$phase-callback" : "$random-call", left, right);
                 }
             }
         }

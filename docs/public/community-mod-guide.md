@@ -23,6 +23,14 @@
 .\dist\editor\ThothTAS.Editor.exe --self-test-community .\examples\basic-1.tas .\examples\basic-2.tas --out .\work\community-editor-check
 ```
 
-v0.3.2 已停用编辑器和普通Host的同进程重置：Basic-3日志显示原生物理状态残留会造成撞墙反弹及随机记录分歧。现在“重新回放”恢复固定存档并启动独立进程。此前约0.55秒的测量属于非确定性练习路径，不能用于可靠写TAS。`verify-reset`仍可显式运行诊断。[草稿保护与反弹失步修复报告](draft-replay-fix-20261013.md)。
+v0.3.2 原版规则已停用编辑器和普通Host的同进程重置：Basic-3日志显示原生物理状态残留会造成撞墙反弹及随机记录分歧。现在“重新回放”恢复固定存档并启动独立进程。此前约0.55秒的测量属于非确定性练习路径，不能用于可靠写TAS。`verify-reset`仍可显式运行诊断。[草稿保护与反弹失步修复报告](draft-replay-fix-20261013.md)。
 
 仅验证当前游戏版本及报告中的路径；不包含社区全部作弊功能、所有关卡、其他 Mod 版本或跨电脑一致性。
+
+## v0.4.0 修改规则
+
+勾选“确定性规则（修改游戏）”后，同一社区配置支持同进程快速重新回放。它固定随机结果，改用60Hz物理、稳定Update顺序及逻辑游戏/音频时钟；Gameplay与原版不同。社区计时器仍按完整周期显示。原规则继续使用独立进程。切换规则或社区配置需要新进程。[规则和实际测量](deterministic-rules-20261013.md)。
+
+```powershell
+.\scripts\Verify-Deterministic.ps1 -ScriptPath .\examples\basic-1.tas -Count 5 -CommunityMod -Modes
+```

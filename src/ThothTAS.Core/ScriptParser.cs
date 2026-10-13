@@ -23,8 +23,10 @@ namespace ThothTAS.Core
             bool hasVersion = false;
             bool hasStart = false;
             bool hasSeed = false;
+            bool hasRules = false;
             string start = null;
             int seed = 1;
+            TasRules rules = TasRules.Original;
             int startSourceLine = 0;
             int totalFrames = 0;
             int lineNumber = 0;
@@ -56,7 +58,7 @@ namespace ThothTAS.Core
                     List<Token> tokens = SplitTokens(line, lineNumber);
                     string first = tokens[0].Value;
                     if (!hasVersion && first != "Version") Fail(lineNumber, tokens[0], "第一个有效指令必须为 Version,1。");
-                    if (first == "Version" || first == "Start" || first == "Seed")
+                    if (first == "Version" || first == "Start" || first == "Seed" || first == "Rules")
                     {
                         if (segments.Count > 0 || hasExplicitRooms) Fail(lineNumber, tokens[0], "头部指令必须在 Room 和输入帧之前。");
                         if (tokens.Count != 2) Fail(lineNumber, tokens[0], "头部指令必须恰有两个字段。");
@@ -74,12 +76,20 @@ namespace ThothTAS.Core
                             startSourceLine = lineNumber;
                             hasStart = true;
                         }
-                        else
+                        else if (first == "Seed")
                         {
                             if (hasSeed) Fail(lineNumber, tokens[0], "重复的 Seed 指令。");
                             if (!int.TryParse(tokens[1].Value, NumberStyles.AllowLeadingSign, CultureInfo.InvariantCulture, out seed))
                                 Fail(lineNumber, tokens[1], "Seed 必须为 32 位有符号整数。");
                             hasSeed = true;
+                        }
+                        else
+                        {
+                            if (hasRules) Fail(lineNumber, tokens[0], "重复的 Rules 指令。");
+                            if (tokens[1].Value == "Original") rules = TasRules.Original;
+                            else if (tokens[1].Value == "Deterministic-1") rules = TasRules.Deterministic1;
+                            else Fail(lineNumber, tokens[1], "未知规则：" + tokens[1].Value + "。只支持 Original 或 Deterministic-1。");
+                            hasRules = true;
                         }
                         continue;
                     }
@@ -128,7 +138,7 @@ namespace ThothTAS.Core
                 if (segments.Count == 0) throw new ScriptParseException(endLine, 1, "脚本至少需要一段输入帧。");
                 chapters.Add(new TasChapter(0, start, startSourceLine, null, totalFrames, chapterSegments));
             }
-            return new TasScript(start, seed, totalFrames, segments, chapters, hasExplicitRooms);
+            return new TasScript(start, seed, rules, totalFrames, segments, chapters, hasExplicitRooms);
         }
 
         private static void AddChapter(List<TasChapter> chapters, string scene, int sourceLine, string sourceOrigin, int frames, List<TasSegment> segments)

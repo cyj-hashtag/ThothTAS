@@ -25,6 +25,8 @@ public sealed class EditorForm : Form
     private readonly ListBox roomEvents = new() { Dock = DockStyle.Bottom, Height = 124, HorizontalScrollbar = true };
     private readonly HashSet<string> seenRoomEvents = new(StringComparer.Ordinal);
     private readonly Label reliableReplay = new() { AutoSize = true, Margin = new Padding(6, 8, 6, 0) };
+    private readonly CheckBox modifiedRules = new() { AutoSize = true, Margin = new Padding(8, 8, 8, 0) };
+    private bool synchronizingRules;
     private readonly CheckBox communityMod = new() { AutoSize = true, Text = "社区计时器", Checked = false, Margin = new Padding(8, 8, 8, 0) };
     private readonly TextBox details = new() { Dock = DockStyle.Fill, Multiline = true, ReadOnly = true, ScrollBars = ScrollBars.Vertical, Font = new Font("Microsoft YaHei UI", 10), BackColor = Color.White, BorderStyle = BorderStyle.FixedSingle };
     private readonly Label status = new() { AutoSize = false, Dock = DockStyle.Top, Height = 36, Padding = new Padding(8), Text = "尚未启动游戏副本" };
@@ -95,6 +97,9 @@ public sealed class EditorForm : Form
     internal void TestShowSnapshot() => ((TabControl)runningSnapshot.Parent!.Parent!).SelectedTab = (TabPage)runningSnapshot.Parent;
     internal void TestShowDraft() => ((TabControl)draft.Parent!.Parent!).SelectedTab = (TabPage)draft.Parent;
     internal void TestCommunity(bool value) => communityMod.Checked = value;
+    internal void TestModifiedRules(bool value) => modifiedRules.Checked = value;
+    internal bool ModifiedRulesChecked => modifiedRules.Checked;
+    internal string ReplayAvailabilityText => reliableReplay.Text;
     internal void TestComposePaths(params string[] paths) => automationComposePaths = paths.Select(Path.GetFullPath).ToArray();
     internal void TestSavePath(string path) => automationSavePath = Path.GetFullPath(path);
     [System.ComponentModel.DesignerSerializationVisibility(System.ComponentModel.DesignerSerializationVisibility.Hidden)]
@@ -147,6 +152,7 @@ public sealed class EditorForm : Form
         Localize(reliableReplay, "可靠重启：独立进程");
         Localize(modes, "同时验证暂停 / 逐帧 / 速度");
         Localize(communityMod, "社区计时器");
+        Localize(modifiedRules, "确定性规则（修改游戏）");
         play = AsyncButton("播放", () => RunGuardedAsync(PlayAsync));
         pause = AsyncButton("暂停", () => RunGuardedAsync(() => CommandAsync("PAUSE")));
         step = AsyncButton("逐帧", () => RunGuardedAsync(StepAsync));
@@ -162,6 +168,7 @@ public sealed class EditorForm : Form
         toolbar.Controls.Add(sizePicker);
         toolbar.Controls.Add(modes);
         toolbar.Controls.Add(communityMod);
+        toolbar.Controls.Add(modifiedRules);
         toolbar.Controls.Add(Button("打开日志目录", OpenLogs));
         var languagePicker = new FlowLayoutPanel { AutoSize = true, WrapContents = false, Margin = Padding.Empty };
         languagePicker.Controls.Add(InlineLabel("语言 / Language"));
@@ -188,7 +195,8 @@ public sealed class EditorForm : Form
         Controls.Add(split);
         Controls.Add(toolbar);
         SetDetails("游戏副本：" + Path.Combine(root, "game", "THOTH.exe") + Environment.NewLine + Environment.NewLine +
-            "此工具每次启动新进程，恢复固定存档，核对游戏指纹。" + Environment.NewLine +
+            "原版规则：重新回放启动新进程；确定性规则：支持同进程重新回放。" + Environment.NewLine +
+            "确定性规则固定随机结果、物理 60Hz、锁定物理转动，取消死亡慢动作并固定游戏计时。与原版玩法有差异。" + Environment.NewLine +
             "回放中可切换焦点编辑。分辨率在启动前设置。" + Environment.NewLine +
             "重复验证运行实际游戏，并比较基线、逐帧玩法与随机记录。" + Environment.NewLine + Environment.NewLine +
             "语法：右 0°、上 90°、左 180°、下 270°。" + Environment.NewLine +
@@ -196,7 +204,8 @@ public sealed class EditorForm : Form
             "A=(x,y)：世界坐标目标；N：不移动。",
             "Game copy: " + Path.Combine(root, "game", "THOTH.exe") + "\r\n\r\n" +
             "Cold replays restore the fixed save and validate the game fingerprint.\r\n" +
-            "Replay uses a fresh process to restore native physics and random state.\r\n" +
+            "Original rules replay in a fresh process; modified deterministic rules support same-process replay.\r\n" +
+            "Modified rules fix random results, use 60Hz physics with frozen rotation, remove death slow motion and fix game clocks. Gameplay differs from original THOTH.\r\n" +
             "You can edit while playback continues in the background.\r\n" +
             "Verification compares the actual baseline, frames and random calls.\r\n\r\n" +
             "Angles: right 0°, up 90°, left 180°, down 270°.\r\n" +
@@ -210,6 +219,7 @@ public sealed class EditorForm : Form
             autosave.Stop();
             if (dirty) autosave.Start(); else ClearCheckpoint();
             UpdateDraftLabel();
+            SynchronizeRulesChoice();
             if (draftHighlightedLine >= 0 && draft.Text != launchedText) ClearDraftHighlight();
             SynchronizeHighlight();
         };
@@ -219,14 +229,23 @@ public sealed class EditorForm : Form
         {
             if (session != null && !busy) await RunGuardedAsync(() => session.SetSpeedAsync(CurrentSpeed, lifetime.Token));
         };
+        modifiedRules.CheckedChanged += (_, _) =>
+        {
+            if (synchronizingRules) return;
+            try { draft.Text = RulesDraftHeader.Set(draft.Text, modifiedRules.Checked ? TasRules.Deterministic1 : TasRules.Original); }
+            catch (Exception ex) { SynchronizeRulesChoice(); ShowError(ex); }
+            RefreshReplayAvailability();
+        };
+        communityMod.CheckedChanged += (_, _) => RefreshReplayAvailability();
         if (initialScript != null) LoadDraft(Path.GetFullPath(initialScript));
         else
         {
-            draft.Text = "Version,1\nStart,Basic-1\nSeed,1\n\n60, M=45, A=270\n60, M=45, A=(30,40)\n30, N\n60, M=0.5:0, A=1:0\n";
+            draft.Text = "Version,1\nRules,Deterministic-1\nStart,Basic-1\nSeed,1\n\n60, M=45, A=270\n60, M=45, A=(30,40)\n30, N\n60, M=0.5:0, A=1:0\n";
             dirty = false;
             savedDraftText = draft.Text;
             autosave.Stop();
             UpdateDraftLabel();
+            SynchronizeRulesChoice();
         }
         UpdateButtons();
         ApplyLanguage();
@@ -265,11 +284,13 @@ public sealed class EditorForm : Form
     {
         SuspendLayout();
         foreach (var (control, key) in localizedControls) control.Text = T(key, EditorText.ControlEnglish(key));
-        hints.SetToolTip(reliableReplay, T("重新回放启动独立进程，恢复物理初始状态。旧同进程重置会使撞墙反弹失步，已从编辑器停用。", "Replay starts a fresh process to restore native physics. The old same-process reset caused divergent collisions and is disabled in the editor."));
+        hints.SetToolTip(reliableReplay, T("确定性规则下，同规则与社区配置的重新回放复用当前进程；切换规则、社区配置或原版规则时启动独立进程。首次启动仍需加载游戏。", "Modified deterministic replays reuse the current process when rules and community profile match. Original rules or a changed profile start a fresh process. The first launch still loads the game."));
+        hints.SetToolTip(modifiedRules, T("在草稿写入 Rules,Deterministic-1。随机结果固定、物理60Hz、锁定物理转动、取消死亡慢动作并固定游戏计时；玩法与原版不同。旧脚本保持原版规则，修改只在下一次重新回放应用。", "Writes Rules,Deterministic-1 into the draft. Fixed random results, 60Hz physics, frozen rotation, no death slow motion and fixed game clocks change gameplay. Existing scripts keep original rules until converted. Changes apply on Replay."));
         hints.SetToolTip(communityMod, T("加载社区Speedrun Mod v2.8计时器和窗口功能；TAS按固定帧计时。切换在下次重新回放生效，并启动新进程。首次使用请先准备社区Mod。", "Community Speedrun Mod v2.8 timers and window behavior; TAS clocks use fixed frames. A changed choice applies on Replay with a new process. Prepare the community Mod before first use."));
         status.Text = T(statusWords.Chinese, statusWords.English);
         details.Text = T(detailsWords.Chinese, detailsWords.English);
         UpdateDraftLabel();
+        RefreshReplayAvailability();
         RefreshRoomEventList();
         if (displayedStatus != null && !controlFaulted) RenderStatus(displayedStatus);
         else segmentProgress.Text = T(segmentWords.Chinese, segmentWords.English);
@@ -309,6 +330,7 @@ public sealed class EditorForm : Form
         dirty = false;
         ClearCheckpoint();
         UpdateDraftLabel();
+        SynchronizeRulesChoice();
         SynchronizeHighlight();
     }
 
@@ -427,7 +449,7 @@ public sealed class EditorForm : Form
             scriptPath = selected.SourcePath;
             savedDraftText = ""; dirty = true;
             if (CheckpointDraft()) recovery.MarkRecovered(selected);
-            UpdateDraftLabel(); SynchronizeHighlight();
+            UpdateDraftLabel(); SynchronizeRulesChoice(); SynchronizeHighlight();
             SetStatus("已恢复草稿，请保存或另存为。备份文件仍保留。", "Draft recovered. Save or Save as to keep it. The original backup is preserved.");
         }
         catch (Exception ex) { ShowError(ex); }
@@ -446,7 +468,7 @@ public sealed class EditorForm : Form
         try
         {
             var parsed = ProjectFiles.Parse(root, draft.Text);
-            SetStatus($"草稿校验通过：{parsed.Start} / 种子 {parsed.Seed} / {parsed.TotalFrames} 帧", $"Draft valid: {parsed.Start} / Seed {parsed.Seed} / {parsed.TotalFrames} frames");
+            SetStatus($"草稿校验通过：{parsed.Start} / {RulesLabel(parsed.Rules, false)} / 种子 {parsed.Seed} / {parsed.TotalFrames} 帧", $"Draft valid: {parsed.Start} / {RulesLabel(parsed.Rules, true)} / Seed {parsed.Seed} / {parsed.TotalFrames} frames");
         }
         catch (Exception ex) { ShowError(ex); }
     }
@@ -457,26 +479,33 @@ public sealed class EditorForm : Form
         var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, Autoplay = false, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked };
         SetStatus("校验指纹、恢复固定存档并启动独立游戏副本…", "Checking fingerprints, restoring the fixed save and starting a cold game copy…");
         session = await GameSession.StartAsync(root, immutable, options, lifetime.Token);
+        sessionUsesCommunityMod = options.CommunityMod;
         var owned = session;
         controlFaulted = false;
         sessionStatusHandler = value => UI(() => { if (!closing && ReferenceEquals(session, owned)) RenderStatus(value); });
         owned.StatusChanged += sessionStatusHandler;
         _ = ObserveCompletionAsync(owned);
+        SetPlaybackSnapshot(immutable);
+        RenderStatus(session.Latest);
+        UpdateButtons();
+    }
+
+    private void SetPlaybackSnapshot(string immutable)
+    {
         launchedText = immutable;
         runningSnapshot.Text = immutable;
         snapshotHighlightedLine = -1;
         seenRoomEvents.Clear();
         renderedRoomEvents.Clear();
         roomEvents.Items.Clear();
-        latestDirectory = session.RunDirectory;
+        latestDirectory = session!.RunDirectory;
         UpdateDraftLabel();
-        RenderStatus(session.Latest);
-        UpdateButtons();
+        RefreshReplayAvailability();
     }
 
     private async Task PlayAsync()
     {
-        if (session?.Latest.State == "complete") await StopAsync();
+        if (session?.Latest.State == "complete") { await ReplayAsync(); return; }
         if (session == null) await StartAsync();
         await session!.SendAsync("PLAY", lifetime.Token);
     }
@@ -501,6 +530,7 @@ public sealed class EditorForm : Form
         session = null;
         if (owned != null) { if (sessionStatusHandler != null) owned.StatusChanged -= sessionStatusHandler; await owned.DisposeAsync(); }
         sessionStatusHandler = null;
+        sessionUsesCommunityMod = false;
         controlFaulted = false;
         launchedText = null;
         displayedStatus = null;
@@ -508,15 +538,53 @@ public sealed class EditorForm : Form
         SetSegment("输入段：已停止", "Input segment: stopped");
         SetStatus("已停止本工具启动的游戏副本", "Stopped the game copy owned by this tool");
         UpdateDraftLabel();
+        RefreshReplayAvailability();
         UpdateButtons();
     }
 
     private async Task ReplayAsync()
     {
-        // PhysX's native accumulator/contact state survives a scene reload.
-        // A fresh process is required for reliable authoring, including after death.
-        await StopAsync(); await StartAsync();
+        var immutable = draft.Text;
+        var parsed = ProjectFiles.Parse(root, immutable);
+        if (CanReplayInCurrentProcess(parsed))
+        {
+            SetStatus("确定性规则：在当前进程恢复初始状态…", "Modified deterministic rules: restoring the start in the current process…");
+            var options = new SessionOptions { Width = (int)width.Value, Height = (int)height.Value, Speed = CurrentSpeed, Autoplay = false, OutputParent = automationOutputParent, CommunityMod = communityMod.Checked };
+            await session!.RestartAsync(immutable, options, lifetime.Token);
+            controlFaulted = false;
+            SetPlaybackSnapshot(immutable);
+            _ = ObserveCompletionAsync(session);
+            RenderStatus(session.Latest);
+        }
+        else { await StopAsync(); await StartAsync(); }
         await session!.SendAsync("PLAY", lifetime.Token);
+    }
+
+    private bool CanReplayInCurrentProcess(TasScript parsed) => !controlFaulted && session != null &&
+        session.Script.Rules == TasRules.Deterministic1 && parsed.Rules == TasRules.Deterministic1 &&
+        sessionUsesCommunityMod == communityMod.Checked;
+
+    private bool sessionUsesCommunityMod;
+    private static string RulesLabel(TasRules rules, bool english) => rules == TasRules.Deterministic1
+        ? english ? "Modified deterministic rules" : "确定性规则（修改游戏）"
+        : english ? "Original rules" : "原版规则";
+
+    private void SynchronizeRulesChoice()
+    {
+        synchronizingRules = true;
+        try { modifiedRules.Checked = RulesDraftHeader.Read(draft.Text) == TasRules.Deterministic1; }
+        finally { synchronizingRules = false; }
+        RefreshReplayAvailability();
+    }
+
+    private void RefreshReplayAvailability()
+    {
+        TasScript parsed;
+        try { parsed = ProjectFiles.Parse(root, draft.Text); }
+        catch (ScriptParseException) { reliableReplay.Text = T("草稿语法待修正", "Fix draft syntax first"); return; }
+        if (CanReplayInCurrentProcess(parsed)) reliableReplay.Text = T("重新回放：同进程", "Replay: same process");
+        else if (parsed.Rules == TasRules.Deterministic1 && session == null) reliableReplay.Text = T("确定性规则：首次加载后可同进程回放", "Modified rules: same-process replay after first launch");
+        else reliableReplay.Text = T("重新回放：独立进程", "Replay: fresh process");
     }
 
     private async Task VerifyAsync()
@@ -590,8 +658,11 @@ public sealed class EditorForm : Form
         }
         else if (s.Frame > 0 && s.Line == 0) { inputZh = "零输入（章节转场或激活等待）"; inputEn = "Zero input (transition or activation wait)"; }
         var xy = $"({s.X.ToString("0.######", CultureInfo.InvariantCulture)}, {s.Y.ToString("0.######", CultureInfo.InvariantCulture)})";
-        SetDetails($"关卡：{s.Scene}\r\n状态：{StateName(s.State, false)}\r\n输入帧：{s.Frame}\r\n执行行：{s.Line}\r\n玩家世界 XY：{xy}\r\n\r\n{inputZh}\r\n\r\n固定瞄准点：{(target.Length == 0 ? "无" : target)}\r\n\r\n随机调用累计：{s.RandomCount}\r\n随机摘要：{s.RandomHash}\r\n\r\n失步 / 错误：{s.Error ?? "无"}\r\n\r\n日志目录：\r\n{latestDirectory}",
-            $"Level: {s.Scene}\r\nState: {StateName(s.State, true)}\r\nInput frame: {s.Frame}\r\nSource line: {s.Line}\r\nPlayer world XY: {xy}\r\n\r\n{inputEn}\r\n\r\nWorld aim target: {(target.Length == 0 ? "None" : target)}\r\n\r\nRandom calls: {s.RandomCount}\r\nRandom digest: {s.RandomHash}\r\n\r\nDesync / error: {(s.Error == null ? "None" : words.Reason(s.Error))}\r\n\r\nLog directory:\r\n{latestDirectory}");
+        var rules = session?.Script.Rules ?? TasRules.Original;
+        var rulesZh = RulesLabel(rules, false) + (rules == TasRules.Deterministic1 ? "\r\n固定随机结果 · 物理60Hz · 锁定物理转动\r\n取消死亡慢动作 · 固定游戏计时\r\n此模式玩法与原版不同。" : "\r\n精确重新回放使用独立进程。");
+        var rulesEn = RulesLabel(rules, true) + (rules == TasRules.Deterministic1 ? "\r\nFixed random results · 60Hz physics · frozen rotation\r\nNo death slow motion · fixed game clocks\r\nGameplay differs from original THOTH." : "\r\nExact replay uses a fresh process.");
+        SetDetails($"关卡：{s.Scene}\r\n状态：{StateName(s.State, false)}\r\n规则：{rulesZh}\r\n输入帧：{s.Frame}\r\n执行行：{s.Line}\r\n玩家世界 XY：{xy}\r\n\r\n{inputZh}\r\n\r\n固定瞄准点：{(target.Length == 0 ? "无" : target)}\r\n\r\n随机调用累计：{s.RandomCount}\r\n随机摘要：{s.RandomHash}\r\n\r\n失步 / 错误：{s.Error ?? "无"}\r\n\r\n日志目录：\r\n{latestDirectory}",
+            $"Level: {s.Scene}\r\nState: {StateName(s.State, true)}\r\nRules: {rulesEn}\r\nInput frame: {s.Frame}\r\nSource line: {s.Line}\r\nPlayer world XY: {xy}\r\n\r\n{inputEn}\r\n\r\nWorld aim target: {(target.Length == 0 ? "None" : target)}\r\n\r\nRandom calls: {s.RandomCount}\r\nRandom digest: {s.RandomHash}\r\n\r\nDesync / error: {(s.Error == null ? "None" : words.Reason(s.Error))}\r\n\r\nLog directory:\r\n{latestDirectory}");
         UpdateButtons();
     }
 
@@ -711,6 +782,7 @@ public sealed class EditorForm : Form
         modes.Enabled = !busy;
         speed.Enabled = !busy;
         communityMod.Enabled = !busy;
+        modifiedRules.Enabled = !busy;
     }
 
     private void OpenLogs()

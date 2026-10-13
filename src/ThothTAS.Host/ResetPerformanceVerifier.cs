@@ -2,10 +2,11 @@ using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using ThothTAS.Core;
 
 namespace ThothTAS.Host;
 
-/// <summary>Measures actual scene rebuilds; it does not treat warm runs as cold-process proofs.</summary>
+/// <summary>Measures actual rebuilds; modified rules require exact warm/cold records within those same modified rules.</summary>
 public static class ResetPerformanceVerifier
 {
     public sealed record FieldDifference(string Field, string? Cold, string? Warm);
@@ -14,7 +15,13 @@ public static class ResetPerformanceVerifier
         string RandomSha256, IReadOnlyList<FieldDifference> BaselineDifferences, string Resources, string Timing,
         IReadOnlyList<FrameFieldDifference> FrameDifferences);
     public sealed record Result(bool Passed, string? Error, IReadOnlyList<Sample> Samples, double? MedianWarmMilliseconds,
-        bool AllWarmRandomRecordsEqual, bool ColdEquivalent, IReadOnlyList<string> Checks);
+        bool AllWarmRandomRecordsEqual, bool ColdEquivalent, IReadOnlyList<string> Checks)
+    {
+        public string Rules { get; init; } = "original";
+        public bool AllWarmFramesEqual { get; init; }
+        public double? MaximumWarmMilliseconds { get; init; }
+        public string EquivalenceScope { get; init; } = "Original rules diagnostic reset; exact warm equivalence is not claimed.";
+    }
 
     public static async Task<Result> VerifyAsync(string root, string scriptText, SessionOptions options, int count = 5,
         Action<string>? progress = null, CancellationToken cancellation = default)
@@ -22,7 +29,9 @@ public static class ResetPerformanceVerifier
         if (count is < 2 or > 100) throw new ArgumentOutOfRangeException(nameof(count), "重置测量次数须在 2 至 100 之间。");
         var output = Path.GetFullPath(options.OutputParent ?? Path.Combine(root, "work", "reset-verification", DateTime.UtcNow.ToString("yyyyMMdd-HHmmss")));
         Directory.CreateDirectory(output);
-        options = options with { Autoplay = false, OutputParent = Path.Combine(output, "runs"), AllowUnsafePracticeReset = true };
+        var rules = ProjectFiles.Parse(root, scriptText).Rules;
+        bool modified = rules == TasRules.Deterministic1;
+        options = options with { Autoplay = false, OutputParent = Path.Combine(output, "runs"), AllowUnsafePracticeReset = !modified };
         var samples = new List<Sample>();
         var checks = new List<string>();
         string? error = null;
@@ -52,7 +61,7 @@ public static class ResetPerformanceVerifier
                     Require(fields["Input.moveX"] == "0" && fields["Input.moveY"] == "0", $"重置 {reset} 的基线输入为零。");
                     var playerPositions = coldFields.Keys.Where(key => key.Contains("/Player.", StringComparison.Ordinal) && key.EndsWith(".position", StringComparison.Ordinal)).ToArray();
                     Require(playerPositions.Length != 0 && playerPositions.All(key => fields.GetValueOrDefault(key) == coldFields[key]), $"重置 {reset} 恢复实际玩家初始位置。");
-                    Require(!fields.Any(pair => pair.Key.EndsWith(".Player.dead", StringComparison.Ordinal) && pair.Value == "True"), $"重置 {reset} 的玩家存活。");
+                    Require(!fields.Any(pair => pair.Key.EndsWith(".Player.isDead", StringComparison.Ordinal) && pair.Value == "True"), $"重置 {reset} 的玩家存活。");
                     Require(!fields.Any(pair => pair.Key.EndsWith(".Room.roomCompleted", StringComparison.Ordinal) && pair.Value == "True"), $"重置 {reset} 的关卡尚未完成。");
                     if (reset == 0)
                     {
@@ -81,6 +90,13 @@ public static class ResetPerformanceVerifier
                     string randomHash = Convert.ToHexString(await SHA256.HashDataAsync(randomFile, cancellation));
                     var frameDifferences = reset == 0 ? [] : CompareFrameFields(samples[0].Directory, game.RunDirectory);
                     samples.Add(new(reset, pid, game.RunDirectory, milliseconds, completed.Frame, randomHash, differences, resources, timing, frameDifferences));
+                    if (modified && reset != 0)
+                    {
+                        Require(differences.Length == 0, $"确定性规则重置 {reset} 的全部基线字段必须精确相同；首个差异：{differences.FirstOrDefault()?.Field ?? "无"}。");
+                        var divergence = ReplayVerifier.Compare(samples[0].Directory, game.RunDirectory);
+                        Require(divergence == null, $"确定性规则重置 {reset} 的逐帧玩法、完整随机记录与更新阶段必须精确相同；首个差异：{divergence?.Frame} / {divergence?.File} / {divergence?.Field} / {divergence?.Expected} → {divergence?.Actual}。");
+                        Require(milliseconds < 1000, $"确定性规则重置 {reset} 必须小于 1000ms；实际 {milliseconds:F3}ms。");
+                    }
                     progress?.Invoke($"重置 {reset}：{milliseconds:F1} ms，实际回放 {completed.Frame} 帧。");
                 }
                 var resourcesByReset = samples.Skip(1).Select(sample => sample.Resources.Split(';').Where(item => item.Contains('=')).Select(item => item.Split('=', 2)).ToDictionary(item => item[0], item => item[1])).ToArray();
@@ -103,9 +119,18 @@ public static class ResetPerformanceVerifier
         var warm = samples.Where(sample => sample.Reset != 0).ToArray();
         var times = warm.Select(sample => sample.Milliseconds).Order().ToArray();
         double? median = times.Length == 0 ? null : times.Length % 2 == 1 ? times[times.Length / 2] : (times[times.Length / 2 - 1] + times[times.Length / 2]) / 2;
-        var result = new Result(error == null, error, samples, median, warm.Length > 1 && warm.All(sample => sample.RandomSha256 == warm[0].RandomSha256), false, checks);
+        var allFramesEqual = warm.Length == count && warm.All(sample => sample.BaselineDifferences.Count == 0 && sample.FrameDifferences.Count == 0);
+        var result = new Result(error == null, error, samples, median, warm.Length > 1 && warm.All(sample => sample.RandomSha256 == warm[0].RandomSha256), modified && error == null && allFramesEqual, checks)
+        {
+            Rules = GameSession.RulesConfigName(rules), AllWarmFramesEqual = allFramesEqual,
+            MaximumWarmMilliseconds = times.Length == 0 ? null : times[^1],
+            EquivalenceScope = modified ? "Exact comparison between cold and warm replay under Deterministic-1 modified rules only. These rules differ from original THOTH." : "Original rules diagnostic reset; exact warm equivalence is not claimed."
+        };
         await File.WriteAllTextAsync(Path.Combine(output, "reset-report.json"), JsonSerializer.Serialize(result, new JsonSerializerOptions { WriteIndented = true }), new UTF8Encoding(false), cancellation);
-        await File.WriteAllTextAsync(Path.Combine(output, "reset-report.md"), "# 同进程重置实际测量\n\n结果：" + (result.Passed ? "通过" : "未通过") + "。暖重置中位耗时：" + (median?.ToString("F1") ?? "无") + " ms。\n\n在同一实际游戏进程中完成 " + warm.Length + " 次重建；首次仍做完整 SHA256 校验，运行期间持有只读文件锁，暖重置复用已校验且禁止改写的文件身份。声音库恢复初始层级、选择器和音源状态；玩法场景、其他持久根、对象池和自建资源重建。\n\nJSON 报告保留所有冷暖基线字段差异、整个回放每个差异字段的首次值/次数/数值最大差异、每次 PID/耗时/完整随机记录 SHA256/资源计数/加载阶段。没有隐藏原生时间或微小浮点差异。coldEquivalent=false；这里的通过表示编辑重建功能及本次资源计数检查通过，不表示与冷启动逐帧精确相同、跨电脑一致、瞬时重载或长期资源永不增长。正式精确验证继续使用 verify 的独立进程回放。\n", new UTF8Encoding(false), cancellation);
+        var scope = modified
+            ? "确定性规则（修改游戏）：随机结果固定、物理60Hz、固定游戏计时。通过要求每次暖重置低于1000ms、全部基线字段及逐帧玩法/完整随机/更新阶段记录精确一致。ColdEquivalent只表示同一修改规则下冷暖回放一致，不表示等价于原版THOTH；原生引擎时间仅在诊断文件保存，不参与修改规则的游戏计时。"
+            : "原版规则诊断：coldEquivalent=false。这里的通过表示编辑重建功能及本次资源计数检查通过，不表示与冷启动逐帧精确相同。原版正式精确验证使用verify的独立进程回放。";
+        await File.WriteAllTextAsync(Path.Combine(output, "reset-report.md"), "# 同进程重置实际测量\n\n结果：" + (result.Passed ? "通过" : "未通过") + "。规则：" + result.Rules + "。暖重置中位耗时：" + (median?.ToString("F1") ?? "无") + " ms；最大：" + (result.MaximumWarmMilliseconds?.ToString("F1") ?? "无") + " ms。\n\n" + scope + "\n\n在同一实际游戏进程中完成 " + warm.Length + " 次重建；首次仍做完整 SHA256 校验，运行期间持有只读文件锁，暖重置复用已校验且禁止改写的文件身份。声音库恢复初始层级、选择器和音源状态；玩法场景、其他持久根、对象池和自建资源重建。\n\nJSON报告保留所有冷暖基线字段差异、整个回放每个差异字段的首次值/次数/数值最大差异、每次PID/耗时/完整随机记录SHA256/资源计数/加载阶段。没有隐藏微小浮点差异。此测量不保证跨电脑一致或长期资源永不增长。\n", new UTF8Encoding(false), cancellation);
         return result;
     }
 

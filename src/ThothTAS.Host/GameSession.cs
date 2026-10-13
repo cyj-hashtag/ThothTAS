@@ -18,7 +18,7 @@ public sealed record SessionOptions
     public double Speed { get; init; } = 1;
     public bool Autoplay { get; init; }
     public bool CommunityMod { get; init; }
-    /// <summary>Diagnostics only. Native physics survives a same-process reset; authoring must use a new process.</summary>
+    /// <summary>Diagnostics only for Original rules. Deterministic1 supports same-process replay without this opt-in.</summary>
     public bool AllowUnsafePracticeReset { get; init; }
     public string? OutputParent { get; init; }
     public TimeSpan ConnectTimeout { get; init; } = TimeSpan.FromSeconds(90);
@@ -39,6 +39,7 @@ public sealed class GameStatus
     public string RandomHash { get; set; } = "";
     public string? Error { get; set; }
     public string Run { get; set; } = "";
+    public string Rules { get; set; } = "original";
     public int Chapter { get; set; }
     public string ChapterScene { get; set; } = "";
     public int ChapterFrame { get; set; }
@@ -94,6 +95,13 @@ public sealed class GameSession : IAsyncDisposable
     public int ProcessId => process?.Id ?? 0;
     public event Action<GameStatus>? StatusChanged;
     public Task<GameStatus> Completion => finished.Task;
+    public bool UsesModifiedRules => Script.Rules == TasRules.Deterministic1;
+    public static string RulesConfigName(TasRules rules) => rules switch
+    {
+        TasRules.Original => "original",
+        TasRules.Deterministic1 => "deterministic-1",
+        _ => throw new ArgumentOutOfRangeException(nameof(rules))
+    };
     private static TaskCompletionSource NewSignal() => new(TaskCreationOptions.RunContinuationsAsynchronously);
 
     public static async Task<GameSession> StartAsync(string root, string scriptText, SessionOptions? options = null, CancellationToken cancellation = default)
@@ -159,6 +167,7 @@ public sealed class GameSession : IAsyncDisposable
                 ["width"] = options.Width.ToString(CultureInfo.InvariantCulture), ["height"] = options.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = options.Autoplay ? "true" : "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
                 ["seed"] = session.Script.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = session.Script.Start,
+                ["rules"] = RulesConfigName(session.Script.Rules),
                 ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(root) : "",
                 ["allowUnsafePracticeReset"] = options.AllowUnsafePracticeReset ? "true" : "false"
             };
@@ -183,6 +192,7 @@ public sealed class GameSession : IAsyncDisposable
                 protocol = ProtocolVersion, pid = session.ProcessId, exe = session.gameExe, coldProcess = true, initialUnityLogPath = session.initialUnityLogPath, baselineSha256 = baselineHash,
                 scriptSha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(scriptText))),
                 start = session.Script.Start, seed = session.Script.Seed, frames = session.Script.TotalFrames,
+                rules = RulesConfigName(session.Script.Rules), modifiedGameRules = session.UsesModifiedRules,
                 communityModEnabled = options.CommunityMod, communityModVersion = options.CommunityMod ? CommunityModProfile.Version : null, communityModSha256 = options.CommunityMod ? CommunityModProfile.ExpectedSha256 : null,
                 width = options.Width, height = options.Height, speed = options.Speed, startedUtc = DateTime.UtcNow,
                 gameManifestSha256 = artifacts["docs/game-fingerprint.json"], runtimeSha256 = artifacts["game/BepInEx/plugins/ThothTAS.Runtime.dll"],
@@ -253,14 +263,17 @@ public sealed class GameSession : IAsyncDisposable
     {
         var resetWatch = Stopwatch.StartNew();
         options ??= activeOptions;
-        if (!options.AllowUnsafePracticeReset || !activeOptions.AllowUnsafePracticeReset)
+        // Validate the immutable draft's rules before touching the game, save or run logs.
+        var parsed = ProjectFiles.Parse(Root, scriptText);
+        if (parsed.Rules != Script.Rules)
+            throw new ArgumentException("切换游戏规则必须重新启动游戏进程，不能同进程重置。", nameof(scriptText));
+        if (parsed.Rules == TasRules.Original && (!options.AllowUnsafePracticeReset || !activeOptions.AllowUnsafePracticeReset))
             throw new InvalidOperationException("同进程重置会导致物理与随机记录失步，已停用。请启动独立进程；仅 verify-reset 诊断允许显式启用。");
         if (options.Width != activeOptions.Width || options.Height != activeOptions.Height)
             throw new ArgumentException("同进程快速重置期间窗口尺寸必须保持启动时的值。", nameof(options));
         if (options.CommunityMod != activeOptions.CommunityMod)
             throw new ArgumentException("切换社区 Mod 必须重新启动游戏进程，不能同进程重置。", nameof(options));
         ValidateSpeed(options.Speed);
-        var parsed = ProjectFiles.Parse(Root, scriptText);
         var parent = Path.GetFullPath(options.OutputParent ?? Path.Combine(Root, "work", "runs"));
         var workRoot = Path.GetFullPath(Path.Combine(Root, "work")).TrimEnd(Path.DirectorySeparatorChar) + Path.DirectorySeparatorChar;
         if (!parent.StartsWith(workRoot, StringComparison.OrdinalIgnoreCase) && !string.Equals(parent.TrimEnd(Path.DirectorySeparatorChar), workRoot.TrimEnd(Path.DirectorySeparatorChar), StringComparison.OrdinalIgnoreCase))
@@ -292,8 +305,9 @@ public sealed class GameSession : IAsyncDisposable
                 ["width"] = activeOptions.Width.ToString(CultureInfo.InvariantCulture), ["height"] = activeOptions.Height.ToString(CultureInfo.InvariantCulture),
                 ["autoplay"] = "false", ["speed"] = options.Speed.ToString(CultureInfo.InvariantCulture),
                 ["seed"] = parsed.Seed.ToString(CultureInfo.InvariantCulture), ["start"] = parsed.Start,
+                ["rules"] = RulesConfigName(parsed.Rules),
                 ["communityModPath"] = options.CommunityMod ? CommunityModProfile.AssemblyPath(Root) : "",
-                ["allowUnsafePracticeReset"] = "true"
+                ["allowUnsafePracticeReset"] = options.AllowUnsafePracticeReset ? "true" : "false"
             };
             if (options.ReferenceFrames != null)
             {
@@ -313,9 +327,10 @@ public sealed class GameSession : IAsyncDisposable
             var previousRun = RunDirectory;
             await File.WriteAllTextAsync(Path.Combine(directory, "host-run.json"), JsonSerializer.Serialize(new
             {
-                protocol = ProtocolVersion, pid = ProcessId, exe = gameExe, coldProcess = false, reusedPid = ProcessId, sameProcessReset = true, coldEquivalent = false, fingerprintPolicy = "startup-sha256-held-read-locks", initialUnityLogPath, previousRun,
+                protocol = ProtocolVersion, pid = ProcessId, exe = gameExe, coldProcess = false, reusedPid = ProcessId, sameProcessReset = true, coldEquivalent = parsed.Rules == TasRules.Deterministic1 ? (bool?)null : false, expectedColdEquivalent = parsed.Rules == TasRules.Deterministic1, fingerprintPolicy = "startup-sha256-held-read-locks", initialUnityLogPath, previousRun,
                 baselineSha256 = Convert.ToHexString(SHA256.HashData(baselineBytes)), scriptSha256 = Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(scriptText))),
                 start = parsed.Start, seed = parsed.Seed, frames = parsed.TotalFrames, width = options.Width, height = options.Height, speed = options.Speed, startedUtc = DateTime.UtcNow,
+                rules = RulesConfigName(parsed.Rules), modifiedGameRules = parsed.Rules == TasRules.Deterministic1,
                 communityModEnabled = options.CommunityMod, communityModVersion = options.CommunityMod ? CommunityModProfile.Version : null, communityModSha256 = options.CommunityMod ? CommunityModProfile.ExpectedSha256 : null,
                 gameManifestSha256 = artifacts["docs/game-fingerprint.json"], runtimeSha256 = artifacts["game/BepInEx/plugins/ThothTAS.Runtime.dll"],
                 preloaderSha256 = artifacts["game/BepInEx/patchers/ThothTAS.Preloader.dll"], bepInExConfigSha256 = artifacts["game/BepInEx/config/BepInEx.cfg"], artifacts
@@ -333,7 +348,7 @@ public sealed class GameSession : IAsyncDisposable
                     finished = new(TaskCreationOptions.RunContinuationsAsynchronously);
                     RunDirectory = directory;
                     Script = parsed;
-                    Latest = new() { Run = directory, State = "loading", Frame = -1, Protocol = ProtocolVersion };
+                    Latest = new() { Run = directory, State = "loading", Frame = -1, Protocol = ProtocolVersion, Rules = RulesConfigName(parsed.Rules) };
                     var oldChanged = stateChanged; stateChanged = NewSignal(); oldChanged.TrySetResult();
                     oldFinished.TrySetCanceled();
                 }
@@ -342,7 +357,7 @@ public sealed class GameSession : IAsyncDisposable
             await SendAsync("RESTART\t" + config, cancellation);
             var preparedMilliseconds = resetWatch.Elapsed.TotalMilliseconds;
             await WaitForStatusAsync(s => s.Run == directory && s.Frame >= 0 && s.State == "paused", TimeSpan.FromSeconds(90), cancellation);
-            await File.WriteAllTextAsync(Path.Combine(directory, "reset-performance.json"), JsonSerializer.Serialize(new { version = 1, pid = ProcessId, totalMilliseconds = resetWatch.Elapsed.TotalMilliseconds, preparedMilliseconds, fingerprintPolicy = "startup-sha256-held-read-locks", coldEquivalent = false }, JsonOptions), cancellation);
+            await File.WriteAllTextAsync(Path.Combine(directory, "reset-performance.json"), JsonSerializer.Serialize(new { version = 2, pid = ProcessId, rules = RulesConfigName(parsed.Rules), totalMilliseconds = resetWatch.Elapsed.TotalMilliseconds, preparedMilliseconds, fingerprintPolicy = "startup-sha256-held-read-locks", coldEquivalent = parsed.Rules == TasRules.Deterministic1 ? (bool?)null : false, expectedColdEquivalent = parsed.Rules == TasRules.Deterministic1 }, JsonOptions), cancellation);
             activeOptions = options;
         }
         catch (Exception ex) { ex.Data["runDirectory"] = RunDirectory; throw; }

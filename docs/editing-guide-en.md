@@ -20,11 +20,11 @@ Use **语言 / Language** to switch between **简体中文** and **English** wit
 
 Click **Compose TAS…**, select the scripts, and arrange them in natural level order. The window provides Add scripts, Remove, Move up and Move down. Click Create composed draft, then Save as a new file. Originals are read only by composition.
 
-The sources must use the same Seed and naturally adjacent ordinary rooms. The output uses `Room,Basic-1`, `Room,Basic-2`, etc. A chapter's unused tail is skipped when that room completes. Input is zero during the natural transition; the next chapter starts at its first local input frame after the player becomes active. A chapter that exhausts its input budget without completing fails visibly.
+The sources must use the same Rules profile and Seed and naturally adjacent ordinary rooms. The output uses `Room,Basic-1`, `Room,Basic-2`, etc. A chapter's unused tail is skipped when that room completes. Input is zero during the natural transition; the next chapter starts at its first local input frame after the player becomes active. A chapter that exhausts its input budget without completing fails visibly.
 
 The included `examples/composed/basic-1-basic-2.tas` combines the supplied examples. The nominal input budget is 799 frames; actual successful playback is 495 frames. Basic-1 completes at frame 147; Basic-2 becomes active at 273 and completes at 495.
 
-Successful isolated levels do not automatically compose successfully. Later rooms inherit earlier random consumption, time and entry state. Seed is applied once per replay, not per Room. Verify the entire composed replay, and adjust later chapter inputs from their continuous entry state if needed.
+Successful isolated levels do not automatically compose successfully, including under modified rules: transition and entry states can differ. Later rooms inherit earlier random consumption, time and entry state. Seed is applied once per replay, not per Room. Verify the entire composed replay, and adjust later chapter inputs from their continuous entry state if needed.
 
 Click Verify ×5 to compare independent cold processes, optionally including pause, step and speed modes. Or run:
 
@@ -39,11 +39,15 @@ Closing, opening another file or composing over a modified draft prompts **Save 
 
 After 350 ms of idle typing, a separate checkpoint is atomically written in `work/draft-recovery`. Leaving the editor also checkpoints the draft. Saving the document clears the current checkpoint. A later startup offers recovery for checkpoints left by a crashed editor; **Recover draft…** previews checkpoints and older `.tas` backups. Save or Save as after recovery.
 
-## Reliable replay
+## Deterministic rules and fast replay
 
-v0.3.2 Replay restores the fixed save and starts a new game process. The former same-process option is disabled: Basic-3 showed differing physics ticks, random records and collision outcomes after warm resets. Ordinary Host sessions reject it too; `verify-reset` explicitly enables unsafe diagnostics.
+Select **Deterministic rules (modified game)** to write `Rules,Deterministic-1` into the draft. This is a document edit, with unsaved prompts and recovery. During playback it only affects the next Replay. New drafts use this profile; existing files are not automatically converted.
 
-Inputs authored under a warm-reset state may need adjustment for the fixed cold baseline. This restores startup waiting; the former roughly 0.55 s practice reset is not a reliable authoring path. See the [actual investigation](public/draft-replay-fix-20261013.md).
+First launch loads and validates the game. While that game remains open with the same Rules and community profile, Replay restores the fixed save, scenes, pools, sound banks and logical clocks in the same process, using the latest immutable draft snapshot. The toolbar says **Replay: same process** when available. Stop, closing the game, and changing Rules/community profile require a fresh launch.
+
+This profile fixes random results, uses 60Hz physics, disables rigidbody interpolation/physical rotation and death slow motion, dispatches managed Update in stable order, and fixes game/relevant audio clocks. Seed does not change intercepted random results. Gameplay differs from original THOTH; existing inputs may need retuning. It is not equivalent to original-game/community RTA. Movement, shooting, enemies and collisions still execute in the actual game; reset is not an instant save.
+
+Files with no Rules header or `Rules,Original` retain original rules and fresh-process Replay. Modified `verify-reset` requires every reset under 1000ms and exact complete frame/random/phase records; original `verify-reset` remains unsafe diagnostics. [Rules and actual verification](public/deterministic-rules-20261013.md).
 
 ## Community Speedrun Mod
 

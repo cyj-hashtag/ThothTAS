@@ -16,7 +16,7 @@ using BepInEx;
 using ThothTAS.Core;
 
 namespace ThothTAS.Runtime {
-[BepInPlugin("local.thoth.tas", "THOTH TAS", "0.3.2")]
+[BepInPlugin("local.thoth.tas", "THOTH TAS", "0.4.0")]
 public sealed class TasPlugin : BaseUnityPlugin {
     void Awake() {
         if(!Hooks.Enabled) return;
@@ -65,6 +65,7 @@ public static partial class Hooks {
         VerifyFingerprint();
         var known=new HashSet<string>(File.ReadAllLines(Path.Combine(Root,"docs/levels.txt")),StringComparer.Ordinal);
         script=ScriptParser.Parse(File.ReadAllText(C("script",""),Encoding.UTF8),known);
+        if(C("rules","original")!=(ModifiedRules?"deterministic-1":"original"))throw new IOException("脚本规则与进程配置不一致。");
         if(C("reference","").Length>0)reference=new StreamReader(C("reference",""),Encoding.UTF8);
         randomLog=Log("random.tsv");framesLog=Log("frames.jsonl");phaseLog=Log("phases.tsv");
         randomLog.WriteLine("index\tframe\tphase\tsite\tapi\targuments\tresult");
@@ -80,6 +81,7 @@ public static partial class Hooks {
     static void EngineReady() {
         if(engineReady)return;engineReady=true;
         Time.captureFramerate=60;QualitySettings.vSyncCount=0;Application.targetFrameRate=-1;
+        if(ModifiedRules){Time.timeScale=1;Time.fixedDeltaTime=DeterministicStep;ResetModifiedClock();}
         UnityEngine.Random.seed=script.Seed;
         eventLog.WriteLine("engine initialized before first game callback/random;captureFramerate="+Time.captureFramerate+";fixedDeltaTime="+F(Time.fixedDeltaTime));
     }
@@ -102,39 +104,50 @@ public static partial class Hooks {
         // when the recreated launcher asks for the already established window.
         if(Screen.width!=w||Screen.height!=h||Screen.fullScreen)Screen.SetResolution(w,h,false);
     }
-    // LaserBeat uses a muted AudioSource as a gameplay timer. Device time is a
-    // wall clock even under captureFramerate; virtualize only that audited path.
-    sealed class AudioClock {public int startedFrame;public bool playing,observed;public float pitch;}
+    // Original rules virtualize the audited laser timer. Modified rules also
+    // virtualize audio queries that control beats, random calls and lifecycle.
+    sealed class AudioClock {public int startedFrame,seekFrame;public bool playing,observed,paused,seekPending;public float pitch,offset;public double oneShotUntil;}
     static Dictionary<AudioSource,AudioClock> audioClocks=new Dictionary<AudioSource,AudioClock>();
     static AudioClock Clock(AudioSource source) {
         if(source==null)throw new ArgumentNullException("source");
         AudioClock clock;
         if(!audioClocks.TryGetValue(source,out clock)) {
             clock=new AudioClock();clock.startedFrame=Time.frameCount;clock.pitch=source.pitch;
+            if(ModifiedRules)clock.playing=source.playOnAwake&&source.enabled&&source.gameObject.activeInHierarchy;
             // Audited laser timer resources have playOnAwake=false.
             audioClocks.Add(source,clock);
         }
         return clock;
     }
     public static void AudioPlay(AudioSource source) {
-        var clock=Clock(source);clock.startedFrame=Time.frameCount;clock.pitch=source.pitch;clock.playing=true;
+        var clock=Clock(source);clock.startedFrame=Time.frameCount;clock.pitch=source.pitch;clock.playing=true;clock.paused=false;
+        if(!ModifiedRules||!clock.seekPending||clock.seekFrame!=Time.frameCount)clock.offset=0;clock.seekPending=false;
         source.Play();
         eventLog.WriteLine("audio play;frame="+(baseline?frame+1:-1)+";source="+PathOf(source.transform)+";pitch="+F(clock.pitch));
     }
     public static void AudioStop(AudioSource source) {
-        var clock=Clock(source);clock.playing=false;clock.startedFrame=Time.frameCount;source.Stop();
+        var clock=Clock(source);clock.playing=false;clock.paused=false;clock.seekPending=false;clock.offset=0;clock.oneShotUntil=0;clock.startedFrame=Time.frameCount;source.Stop();
     }
     static float ClockTime(AudioSource source,AudioClock clock) {
-        if(!clock.playing||source.clip==null)return 0;
-        float elapsed=(float)((Time.frameCount-clock.startedFrame)*(double)clock.pitch/60.0);
+        if(source.clip==null||!clock.playing)return 0;
+        if(clock.paused)return clock.offset;
+        float elapsed=clock.offset+(float)((Time.frameCount-clock.startedFrame)*(double)clock.pitch/60.0);
+        if(elapsed<0)return 0;
         if(source.loop&&source.clip.length>0)return elapsed%source.clip.length;
         return elapsed>=source.clip.length?0:elapsed;
     }
     public static float AudioTime(AudioSource source) {var clock=Clock(source);clock.observed=true;return ClockTime(source,clock);}
     public static bool AudioIsPlaying(AudioSource source) {
         var clock=Clock(source);clock.observed=true;
-        return clock.playing&&source.clip!=null&&(source.loop||(Time.frameCount-clock.startedFrame)*(double)clock.pitch/60.0<source.clip.length);
+        return !clock.paused&&(clock.oneShotUntil>Time.frameCount||clock.playing&&source.clip!=null&&Time.frameCount>=clock.startedFrame&&(source.loop||clock.offset+(Time.frameCount-clock.startedFrame)*(double)clock.pitch/60.0<source.clip.length));
     }
+    public static void AudioSeek(AudioSource source,float value) {var clock=Clock(source);clock.offset=value;clock.seekPending=true;clock.seekFrame=Time.frameCount;clock.startedFrame=Time.frameCount;source.time=value;}
+    public static void AudioPitch(AudioSource source,float value) {var clock=Clock(source);clock.offset=ClockTime(source,clock);clock.startedFrame=Time.frameCount;clock.pitch=value;source.pitch=value;}
+    public static void AudioPlayDelayed(AudioSource source,float delay) {var clock=Clock(source);clock.startedFrame=Time.frameCount+(int)Math.Ceiling(Math.Max(0,delay)*60.0);clock.pitch=source.pitch;clock.playing=true;clock.paused=false;clock.seekPending=false;clock.offset=0;source.PlayDelayed(delay);}
+    public static void AudioPause(AudioSource source) {var clock=Clock(source);clock.offset=ClockTime(source,clock);clock.startedFrame=Time.frameCount;clock.paused=true;source.Pause();}
+    public static void AudioUnPause(AudioSource source) {var clock=Clock(source);clock.startedFrame=Time.frameCount;clock.paused=false;source.UnPause();}
+    public static void AudioOneShot(AudioSource source,AudioClip clip) {AudioOneShotScale(source,clip,1);}
+    public static void AudioOneShotScale(AudioSource source,AudioClip clip,float scale) {var clock=Clock(source);if(clip!=null)clock.oneShotUntil=Math.Max(clock.oneShotUntil,Time.frameCount+clip.length*60.0/Math.Max(0.00001,Math.Abs(source.pitch)));source.PlayOneShot(clip,scale);}
     public static void BeforeRandom(string site,string api,object[] args) {
         if(suppressTrace)return;
         Ensure();EngineReady();randomSite=site;randomApi=api;randomArgs=Values(args);
@@ -146,7 +159,7 @@ public static partial class Hooks {
     }
     public static void Phase(string name) {
         if(suppressTrace)return;
-        Ensure();EngineReady();phase=name;phaseCount++;phaseFrameCount++;phaseHash=Hash(phaseHash,name);
+        Ensure();EngineReady();ModifiedPhase(name);phase=name;phaseCount++;phaseFrameCount++;phaseHash=Hash(phaseHash,name);
         phaseLog.WriteLine(phaseCount+"\t"+(baseline?frame+1:-1)+"\t"+name);
     }
     public static float ReadInput(string name,int player) {
@@ -180,6 +193,9 @@ public static partial class Hooks {
         ResetTiming("menuReadyMs");
         RememberStaticBaseline();
         RememberSoundBanks();
+        if(ModifiedRules&&resetCount>0)RestoreSoundBanks();
+        RemoveModifiedLauncherSound();
+        ResetModifiedSceneTrace();
         var globals=GetGlobal("instance");var names=(IList)Get(globals,"levelNames");
         int dash=script.Start.LastIndexOf('-');string family=script.Start.Substring(0,dash);int room=int.Parse(script.Start.Substring(dash+1));int group=-1;
         for(int i=0;i<16&&i<names.Count;i++)if(string.Equals((string)names[i],family,StringComparison.OrdinalIgnoreCase)){group=i;break;}
@@ -235,7 +251,7 @@ public static partial class Hooks {
     static void UpdateStatus(string state) {
         reportedState=state;
         var p=GetGlobal("player") as Component;var pos=p==null?Vector3.zero:p.transform.position;
-        status="{\"protocol\":1,\"type\":\"status\",\"state\":"+Q(state)+",\"run\":"+Q(run)+",\"frame\":"+frame+",\"line\":"+line+",\"scene\":"+Q(SceneManager.GetActiveScene().name)+",\"chapter\":"+chapterIndex+",\"chapterScene\":"+Q(script.Chapters[chapterIndex].Scene)+",\"chapterFrame\":"+(script.HasExplicitRooms?chapterFrame:Math.Max(frame,0))+",\"segmentFrame\":"+segmentFrame+",\"segmentFrames\":"+segmentFrames+",\"roomEvents\":"+RoomEventsJson()+",\"resetCount\":"+resetCount+",\"coldProcess\":"+(resetCount==0?"true":"false")+",\"x\":"+F(pos.x)+",\"y\":"+F(pos.y)+",\"randomCount\":"+randomCount+",\"randomHash\":"+Q(randomHash.ToString("X16"))+",\"input\":"+Q(Values(new object[]{input.MoveX,input.MoveY,input.AimKind,input.AimX,input.AimY}))+",\"error\":"+Q(error)+"}";
+        status="{\"protocol\":1,\"type\":\"status\",\"state\":"+Q(state)+",\"rules\":"+Q(ModifiedRules?"deterministic-1":"original")+",\"run\":"+Q(run)+",\"frame\":"+frame+",\"line\":"+line+",\"scene\":"+Q(SceneManager.GetActiveScene().name)+",\"chapter\":"+chapterIndex+",\"chapterScene\":"+Q(script.Chapters[chapterIndex].Scene)+",\"chapterFrame\":"+(script.HasExplicitRooms?chapterFrame:Math.Max(frame,0))+",\"segmentFrame\":"+segmentFrame+",\"segmentFrames\":"+segmentFrames+",\"roomEvents\":"+RoomEventsJson()+",\"resetCount\":"+resetCount+",\"coldProcess\":"+(resetCount==0?"true":"false")+",\"x\":"+F(pos.x)+",\"y\":"+F(pos.y)+",\"randomCount\":"+randomCount+",\"randomHash\":"+Q(randomHash.ToString("X16"))+",\"input\":"+Q(Values(new object[]{input.MoveX,input.MoveY,input.AimKind,input.AimX,input.AimY}))+",\"error\":"+Q(error)+"}";
     }
     static void NetworkLoop() {
         while(!quit) {
@@ -287,7 +303,8 @@ public static partial class Hooks {
             foreach(var f in fields) {if(f.IsStatic)continue;object v=f.GetValue(c);string val=FieldValue(v,0);if(val!=null)map[key+"."+f.DeclaringType.Name+"."+f.Name]=val;}
         }
         foreach(string n in new[]{"currentLevelID","currentLevelName","currentGlobalRoomID","currentLevelSize","save_progress"})map["Globals."+n]=Value(GetGlobal(n));
-        map["Time.timeScale"]=Value(Time.timeScale);map["Time.fixedDeltaTime"]=Value(Time.fixedDeltaTime);map["Time.deltaTime"]=Value(Time.deltaTime);map["Time.fixedTime"]=Value(Time.fixedTime);map["Time.time"]=Value(Time.time);
+        map["Time.timeScale"]=Value(Time.timeScale);map["Time.fixedDeltaTime"]=Value(Time.fixedDeltaTime);map["Time.deltaTime"]=Value(ModifiedRules?RulesTime("get_deltaTime"):Time.deltaTime);map["Time.fixedTime"]=Value(ModifiedRules?RulesTime("get_fixedTime"):Time.fixedTime);map["Time.time"]=Value(ModifiedRules?RulesTime("get_time"):Time.time);
+        AppendRulesState(map);
         map["Input.moveX"]=Value(input.MoveX);map["Input.moveY"]=Value(input.MoveY);map["Input.aimKind"]=Value(input.AimKind);map["Input.aimX"]=Value(input.AimX);map["Input.aimY"]=Value(input.AimY);
         map["Input.shootPosition"]=Value(aimOrigin);map["Input.resolvedAim"]=Value(aimResolved);
         foreach(var pair in audioClocks) {

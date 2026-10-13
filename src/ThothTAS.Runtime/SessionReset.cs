@@ -24,7 +24,7 @@ public static partial class Hooks {
     static void ResetReachedBaseline() {
         if(resetWatch==null)return;
         ResetTiming("baselineMs");
-        eventLog.WriteLine("reset timing;"+string.Join(";",resetTimings.ToArray())+";fingerprint=held-read-locks;soundBanks=restore-initial-cache;coldEquivalent=false");
+        eventLog.WriteLine("reset timing;"+string.Join(";",resetTimings.ToArray())+";fingerprint=held-read-locks;soundBanks=restore-initial-cache;rules="+(ModifiedRules?"deterministic-1;equivalence=pending-strict-verification":"original;coldEquivalent=false"));
         resetWatch=null;resetTimings.Clear();
     }
 
@@ -48,6 +48,7 @@ public static partial class Hooks {
         }} finally {captureOwnedResources=true;}
     }
     static bool ResetPhaseReady() {
+        if(ModifiedRules)return true;
         if(resetCount==0)return true;
         // 60 Hz input with 100 Hz physics has three accumulator phases. Wait
         // in the zero-input menu to match the observed initial loading phase.
@@ -100,16 +101,19 @@ public static partial class Hooks {
         if(oldRandom!=null)oldRandom.Dispose();if(oldFrames!=null)oldFrames.Dispose();if(oldPhases!=null)oldPhases.Dispose();
         if(oldEvents!=null){oldEvents.Flush();oldEvents.Dispose();}
         if(oldReference!=null)oldReference.Dispose();
+        if(nativeTelemetry!=null){nativeTelemetry.Dispose();nativeTelemetry=null;}
     }
     static void RestartAtBoundary(string cfgPath) {
-        if(C("allowUnsafePracticeReset","false")!="true")throw new InvalidOperationException("同进程重置会导致物理失步；请通过编辑器重新回放启动独立进程。仅诊断测量允许启用。");
+        if(!ModifiedRules&&C("allowUnsafePracticeReset","false")!="true")throw new InvalidOperationException("原版规则同进程重置会导致物理失步；请启动独立进程或采用确定性修改规则。");
         resetWatch=System.Diagnostics.Stopwatch.StartNew();resetTimings.Clear();
         cfgPath=Path.GetFullPath(cfgPath);
         string allowed=Path.GetFullPath(Path.Combine(Root,"work"))+Path.DirectorySeparatorChar;
         if(!cfgPath.StartsWith(allowed,StringComparison.OrdinalIgnoreCase))throw new IOException("重置配置必须位于本项目 work 中。");
         var next=new Dictionary<string,string>(StringComparer.Ordinal);
         foreach(string raw in File.ReadAllLines(cfgPath)){int p=raw.IndexOf('=');if(p>0)next[raw.Substring(0,p)]=raw.Substring(p+1);}
-        if(!next.ContainsKey("allowUnsafePracticeReset")||next["allowUnsafePracticeReset"]!="true")throw new IOException("同进程重置必须明确声明为非确定性诊断。");
+        string nextRules;next.TryGetValue("rules",out nextRules);
+        if((nextRules??"original")!=(ModifiedRules?"deterministic-1":"original"))throw new IOException("同进程重置不能切换游戏规则。");
+        if(!ModifiedRules&&(!next.ContainsKey("allowUnsafePracticeReset")||next["allowUnsafePracticeReset"]!="true"))throw new IOException("原版同进程重置必须明确声明为非确定性诊断。");
         if(!next.ContainsKey("token")||next["token"]!=C("token","")||next["port"]!=C("port","")||next["width"]!=C("width","1280")||next["height"]!=C("height","720"))throw new IOException("同进程重置不得改变控制连接或窗口尺寸。");
         string nextCommunity;next.TryGetValue("communityModPath",out nextCommunity);
         if((nextCommunity??"")!=C("communityModPath",""))throw new IOException("同进程重置不得切换社区 Mod；必须启动新进程。");
@@ -118,6 +122,7 @@ public static partial class Hooks {
         string scriptPath=Path.GetFullPath(next["script"]);
         if(!scriptPath.StartsWith(newRun+Path.DirectorySeparatorChar,StringComparison.OrdinalIgnoreCase))throw new IOException("重置脚本必须属于新记录目录。");
         var nextScript=ScriptParser.Parse(File.ReadAllText(scriptPath,Encoding.UTF8),new HashSet<string>(File.ReadAllLines(Path.Combine(Root,"docs/levels.txt")),StringComparer.Ordinal));
+        if(nextScript.Rules!=script.Rules)throw new IOException("同进程重置不能切换脚本规则。");
         if(staticBaseline==null)throw new InvalidOperationException("首次关卡尚未建立，不能快速重置。");
         VerifyFingerprint();
         ResetTiming("verifiedMs");
@@ -169,7 +174,7 @@ public static partial class Hooks {
             Time.timeScale=1;Time.fixedDeltaTime=0.01f;engineReady=false;resetCount++;
             phaseAlignmentWait=0;
             suppressTrace=false;EngineReady();
-            eventLog.WriteLine("same-process reset="+resetCount+";pid="+System.Diagnostics.Process.GetCurrentProcess().Id+";nativeTime="+F(Time.time)+";nativeFixedTime="+F(Time.fixedTime)+";coldEquivalent=false");
+            eventLog.WriteLine("same-process reset="+resetCount+";pid="+System.Diagnostics.Process.GetCurrentProcess().Id+";nativeTime="+F(Time.time)+";nativeFixedTime="+F(Time.fixedTime)+";rules="+(ModifiedRules?"deterministic-1;equivalence=pending-strict-verification":"original;coldEquivalent=false"));
             UpdateStatus("loading");Send(status);
             ResetTiming("preparedMs");
             eventLog.WriteLine("sound bank restored;roots="+cachedSoundRoots.Count+";transforms="+cachedSoundTransforms.Count+";audioSources="+cachedSoundAudio.Count+";selectors="+cachedSoundFields.Count);

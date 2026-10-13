@@ -1,5 +1,5 @@
 [CmdletBinding()]
-param([string]$ProjectRoot=(Split-Path -Parent $PSScriptRoot), [string]$Version='0.3.2')
+param([string]$ProjectRoot=(Split-Path -Parent $PSScriptRoot), [string]$Version='0.4.0')
 $ErrorActionPreference='Stop'
 if ($Version -notmatch '^\d+\.\d+\.\d+$') {throw 'Invalid version.'}
 $ProjectRoot=[IO.Path]::GetFullPath($ProjectRoot)

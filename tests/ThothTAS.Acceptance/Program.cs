@@ -47,14 +47,14 @@ internal static class Program
     {
         if (args.Length == 0 || args[0] is "help" or "--help")
         {
-            Console.WriteLine("THOTH TAS 验收入口：contract | fingerprint | inputs | seeds | protocol | divergence | actual-all [--root 路径] [--out 报告目录]");
+            Console.WriteLine("THOTH TAS 验收入口：contract | fingerprint | inputs | seeds | protocol | divergence | actual-all | modified-starts [--root 路径] [--out 报告目录]");
             Console.WriteLine("contract为纯解析；fingerprint仅校验隔离根目录中的实际文件；其余命令启动独立游戏副本。逐关卡验证使用 scripts/Verify-LevelStarts.ps1。");
             return 0;
         }
         try
         {
             string command = args[0];
-            if (command is not ("contract" or "fingerprint" or "inputs" or "seeds" or "protocol" or "divergence" or "actual-all")) throw new ArgumentException("未知验收命令：" + command);
+            if (command is not ("contract" or "fingerprint" or "inputs" or "seeds" or "protocol" or "divergence" or "actual-all" or "modified-starts")) throw new ArgumentException("未知验收命令：" + command);
             string? Option(string key)
             {
                 int index = Array.IndexOf(args, key);
@@ -63,6 +63,7 @@ internal static class Program
                 return args[index + 1];
             }
             root = ProjectFiles.FindRoot(Option("--root"));
+            if (command == "modified-starts") return await ModifiedStarts.Run(root, Path.GetFullPath(Option("--out") ?? Path.Combine(root, "work/modified-starts")), args.Contains("--community-mod"));
             bool actual = command is not ("contract" or "fingerprint");
             output = Path.GetFullPath(Option("--out") ?? Path.Combine(root, "docs", "verification", actual ? "acceptance-actual" : "acceptance-" + command));
             rawParent = Path.Combine(root, "work", "acceptance", command + "-" + DateTime.UtcNow.ToString("yyyyMMdd-HHmmss", CultureInfo.InvariantCulture) + "-" + Guid.NewGuid().ToString("N"));

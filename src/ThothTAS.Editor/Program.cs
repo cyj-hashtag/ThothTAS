@@ -29,14 +29,16 @@ internal static class Program
                 Application.Run(probe); return;
             }
             var safetyIndex = Array.IndexOf(args, "--self-test-draft-safety");
+            var rulesIndex = Array.IndexOf(args, "--self-test-rules");
+            var modifiedReplayIndex = Array.IndexOf(args, "--self-test-modified-replay");
             var replaySafetyIndex = Array.IndexOf(args, "--self-test-replay-safety");
             var testIndex = Array.IndexOf(args, "--self-test-runtime");
             var editingIndex = Array.IndexOf(args, "--self-test-editing");
             var communityIndex = Array.IndexOf(args, "--self-test-community");
             var presentationIndex = Array.IndexOf(args, "--self-test-presentation");
-            if (testIndex >= 0 || editingIndex >= 0 || presentationIndex >= 0 || communityIndex >= 0 || safetyIndex >= 0 || replaySafetyIndex >= 0)
+            if (testIndex >= 0 || editingIndex >= 0 || presentationIndex >= 0 || communityIndex >= 0 || safetyIndex >= 0 || replaySafetyIndex >= 0 || rulesIndex >= 0 || modifiedReplayIndex >= 0)
             {
-                var selectedTest = replaySafetyIndex >= 0 ? replaySafetyIndex : safetyIndex >= 0 ? safetyIndex : communityIndex >= 0 ? communityIndex : presentationIndex >= 0 ? presentationIndex : editingIndex >= 0 ? editingIndex : testIndex;
+                var selectedTest = modifiedReplayIndex >= 0 ? modifiedReplayIndex : rulesIndex >= 0 ? rulesIndex : replaySafetyIndex >= 0 ? replaySafetyIndex : safetyIndex >= 0 ? safetyIndex : communityIndex >= 0 ? communityIndex : presentationIndex >= 0 ? presentationIndex : editingIndex >= 0 ? editingIndex : testIndex;
                 if (selectedTest + 1 >= args.Length) throw new ArgumentException("自测缺少脚本路径。");
                 if ((editingIndex >= 0 || presentationIndex >= 0 || communityIndex >= 0) && (selectedTest + 2 >= args.Length || args[selectedTest + 2].StartsWith("--"))) throw new ArgumentException("此自测需要两个按关卡顺序排列的脚本路径。");
                 var outIndex = Array.IndexOf(args, "--out");
@@ -48,7 +50,11 @@ internal static class Program
                 form.FormClosing += (_, e) => { if (!testEnded) { e.Cancel = true; testCancellation.Cancel(); } };
                 form.Shown += async (_, _) =>
                 {
-                    var passed = replaySafetyIndex >= 0
+                    var passed = modifiedReplayIndex >= 0
+                        ? await EditorModifiedReplayTest.RunAsync(form, root, args[modifiedReplayIndex + 1], output, args.Contains("--community-mod"), testCancellation.Token)
+                        : rulesIndex >= 0
+                        ? await EditorRulesTest.RunAsync(form, root, args[rulesIndex + 1], output, testCancellation.Token)
+                        : replaySafetyIndex >= 0
                         ? await EditorReplaySafetyTest.RunAsync(form, root, args[replaySafetyIndex + 1], output, testCancellation.Token)
                         : safetyIndex >= 0
                         ? await EditorDraftSafetyTest.RunAsync(form, root, args[safetyIndex + 1], output, testCancellation.Token)

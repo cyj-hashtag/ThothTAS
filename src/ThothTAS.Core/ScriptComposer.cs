@@ -50,7 +50,7 @@ namespace ThothTAS.Core
         }
 
         /// <summary>
-        /// Keeps the caller's source order, unifies the seed, and emits explicit Room chapters.
+        /// Keeps the caller's source order, requires matching seeds and rules, and emits explicit Room chapters.
         /// orderedStarts must contain the game's natural order, not an alphabetic sort.
         /// The extra Teleporters-5 resource is accepted by the parser but cannot be composed.
         /// This checks format and adjacency, and does not certify continuous game replay.
@@ -89,11 +89,15 @@ namespace ThothTAS.Core
             if (parsed.Count == 0) throw new ArgumentException("至少需要一个输入脚本。", "sources");
 
             int seed = parsed[0].Script.Seed;
+            TasRules rules = parsed[0].Script.Rules;
             string previousScene = null;
             HashSet<string> chapterScenes = new HashSet<string>(StringComparer.Ordinal);
             long totalFrames = 0;
             foreach (ParsedSource source in parsed)
             {
+                if (source.Script.Rules != rules)
+                    Fail(source, FindDirective(source.Lines, "Rules", "Start"), 1,
+                        "输入脚本的 Rules 不一致：原版 Original 与修改规则 Deterministic-1 不能混合拼接。请使用相同规则重新编写并验证各关脚本。");
                 if (source.Script.Seed != seed)
                     Fail(source, FindDirective(source.Lines, "Seed", "Start"), 1,
                         "输入脚本的 Seed 不一致：要求 " + seed.ToString(CultureInfo.InvariantCulture) +
@@ -126,6 +130,8 @@ namespace ThothTAS.Core
             AppendLine(result, "Version,1");
             AppendLine(result, "Start," + parsed[0].Script.Start);
             AppendLine(result, "Seed," + seed.ToString(CultureInfo.InvariantCulture));
+            // Omit the default rule header to preserve existing Original composition output.
+            if (rules == TasRules.Deterministic1) AppendLine(result, "Rules,Deterministic-1");
             foreach (ParsedSource source in parsed)
             {
                 foreach (TasChapter chapter in source.Script.Chapters)

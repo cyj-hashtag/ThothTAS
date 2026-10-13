@@ -1,0 +1,379 @@
+{
+  "version": "0.4.0",
+  "rules": "Deterministic-1",
+  "passed": true,
+  "actualGame": true,
+  "scope": "Current Windows computer and pinned game; exact modified-profile comparison only. Gameplay differs from original THOTH.",
+  "gameBuild": "THOTH-2019-09-10-174628-r239",
+  "warmResetCount": 169,
+  "warmResetMinimumMs": 479.2763,
+  "warmResetMaximumMs": 644.0036,
+  "warmResetMedianMs": 523.4957,
+  "modifiedInputFramesAudited": 22142,
+  "gameplayRandomSitesObserved": 90,
+  "randomSitesStaticallyPatched": 158,
+  "healthyNativeLogsAudited": 22,
+  "moduleSha256": {
+    "dist/module/ThothTAS.Runtime.dll": "b9341fa07025b4bd98288ac87a567ae1ce55b63fbdd06eeeb7fea96d74e17869",
+    "dist/module/ThothTAS.Preloader.dll": "8763a5e0b274759b6abaf0f6b2538ea2f73e917d9c4f1d3c3abe4d92bc40bb78",
+    "dist/host/ThothTAS.Host.dll": "aa17023c4fcf2945269b5741b5396ce685a820d926afccacb84d1a4dda1a31aa",
+    "dist/editor/ThothTAS.Editor.dll": "57dea5619ea0f85754ad7b590ed12429996fef18228f6aaf0257a6eb3b1b497d"
+  },
+  "representatives": [
+    {
+      "name": "balls-collision-warm",
+      "report": "work/modified-determinism/representatives-final/balls-collision-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 420,
+      "pid": 23252,
+      "resetMilliseconds": [
+        624.359,
+        610.9039,
+        559.6321,
+        565.4407,
+        550.0074
+      ],
+      "sha256": {
+        "frames.jsonl": "38100c556972c08866eba4d7cf669eb0031b924a1474db6ddd64bc1899e50a6b",
+        "random.tsv": "a4554daa7c348a6fffdd83db8c8e599d092fb014c9887d68b39bfd0122c04a05",
+        "phases.tsv": "e259d5cae6f2f43b9127ef2bb1524060b1b67ed5601664d93da20d73068c5415"
+      },
+      "firstDeathFrame": 106,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "Balls-1"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104236-fff581bff0f9422298fcdc507b68976d",
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104257-ef4958f241744ae2bfce93556615296b",
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104313-bed40592abb94ae9b8e3568719b2b097",
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104328-23bccd0052864f6b82d1779ba4a998ea",
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104343-5f4fb975a8f94b149e380704d1e1602b",
+        "work/modified-determinism/representatives-final/balls-collision-warm/runs/20261013-104357-0a9dba90d5ab49f0b198bc073d92c039"
+      ]
+    },
+    {
+      "name": "basic-death-warm",
+      "report": "work/modified-determinism/representatives-final/basic-death-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 600,
+      "pid": 42296,
+      "resetMilliseconds": [
+        644.0036,
+        607.4061,
+        565.8276,
+        624.2219,
+        613.5617
+      ],
+      "sha256": {
+        "frames.jsonl": "4800910f10d8029fc096a16268313383d60cbddee2a68385e39840f112a7cd5b",
+        "random.tsv": "71d2cd7e6aac8a64a704392ca489cedc2405af1fe152c7f1ec00eeb19e09e97a",
+        "phases.tsv": "d40c2f7b2506b144f6d33c55449550599c6bc0f1cd4808024e83d707898eef8d"
+      },
+      "firstDeathFrame": 283,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "Basic-1"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104026-0640237413c44a89ad5df0390181ce6d",
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104052-d6df11a73e0d4a00b23d20bd66b68125",
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104113-74919e39435d4a4c985b7cfcc23c4823",
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104133-5615716a4b2d43b88f70e468e12539dc",
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104154-01d92c9de7404abca6d89229bb2bc418",
+        "work/modified-determinism/representatives-final/basic-death-warm/runs/20261013-104215-70b323b8cb1c4d1097d5532f774d1daa"
+      ]
+    },
+    {
+      "name": "basic-transition-warm",
+      "report": "work/modified-determinism/representatives-final/basic-transition-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 600,
+      "pid": 12024,
+      "resetMilliseconds": [
+        533.4445,
+        516.2528,
+        513.3945,
+        546.192,
+        558.617
+      ],
+      "sha256": {
+        "frames.jsonl": "f6ee3969baa3d31324e4b30a83edc56c44e2fc82f0e78524fb3e5979f0c5755c",
+        "random.tsv": "2bf30d6682654db949cb7e3807fd5907ed64573b3bc100f01cdeb2112287b881",
+        "phases.tsv": "a5ed8a9f3d5c8be5eddc09ada2539649df6bba189a4b0ecee0f9cf6a8b8dc134"
+      },
+      "firstDeathFrame": 458,
+      "firstRoomCompletedFrame": 173,
+      "scenes": [
+        "Basic-1",
+        "Basic-2"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-104935-cd42007eea2541438a0f0f8727df83bd",
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-104958-df2dd70f0f1049dfa6a54ce4fde8c780",
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-105015-d6d3f073f79348beb88ee8dd95bc483d",
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-105032-4aa556cddea8478db3826bb06a344ec2",
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-105049-247c4316efe84fdaa86935ea9f0d0feb",
+        "work/modified-determinism/representatives-final/basic-transition-warm/runs/20261013-105107-9d20b01fe1704419a6e2ff259b62a652"
+      ]
+    },
+    {
+      "name": "boss-big-warm",
+      "report": "work/modified-determinism/representatives-final/boss-big-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 420,
+      "pid": 23092,
+      "resetMilliseconds": [
+        541.8069,
+        556.4546,
+        494.9911,
+        509.2614,
+        516.8895
+      ],
+      "sha256": {
+        "frames.jsonl": "cf3848c99a844bbba934db09cda2315438a6c8d372b0c228aad4c8a80626f0da",
+        "random.tsv": "d2c2818e8037393beb20790783c4e87260a25cacfce34f93d78e20ae93a1e344",
+        "phases.tsv": "f01573b0aa310a0bc9b40c51d67189198be5375b2c9668009a8b55dd6d711585"
+      },
+      "firstDeathFrame": 103,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "Final-4"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104519-a8bd1b08cef54ff48da1286f5e3c1eee",
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104543-ba69f7b423c84243b5ee22f898e1e17b",
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104604-2397e9a7e2bb42d181d91d96b2034109",
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104625-c3e5467c09d44a1688f774b19ceeb89f",
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104646-cc96abee73174d4d8367e5cb39268f52",
+        "work/modified-determinism/representatives-final/boss-big-warm/runs/20261013-104706-b326a6075f1c4dcc9db64a376f332991"
+      ]
+    },
+    {
+      "name": "inputs-warm",
+      "report": "work/modified-determinism/representatives-final/inputs-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 18,
+      "pid": 30200,
+      "resetMilliseconds": [
+        544.5619,
+        479.2763,
+        488.9338,
+        494.4767,
+        511.5195
+      ],
+      "sha256": {
+        "frames.jsonl": "040db40a9e0ee00b9d0254e4795e6eacaef1251c68860bc19aa6f6e98bf510f1",
+        "random.tsv": "af106750cba6dee249dca0e597c0187a84e29ce32d24581de5ba11afce4c6b5d",
+        "phases.tsv": "77692c1b0d0a275453601ce77383f42f50749d8a702881e2d78e77ea6ddb20bc"
+      },
+      "firstDeathFrame": null,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "Basic-1"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104919-06973eec783b4f4ca154a43a4aac6691",
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104928-a49433ec24eb46fba71a6240f65a0e57",
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104929-727909a48e3c487d962bba7caf1ce3fe",
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104930-307b4464bef54d37a9aa36cabb1aff07",
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104931-e5c948f69e4e4549a5fef1a6fc32bd6a",
+        "work/modified-determinism/representatives-final/inputs-warm/runs/20261013-104932-e2f50216e5214404a7439f4830380375"
+      ]
+    },
+    {
+      "name": "teleport-warm",
+      "report": "work/modified-determinism/representatives-final/teleport-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 240,
+      "pid": 46572,
+      "resetMilliseconds": [
+        588.8619,
+        570.332,
+        489.3263,
+        501.6591,
+        533.6901
+      ],
+      "sha256": {
+        "frames.jsonl": "9623e502c0b3a2e8a15ce45a52548d8d06b1ff0667ef1005a7f57cf7f7d8d66e",
+        "random.tsv": "9331bf4dfdc952556cc55b2b0fd3fc730ef9f95c748975e05e452337c31d2109",
+        "phases.tsv": "6cab1d91fe8d2bb5d372f20ac28abe6c9b7dae1800fa0cc7454e438d54e404c4"
+      },
+      "firstDeathFrame": null,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "Teleporters-1"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104413-82309a8a1dcf4b159e0d17f6efa90c1c",
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104430-52927c45fdc84b48bc30421a5df0012c",
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104441-463e9520f5104dd491a5cd0a2ae864c8",
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104450-62aa22b2b7ae415f8906e6fea4885b97",
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104459-5e7a9b915f834e3e95241631328d9dbc",
+        "work/modified-determinism/representatives-final/teleport-warm/runs/20261013-104508-22a7bcb639d44cfdbd3e2d66b750f601"
+      ]
+    },
+    {
+      "name": "zapper-clock-warm",
+      "report": "work/modified-determinism/representatives-final/zapper-clock-warm/reset-report.json",
+      "cold": 1,
+      "warm": 5,
+      "frames": 360,
+      "pid": 47012,
+      "resetMilliseconds": [
+        556.4314,
+        521.8782,
+        532.7627,
+        529.8749,
+        533.7273
+      ],
+      "sha256": {
+        "frames.jsonl": "08806661978192b85e77663e91e2c22cfc529224a17eed309bdde3d2408f48e7",
+        "random.tsv": "209f0af0650a528ff9226d05b20cf54e9161b48c10977e5cb077c3e19fee8e9c",
+        "phases.tsv": "58fa9b1d6276c8e15f560533b25f5a1962525065d02e56fb9148a5d20c3227cc"
+      },
+      "firstDeathFrame": 191,
+      "firstRoomCompletedFrame": null,
+      "scenes": [
+        "zapper-1"
+      ],
+      "runs": [
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104729-db1c2baf2a56469db596da3a7ac59f81",
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104751-4ab0115803fe426c997f3e987b96ade4",
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104808-bef79f302c664a78a3e70a6c650bc7c2",
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104826-60fcc29f7de34749a27b7690b3d0b195",
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104843-e9a5924746ac41f19f160f347e52a71d",
+        "work/modified-determinism/representatives-final/zapper-clock-warm/runs/20261013-104901-02f0f0ba4c094d2087477b6cfb21213f"
+      ]
+    }
+  ],
+  "allStarts": {
+    "report": "work/modified-determinism/all-starts-final-healthy/report.json",
+    "ordinaryRooms": 64,
+    "warmEntries": 128,
+    "pid": 45948,
+    "scope": "Actual player-active entries for all 64 rooms in the natural ordinary sequence, twice under modified rules, with exact baseline/frame/phase/random comparison and reset below 1000ms. One long-lived process exercises changing level and prior scene history. The extra Teleporters-5 resource has missing core-renderer references and is excluded. Does not independently compare every room to a fresh process, finish all rooms or establish original-game equivalence."
+  },
+  "editor": [
+    {
+      "profile": "stock",
+      "report": "work/modified-determinism/editor-basic3-final-stock/report.json",
+      "pid": 52620,
+      "checks": 23,
+      "warmMilliseconds": [
+        589.8833,
+        567.8941,
+        537.6542
+      ],
+      "sha256": {
+        "frames.jsonl": "f2186c564149e3fa8734028f301b739f629d8247bad410fe154f46f2933a76af",
+        "random.tsv": "852b0e1c27ca402f4d8d8b7e9988d17ad6a335796c4e607e67d68652ded70e38",
+        "phases.tsv": "3e41fcc7037870722da2ed5535053865795c84a7019a2b7b0ec4f50e33517224"
+      },
+      "runs": [
+        "work/modified-determinism/editor-basic3-final-stock/runs/20261013-105644-62ab7d49a16f49749f04694dab999068",
+        "work/modified-determinism/editor-basic3-final-stock/runs/20261013-105702-271b7c6e94574e1a8bd2364f6750c5da",
+        "work/modified-determinism/editor-basic3-final-stock/runs/20261013-105712-a8eb47fe997a44178105243cf94d7f02",
+        "work/modified-determinism/editor-basic3-final-stock/runs/20261013-105726-1ceeea2a8c9a4f049b8b6ebd4e2389a7"
+      ]
+    },
+    {
+      "profile": "community",
+      "report": "work/modified-determinism/editor-basic3-final-community/report.json",
+      "pid": 47036,
+      "checks": 23,
+      "warmMilliseconds": [
+        641.8503,
+        567.1647,
+        529.2448
+      ],
+      "sha256": {
+        "frames.jsonl": "fc38cf13647ce8184459ccc1668cb02353d6b2684fb8208a56f11f472a638e00",
+        "random.tsv": "bf8d0b7f864ab392e43cd76a896aae69cc099e5443612498b965db001f5b9218",
+        "phases.tsv": "3e41fcc7037870722da2ed5535053865795c84a7019a2b7b0ec4f50e33517224"
+      },
+      "runs": [
+        "work/modified-determinism/editor-basic3-final-community/runs/20261013-105739-07b7a339a1e04db1b6504fce07efd17b",
+        "work/modified-determinism/editor-basic3-final-community/runs/20261013-105756-11b88ed1a4a1457a850e237f06c2fec3",
+        "work/modified-determinism/editor-basic3-final-community/runs/20261013-105806-acfeefb43e6e4dd98b4fe0fd936bcbad",
+        "work/modified-determinism/editor-basic3-final-community/runs/20261013-105820-cea355fd465948d1aa1a7e54b803acf6"
+      ]
+    }
+  ],
+  "coldBasic3": {
+    "report": "work/modified-determinism/basic3-cold-modes-final/report.json",
+    "runs": 9,
+    "frames": 337,
+    "modes": [
+      {
+        "mode": "play",
+        "speed": 1
+      },
+      {
+        "mode": "play",
+        "speed": 1
+      },
+      {
+        "mode": "play",
+        "speed": 1
+      },
+      {
+        "mode": "play",
+        "speed": 1
+      },
+      {
+        "mode": "play",
+        "speed": 1
+      },
+      {
+        "mode": "pause",
+        "speed": 1
+      },
+      {
+        "mode": "step",
+        "speed": 1
+      },
+      {
+        "mode": "play",
+        "speed": 0.5
+      },
+      {
+        "mode": "play",
+        "speed": 2
+      }
+    ]
+  },
+  "seed2NeutralRecordsEqual": true,
+  "originalRegression": {
+    "report": "work/modified-determinism/original-regression-final/report.json",
+    "runs": 2,
+    "frames": 274,
+    "sha256": {
+      "frames.jsonl": "c87904fb4e279ff48bc59af7ce57b04b0768f987f89da269a429ad047f40c38f",
+      "random.tsv": "006b9570af5d5b7d3334e5f7c072515401f06e024140a25b314ee58a77da8684",
+      "phases.tsv": "a2c46334569f4097ab581d9fa8e3a93f025416d5683715ed32ff423167491161"
+    }
+  },
+  "pureCoreChecks": 140,
+  "rulesUiChecks": 14,
+  "draftSafetyChecks": 19,
+  "expectedNegative": {
+    "report": "work/modified-determinism/extra5-rejection-final/report.json",
+    "resource": "Teleporters-5",
+    "reason": "Missing core-renderer references; native exceptions are rejected instead of accepted as deterministic success."
+  },
+  "limitations": [
+    "First launch and switching rules/community profiles require a fresh process and are not subsecond.",
+    "No all-path or cross-computer guarantee, no rewind/seek/instant savestate.",
+    "All-starts compares two warm entries per room, not two independent cold starts or complete victories.",
+    "Old inputs may need retuning; the private recovered Basic-3 script dies deterministically and is not claimed to win.",
+    "Native physics internals are not wholly reset. Exact observed gameplay state, complete phases and random calls are compared; native telemetry and bootstrap logs are retained separately.",
+    "Video pixels and native sound output are not required to be byte-identical."
+  ]
+}

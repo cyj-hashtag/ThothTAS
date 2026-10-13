@@ -1,0 +1,11 @@
+Version,1
+Rules,Deterministic-1
+Start,Teleporters-1
+Seed,1
+
+120, N, A=(26,9)
+120, N, A=(16,-4)
+120, N, A=(-16,-4)
+120, N, A=(-26,9)
+120, N, A=(0,-13)
+120, N, A=0

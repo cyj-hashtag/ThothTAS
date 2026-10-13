@@ -1,0 +1,12 @@
+Version,1
+Rules,Deterministic-1
+Start,Basic-1
+Seed,1
+2,M=0,A=0
+2,M=90,A=90
+2,M=180,A=180
+2,M=-90,A=270
+2,M=0.5:0,A=0:0
+2,UR,A=1:0
+4,M=45,A=(-12.5,3.25)
+2,N,A=0.1:0

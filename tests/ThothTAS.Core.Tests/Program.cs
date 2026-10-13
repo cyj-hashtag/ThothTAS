@@ -279,6 +279,7 @@ internal static class Program
         });
 
         ChapterTests.Run(Test);
+        RulesTests.Run(Test);
         Console.WriteLine("RESULT: " + passed + " passed, " + failed + " failed.");
         return failed == 0 ? 0 : 1;
     }

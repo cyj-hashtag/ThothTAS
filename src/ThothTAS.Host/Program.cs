@@ -57,7 +57,7 @@ internal static class Program
             }
             var text = await File.ReadAllTextAsync(Path.GetFullPath(Arg(1)), cancellation.Token);
             var script = ProjectFiles.Parse(root, text);
-            if (args[0] == "validate") { Console.WriteLine($"校验通过：{script.Start}，种子 {script.Seed}，{script.TotalFrames} 帧。"); return 0; }
+            if (args[0] == "validate") { Console.WriteLine($"校验通过：{script.Start}，规则 {GameSession.RulesConfigName(script.Rules)}，种子 {script.Seed}，{script.TotalFrames} 帧。"); return 0; }
             var options = new SessionOptions
             {
                 Width = int.Parse(Option("--width") ?? "1280", CultureInfo.InvariantCulture),
@@ -81,7 +81,7 @@ internal static class Program
             if (args[0] == "verify-reset")
             {
                 var report = await ResetPerformanceVerifier.VerifyAsync(root, text, options, int.Parse(Option("--count") ?? "5", CultureInfo.InvariantCulture), Console.WriteLine, cancellation.Token);
-                Console.WriteLine(report.Passed ? "实际同进程重置测量通过；暖重置不等价于冷启动。" : "实际同进程重置测量未通过，请查看 reset-report.json。");
+                Console.WriteLine(report.Passed ? report.ColdEquivalent ? "确定性修改规则下的实际同进程重置验证通过；每次低于1000ms，逐帧记录精确一致。此规则与原版THOTH不同。" : "原版实际同进程重置诊断通过；暖重置不等价于冷启动。" : "实际同进程重置测量未通过，请查看 reset-report.json。");
                 return report.Passed ? 0 : 2;
             }
             throw new ArgumentException("未知命令：" + args[0]);

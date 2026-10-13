@@ -4,6 +4,13 @@ using System.Collections.ObjectModel;
 
 namespace ThothTAS.Core
 {
+    /// <summary>The versioned game rules required by this script. Original preserves the shipped game.</summary>
+    public enum TasRules
+    {
+        Original = 0,
+        Deterministic1 = 1
+    }
+
     public enum AimKind
     {
         None = 0,
@@ -130,15 +137,17 @@ namespace ThothTAS.Core
         public int Version { get { return 1; } }
         public string Start { get; private set; }
         public int Seed { get; private set; }
+        public TasRules Rules { get; private set; }
         public int TotalFrames { get; private set; }
         public ReadOnlyCollection<TasSegment> Segments { get; private set; }
         public ReadOnlyCollection<TasChapter> Chapters { get; private set; }
         public bool HasExplicitRooms { get; private set; }
 
-        internal TasScript(string start, int seed, int totalFrames, List<TasSegment> segments, List<TasChapter> chapters, bool hasExplicitRooms)
+        internal TasScript(string start, int seed, TasRules rules, int totalFrames, List<TasSegment> segments, List<TasChapter> chapters, bool hasExplicitRooms)
         {
             Start = start;
             Seed = seed;
+            Rules = rules;
             TotalFrames = totalFrames;
             Segments = new List<TasSegment>(segments).AsReadOnly();
             Chapters = new List<TasChapter>(chapters).AsReadOnly();

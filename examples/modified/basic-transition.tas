@@ -1,0 +1,10 @@
+Version,1
+Rules,Deterministic-1
+Start,Basic-1
+Seed,1
+
+90, N, A=12
+90, N, A=348
+120, N, A=0
+120, M=90, A=270
+180, N, A=0

@@ -179,6 +179,7 @@ public static partial class Hooks {
         InitializeCommunityTimers();
         ResetTiming("menuReadyMs");
         RememberStaticBaseline();
+        RememberSoundBanks();
         var globals=GetGlobal("instance");var names=(IList)Get(globals,"levelNames");
         int dash=script.Start.LastIndexOf('-');string family=script.Start.Substring(0,dash);int room=int.Parse(script.Start.Substring(dash+1));int group=-1;
         for(int i=0;i<16&&i<names.Count;i++)if(string.Equals((string)names[i],family,StringComparison.OrdinalIgnoreCase)){group=i;break;}

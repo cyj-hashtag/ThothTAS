@@ -68,6 +68,6 @@ dotnet run --project .\tests\ThothTAS.Core.Tests -c Release
 
 已适配 rmadlal v2.8 的计时器和窗口。首次运行 `scripts/Prepare-CommunityMod.ps1`，然后在编辑器勾选“社区计时器”。只在内存中加载社区程序集，窗口仍由编辑器配置；计时器按完整60Hz周期推进，暂停与变速不改变同一TAS结果，不能视为普通墙钟RTA。切换配置在下次重新回放生效并自动启动新进程。
 
-同进程重置通过首次校验后持续持有文件读锁，免去重复哈希。同脚本实测约6.35秒→2.56秒，等待减少59.7%；仍完整重建场景和资源，且 `coldEquivalent=false`。完整一致性验证继续使用独立冷进程。
+同进程重置复用已经加载的声音库，并恢复初始层级、选择器和音源状态；玩法场景和对象池仍重建。从点击重置到玩家可操作基线，实测从约2.56秒降至 **约0.55秒**。勾选“重新回放”旁的“同进程快速重置”即可使用；首次启动仍需建立缓存。暖重置保持 `coldEquivalent=false`，正式逐帧一致性验证继续使用独立冷进程。[一秒以内重置测量与限制](docs/public/reset-subsecond-20261013.md)。
 
 [启用与操作说明](docs/public/community-mod-guide.md) · [实际兼容和重置报告](docs/public/community-reset-20261013.md)

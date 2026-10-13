@@ -64,6 +64,6 @@ Room 章节按实际过关和入场边界执行。关卡提前完成后，当前
 
 已适配 rmadlal v2.8 的计时器和窗口。首次运行 `scripts/Prepare-CommunityMod.ps1`，然后在编辑器勾选“社区计时器”。只在内存中加载社区程序集，窗口仍由编辑器配置；计时器按完整60Hz周期推进，暂停与变速不改变同一TAS结果，不能视为普通墙钟RTA。切换配置在下次重新回放生效并自动启动新进程。
 
-同进程重置通过首次校验后持续持有文件读锁，免去重复哈希。同脚本实测约6.35秒→2.56秒，等待减少59.7%；仍完整重建场景和资源，且 `coldEquivalent=false`。完整一致性验证继续使用独立冷进程。
+同进程重置复用已加载的声音库，恢复其层级、选择器和音源状态，重建其他玩法场景与对象池。勾选“同进程快速重置”后，重新回放从约2.56秒缩短至实测约0.55秒；首次启动仍需正常加载。`coldEquivalent=false`：暖回放可能存在浮点和长路径随机记录差异，完整精确验证继续使用独立冷进程。自动实测入口为 `dist/host/ThothTAS.Host.exe verify-reset examples/basic-1.tas --count 5`，JSON 同时列出整个回放的字段差异。[本次实际报告](public/reset-subsecond-20261013.md)。
 
 [启用与操作说明](public/community-mod-guide.md) · [实际兼容和重置报告](public/community-reset-20261013.md)

@@ -24,11 +24,12 @@ public static partial class Hooks {
     static void ResetReachedBaseline() {
         if(resetWatch==null)return;
         ResetTiming("baselineMs");
-        eventLog.WriteLine("reset timing;"+string.Join(";",resetTimings.ToArray())+";fingerprint=held-read-locks;coldEquivalent=false");
+        eventLog.WriteLine("reset timing;"+string.Join(";",resetTimings.ToArray())+";fingerprint=held-read-locks;soundBanks=restore-initial-cache;coldEquivalent=false");
         resetWatch=null;resetTimings.Clear();
     }
 
-    // This is a scene/resource rebuild for editing. Unity's native clocks and
+    // This rebuilds scenes/pools and restores the audited sound-bank cache.
+    // Unity's native clocks and
     // physics accumulator remain live; exact cold-process validation stays separate.
     static void RememberStaticBaseline() {
         if(staticBaseline!=null)return;
@@ -129,13 +130,13 @@ public static partial class Hooks {
             for(int pass=0;pass<3;pass++) {
                 var unique=new HashSet<GameObject>();
                 foreach(GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject))) {
-                    if(go==null||go.transform.parent!=null||!go.scene.IsValid()||keep!=null&&go==keep.transform.root.gameObject)continue;
+                    if(go==null||go.transform.parent!=null||!go.scene.IsValid()||cachedSoundRoots.Contains(go)||keep!=null&&go==keep.transform.root.gameObject)continue;
                     unique.Add(go);
                 }
                 // Unity 5.3 reports an invalid Scene for DontDestroyOnLoad roots.
                 // Register original persistence calls rather than treating every
                 // invalid-scene prefab asset as a runtime object to destroy.
-                foreach(var go in persistentGameRoots)if(go!=null&&(keep==null||go.transform.root.gameObject!=keep.transform.root.gameObject))unique.Add(go.transform.root.gameObject);
+                foreach(var go in persistentGameRoots)if(go!=null&&!cachedSoundRoots.Contains(go)&&(keep==null||go.transform.root.gameObject!=keep.transform.root.gameObject))unique.Add(go.transform.root.gameObject);
                 var roots=new List<GameObject>(unique);
                 roots.Sort(delegate(GameObject a,GameObject b){return (persistentGameRoots.Contains(a)?1:0).CompareTo(persistentGameRoots.Contains(b)?1:0);});
                 if(roots.Count==0)break;
@@ -143,12 +144,14 @@ public static partial class Hooks {
             }
             // Destroy changes the old Unity wrappers' native identity. Hash-based
             // removal is unreliable after that change; never reuse their registry.
-            int survivingRoots=0;foreach(var go in persistentGameRoots)if(go!=null)survivingRoots++;
+            int survivingRoots=0;foreach(var go in persistentGameRoots)if(go!=null&&!cachedSoundRoots.Contains(go))survivingRoots++;
             persistentGameRoots.Clear();
+            foreach(var go in cachedSoundRoots)if(go!=null)persistentGameRoots.Add(go);
             if(survivingRoots!=0)throw new InvalidOperationException("重置后仍有 "+survivingRoots+" 个旧持久游戏根存活。");
             ReleaseOwnedResources();
             ResetTiming("cleanupMs");
             RestoreGameStatics();
+            RestoreSoundBanks();
             audioClocks.Clear();teleportBefore.Clear();
             config=next;script=nextScript;run=newRun;Directory.CreateDirectory(run);
             ResetCommunityTimers();
@@ -167,7 +170,10 @@ public static partial class Hooks {
             eventLog.WriteLine("same-process reset="+resetCount+";pid="+System.Diagnostics.Process.GetCurrentProcess().Id+";nativeTime="+F(Time.time)+";nativeFixedTime="+F(Time.fixedTime)+";coldEquivalent=false");
             UpdateStatus("loading");Send(status);
             ResetTiming("preparedMs");
-            // Scene zero owns RoomMusic, texture banks and the sound-bank loader.
+            eventLog.WriteLine("sound bank restored;roots="+cachedSoundRoots.Count+";transforms="+cachedSoundTransforms.Count+";audioSources="+cachedSoundAudio.Count+";selectors="+cachedSoundFields.Count);
+            // Scene zero recreates RoomMusic, meshes and other gameplay roots.
+            // Its loader finds the restored sound singleton and skips loading
+            // thousands of already resident audio objects a second time.
             // Loading NewMenu directly would omit those destroyed persistent roots.
             SceneManager.LoadScene(0);
             ResetTiming("bootstrapLoadedMs");
